@@ -13,6 +13,18 @@ http://findmyfbid.com/
 
 '''
 
+
+# Should I updat to this user_agent?
+user_agent = "Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)"
+
+headers = {
+    'app_version': '3',
+    'platform': 'ios',
+    "content-type": "application/json",
+    "User-agent": "Tinder/3.0.4 (iPhone; iOS 7.1; Scale/2.00)",
+    "X-Auth-Token": tinder_auth
+}
+
 def auth_token(fb_auth_token, fb_user_id):
     req = requests.post(
         'https://api.gotinder.com/auth',
