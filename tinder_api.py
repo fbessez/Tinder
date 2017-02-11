@@ -77,6 +77,21 @@ def get_self():
 	r = requests.get(url, headers=headers)
 	return r.json()
 
+
+# 18 >= age_filter_min <= 46
+# 22 >- age_filter_max <= 55
+# age_filter_min <= age_filter_max - 4
+# gender 0 = looking for males, gender 1 = looking for females
+# 1 <= distance_filter >= 100 in miles
+def change_preferences(age_filter_min, age_filter_max, gender, distance_filter):
+	url = config.host + '/profile'
+	preferences = {"age_filter_min": age_filter_min,
+		 "gender": gender,
+		 "age_filter_max": age_filter_max, 
+		 "distance_filter": distance_filter}
+	r = requests.post(url, headers=headers, data=json.dumps(preferences))
+	return r.json()
+
 # Returns metadata containing the following keys:
 ## ['globals', 'client_resources', 'versions', 'purchases', 
 ## 'status', 'groups', 'products', 'rating', 'tutorials', 
