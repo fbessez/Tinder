@@ -2,36 +2,124 @@ import json
 from datetime import datetime
 
 import requests
-
-'''
-the url to get your fb_auth
-https://www.facebook.com/v2.6/dialog/oauth?redirect_uri=fb464891386855067%3A%2F%2Fauthorize%2F&display=touch&state=%7B%22challenge%22%3A%22IUUkEUqIGud332lfu%252BMJhxL4Wlc%253D%22%2C%220_auth_logger_id%22%3A%2230F06532-A1B9-4B10-BB28-B29956C71AB1%22%2C%22com.facebook.sdk_client_state%22%3Atrue%2C%223_method%22%3A%22sfvc_auth%22%7D&scope=user_birthday%2Cuser_photos%2Cuser_education_history%2Cemail%2Cuser_relationship_details%2Cuser_friends%2Cuser_work_history%2Cuser_likes&response_type=token%2Csigned_request&default_audience=friends&return_scopes=true&auth_type=rerequest&client_id=464891386855067&ret=login&sdk=ios&logger_id=30F06532-A1B9-4B10-BB28-B29956C71AB1&ext=1470840777&hash=AeZqkIcf-NEW6vBd
-
-
-the url to get your fb_id
-http://findmyfbid.com/
-
-'''
-
-
-# Should I updat to this user_agent?
-user_agent = "Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)"
+import tinder_config as config
 
 headers = {
     'app_version': '3',
     'platform': 'ios',
     "content-type": "application/json",
-    "User-agent": "Tinder/3.0.4 (iPhone; iOS 7.1; Scale/2.00)",
-    "X-Auth-Token": tinder_auth
+    "User-agent": "Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)",
 }
 
-def auth_token(fb_auth_token, fb_user_id):
-    req = requests.post(
-        'https://api.gotinder.com/auth',
-        headers=headers,
-        data=json.dumps({'facebook_token': fb_auth_token, 'facebook_id': fb_user_id})
-      )
-    try:
-        return req.json()["token"]
-    except:
-        return "no"
+"""
+Known endpoints:
+
+-- https://api.gotinder.com/user/recs
+-- https://api.gotinder.com/user/matches/_id
+-- https://api.gotinder.com/user/_id
+-- https://api.gotinder.com/updates
+-- https://api.gotinder.com/profile
+-- https://api.gotinder.com/meta
+https://api.gotinder.com/user/ping
+https://api.gotinder.com/passport/user/travel
+https://api.gotinder.com/{like|pass}/{_id}
+https://api.gotinder.com/group/{like|pass}/{id}
+https://api.gotinder.com/report/{_id}
+"""
+
+def get_auth_token(fb_auth_token, fb_user_id):
+	url = config.host + '/auth'
+	req = requests.post(url,
+    	headers=headers,
+    	data=json.dumps({'facebook_token': fb_auth_token, 'facebook_id': fb_user_id})
+    	)
+	try:
+		return req.json()["token"]
+	except:
+		return {"error": "could not authorize"}
+
+tinder_auth_token = get_auth_token(config.fb_auth_token, config.fb_user_id)
+
+# INPUT : None
+# OUTPUT: A dict of the recommended users to swipe on
+# I think recommended means the users who have already 'liked' you
+# r.json()["results"][index]["name"] == the person at index's name
+def get_recommendations():
+	headers.update({"X-Auth-Token": tinder_auth_token})
+	try:
+		r = requests.get('https://api.gotinder.com/user/recs', headers=headers)
+		return r.json()
+	except:
+		return {"error": "could not retrieve recommendations"}
+
+# INPUT: last_activity_date -> the date from which you want to see updates
+#							-> defaults to "" which means from the beginning of time
+# 		should be of the form ______________________
+# OUTPUT: A dict of all updates since given activity date
+# NOTES: You can do this to get messages sent, all matches...
+def get_updates(last_activity_date=""):
+	headers.update({"X-Auth-Token": tinder_auth_token})
+	r = requests.post('https://api.gotinder.com/updates',
+		headers=headers,
+		data=json.dumps({"last_activity_date": last_activity_date}))
+	return r.json()
+
+# Returns the following keys:
+## ['squads_only', 'squads_discoverable', 'instagram', 
+## 'gender', 'bio', 'birth_date', 'name', 'interested_in', 
+## 'location', 'gender_filter', 'age_filter_min', 'photos', 
+## 'ping_time', 'squad_ads_shown', 'discoverable', 'facebook_id', 
+## 'pos', 'can_create_squad', 'age_filter_max', 'schools', 
+## 'pos_info', 'jobs', 'blend', 'distance_filter', '_id', 
+## 'create_date']
+def get_self():
+	headers.update({"X-Auth-Token": tinder_auth_token})
+	url = config.host + '/profile'
+	r = requests.get(url, headers=headers)
+	return r.json()
+
+# Returns metadata containing the following keys:
+## ['globals', 'client_resources', 'versions', 'purchases', 
+## 'status', 'groups', 'products', 'rating', 'tutorials', 
+## 'travel', 'notifications', 'user']
+def get_meta():
+	headers.update({"X-Auth-Token": tinder_auth_token})
+	url = config.host + '/meta'
+	r = requests.get(url, headers=headers)
+	return r.json()
+
+# def get_ping():
+# 	headers.update({"X-Auth-Token": tinder_auth_token})
+# 	url = config.host + '/user/ping'
+# 	r = requests.post(url, headers=headers)
+# 	return r.json()
+
+# Input: person_id --> the tinder_id of a user not yourself
+# Output: The person_id's corresponding profile information
+#		bio, pictures, gender, birthdate...
+
+# NEED A FUNCTION TO GET THAT PERSON'S ID FROM THE UPDATES CALL
+def get_person(person_id):
+	headers.update({"X-Auth-Token": tinder_auth_token})
+	url = config.host + '/user/%s' % person_id
+	r = requests.get(url, headers=headers)
+	return r.json()
+
+
+
+# INPUT: match_id -> this is different than the person's person_id
+#	the match_id is typically an id for the chat
+# 	usually, match_id = person1_id ^ person2_id
+# 	get_updates["matches"][0]["_id"] is the match_id for match 0, the index
+# INPUT: msg -> Desired message to be sent
+# OUTPUT: Success or Failure msg
+def send_msg(match_id, msg):
+	headers.update({"X-Auth-Token": tinder_auth_token})
+	url = config.host + '/user/matches/%s' % match_id
+	r = requests.get(url, headers=headers, data=json.dumps({"message": msg}))
+	return r.json()
+
+
+
+
+
