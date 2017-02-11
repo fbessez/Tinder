@@ -34,8 +34,9 @@ def get_auth_token(fb_auth_token, fb_user_id):
     	data=json.dumps({'facebook_token': fb_auth_token, 'facebook_id': fb_user_id})
     	)
 	try:
-		return req.json()["token"]
+		tinder_auth_token = req.json()["token"]
 		headers.update({"X-Auth-Token": tinder_auth_token})
+		return tinder_auth_token
 	except:
 		return {"error": "could not authorize"}
 
@@ -88,7 +89,7 @@ def get_meta():
 def get_ping(lat, lon):
 	headers.update({"X-Auth-Token": tinder_auth_token})
 	url = config.host + '/user/ping'
-	r = requests.post(url, headers=headers)
+	r = requests.post(url, headers=headers, data={"lat": lat, "lon": lon})
 	return r.json()
 
 # Input: person_id --> the tinder_id of a user not yourself
@@ -134,6 +135,25 @@ def dislike(person_id):
 def report(person_id, cause):
 	url = config.host + '/report/%s' % person_id
 	r = requests.post(url, headers=headers, data={"cause": cause})
+	return r.json()
+
+
+def match_info():
+	matches = get_updates()['matches']
+	name_dict = {}
+	for match in matches:
+		name = match['person']['name']
+		person_id = match['person']['_id']
+		match_id = match['id']
+		ping_time = match['person']['ping_time']
+		birthday = match['person']['birth_date'][:10]
+		name_dict[person_id] = {
+			"name": name,
+			"ping_time": ping_time,
+			"match_id": match_id,
+			"birthday": birthday
+		}
+	return name_dict
 
 
 
