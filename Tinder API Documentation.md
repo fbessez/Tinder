@@ -1,6 +1,6 @@
-Tinder API Documentation -- 2017
+# Tinder API Documentation -- 2017
 
-First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on
+First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on.
 
 **Note: This was written in February 2017. API might be outdated.**
 
@@ -44,6 +44,7 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 
 ### Known Endpoints
 Note: All endpoints are concatenated to the host api
+
 Note: All curls must be sent with the headers as well (the only exception is that the /auth call must not have the X-Auth-Token header)
 <table>
 	<thead>
@@ -157,30 +158,4 @@ This should cause the 'Network' section to show a 'name' beginning with 'confirm
 <img src='https://github.com/fbessez/Tinder/blob/master/AuthPhotos/auth2.png' alt='Auth2' style="width:128px;height:128px;"> 
 
 ### How to get facebook_id
-This one is much simpler. Visit <a href='http://findmyfbid.com/'> this </a> website and it should be pretty simple. Simply paste in the url to your Facebook timeline and it should return your correct facebook_id. Copy and Paste this value into your config file as well. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+This one is much simpler. Visit <a href='http://findmyfbid.com/'> this </a> website and it should be pretty simple. Simply paste in the url to your Facebook timeline and it should return your correct facebook_id. Copy and Paste this value into your c
