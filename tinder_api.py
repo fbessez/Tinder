@@ -4,9 +4,6 @@ from datetime import datetime
 import requests
 import tinder_config as config
 
-# https://github.com/JoeErani/tinder/blob/master/tinder/api.py
-# https://gist.github.com/rtt/10403467
-# http://jsonviewer.stack.hu/
 
 
 headers = {
