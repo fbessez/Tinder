@@ -4,8 +4,6 @@ from datetime import datetime
 import requests
 import tinder_config as config
 
-
-
 headers = {
     'app_version': '6.9.4',
     'platform': 'ios',
@@ -16,6 +14,7 @@ headers = {
 """
 Known endpoints:
 	tested:
+		-- https://api.gotinder.com/auth
 		-- https://api.gotinder.com/user/recs
 		-- https://api.gotinder.com/user/matches/_id
 		-- https://api.gotinder.com/user/_id
