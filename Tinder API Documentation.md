@@ -1,6 +1,6 @@
 Tinder API Documentation -- 2017
 
-First off, I want to give a shoutout to @rtt who initially posted the Tinder API Documentation that I found most of these endpoints on
+First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on
 
 **Note: This was written in February 2017. API might be outdated.**
 
