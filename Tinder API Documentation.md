@@ -58,7 +58,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		<tr>
 			<td>/auth</td>
 			<td>For authenticating</td>
-			<td>{'facebook_token': <TOKEN>, 'facebook_id': <ID>}</td>
+			<td>{'facebook_token': INSERT_HERE, 'facebook_id': INSERT_HERE}</td>
 			<td>POST</td>
 		</tr>
 		<tr>
@@ -70,7 +70,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		<tr>
 			<td>/user/matches/_id</td>
 			<td>Send Message to that id</td>
-			<td>{"message": <TEXT GOES HERE>}</td>
+			<td>{"message": TEXT GOES HERE}</td>
 			<td>GET</td>
 		</tr>
 		<tr>
@@ -115,7 +115,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		<tr>
 			<td>/report/_id</td>
 			<td>Report someone --> There are only a few accepted causes...</td>
-			<td>{"cause": <CAUSE>}</td>
+			<td>{"cause": CAUSE}</td>
 			<td>POST</td>
 		</tr>
 		<tr>
