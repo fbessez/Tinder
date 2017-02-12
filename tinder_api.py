@@ -4,8 +4,13 @@ from datetime import datetime
 import requests
 import tinder_config as config
 
+# https://github.com/JoeErani/tinder/blob/master/tinder/api.py
+# https://gist.github.com/rtt/10403467
+# http://jsonviewer.stack.hu/
+
+
 headers = {
-    'app_version': '3',
+    'app_version': '6.9.4',
     'platform': 'ios',
     "content-type": "application/json",
     "User-agent": "Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)",
@@ -13,18 +18,19 @@ headers = {
 
 """
 Known endpoints:
-
--- https://api.gotinder.com/user/recs
--- https://api.gotinder.com/user/matches/_id
--- https://api.gotinder.com/user/_id
--- https://api.gotinder.com/updates
--- https://api.gotinder.com/profile
--- https://api.gotinder.com/meta
-https://api.gotinder.com/user/ping
--- https://api.gotinder.com/{like|pass}/{_id}
-https://api.gotinder.com/group/{like|pass}/{id}
-https://api.gotinder.com/passport/user/travel
-https://api.gotinder.com/report/{_id}
+	tested:
+		-- https://api.gotinder.com/user/recs
+		-- https://api.gotinder.com/user/matches/_id
+		-- https://api.gotinder.com/user/_id
+		-- https://api.gotinder.com/updates
+		-- https://api.gotinder.com/profile
+		-- https://api.gotinder.com/meta
+		-- https://api.gotinder.com/user/ping
+		-- https://api.gotinder.com/report/{_id}
+		-- https://api.gotinder.com/{like|pass}/{_id}
+	untested:
+		https://api.gotinder.com/group/{like|pass}/{id}
+		https://api.gotinder.com/passport/user/travel
 """
 
 def get_auth_token(fb_auth_token, fb_user_id):
@@ -153,7 +159,12 @@ def report(person_id, cause):
 	return r.json()
 
 
-def match_info():
+################################################
+################################################
+################################################
+################################################
+
+def get_match_info():
 	matches = get_updates()['matches']
 	name_dict = {}
 	for match in matches:
@@ -169,6 +180,27 @@ def match_info():
 			"birthday": birthday
 		}
 	return name_dict
+
+def get_match_id_by_name(name):
+	match_info = get_match_info()
+	for match in match_info:
+		if match_info[match]['name'] == name:
+			return match_info[match]['match_id']
+	return {"error": "No matches by name of %s" % name}
+
+def get_photos_by_person_id(person_id):
+	person = get_person(person_id)
+	photo_urls = []
+	for photo in person['results']['photos']:
+		photo_urls.append(photo['url'])
+	return photo_urls
+
+# It is probably a good idea to 
+# go through each match and create a dict from 
+# name -> match_id 
+# and then create another thing that will list each matches name
+
+
 
 
 
