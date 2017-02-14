@@ -29,6 +29,16 @@ Known endpoints:
 		https://api.gotinder.com/passport/user/travel
 """
 
+
+""" TO DO :
+1. Figure out sorting by date
+2. Create thread to generate all matches info upon startup
+3. Create master function? since all the functions are similar just with different
+	endpoints and GET/POST
+4. Look for error/test cases?
+5. How can i use this ??
+"""
+
 def get_auth_token(fb_auth_token, fb_user_id):
 	url = config.host + '/auth'
 	req = requests.post(url,
@@ -54,6 +64,9 @@ def get_recommendations():
 		return r.json()
 	except:
 		return {"error": "could not retrieve recommendations"}
+
+		##### COULD DO LIKE IF "ERROR" IN r.json() then print this else do this.
+
 
 # INPUT: last_activity_date -> the date from which you want to see updates
 #							-> defaults to "" which means from the beginning of time
@@ -160,27 +173,60 @@ def report(person_id, cause):
 ################################################
 ################################################
 
+# To sort by distance
+# the call is get_person(id)['results']['distance_mi']
+
+# To sort by time
+# the call is get_updates()['matches'][INDEX]['person']['ping_time']
+
+# To sort by total messages
+# the call is get_updates()['matches'][INDEX]['message_count']
+
+# To sort by gender:
+# the call is get_updates()['matches'][0]['person']['gender']
+
+# To get bio:
+# the call is get_updates()['matches'][INDEX]['person']['bio']
+
+# To get list of photos:
+# the call is get_photos_by_person_id(person_id)
+
+# To get person_id by name:
+# the call is get_match_id_by_name
+
 def get_match_info():
 	matches = get_updates()['matches']
 	name_dict = {}
 	for match in matches:
-		name = match['person']['name']
-		person_id = match['person']['_id']
+		person = match['person']
+		name = person['name']
+		person_id = person['_id']
 		match_id = match['id']
-		ping_time = match['person']['ping_time']
-		birthday = match['person']['birth_date'][:10]
+		ping_time = person['ping_time']
+		birthday = person['birth_date'][:10]
+		message_count = match['message_count']
+		# photos = get_photos_by_person_id(person_id)
+		bio = person['bio']
+		gender = person['gender']
+		# distance = get_person(person_id)['results']['distance_mi']
 		name_dict[person_id] = {
 			"name": name,
 			"ping_time": ping_time,
 			"match_id": match_id,
-			"birthday": birthday
+			"birthday": birthday,
+			"message_count": message_count,
+			# "photos": photos,
+			"bio": bio,
+			"gender": gender,
+			# "distance": distance
 		}
 	return name_dict
 
 def get_match_id_by_name(name):
 	match_info = get_match_info()
 	for match in match_info:
-		if match_info[match]['name'] == name:
+		match_name = match_info[match]['name']
+		if match_name == name:
 			return match_info[match]['match_id']
 	return {"error": "No matches by name of %s" % name}
 
@@ -190,6 +236,16 @@ def get_photos_by_person_id(person_id):
 	for photo in person['results']['photos']:
 		photo_urls.append(photo['url'])
 	return photo_urls
+
+# def sort_by_message_count():
+# 	matches = get_match_info()
+# 	msg_count = []
+# 	for match in matches:
+# 		msg_count.append(match['message_count'])
+
+# Upon starting the program i should start a separate thread that basically begins get_matches
+# so that all the data is stored locally after about a minute but behind the scenes.
+
 
 # It is probably a good idea to 
 # go through each match and create a dict from 
