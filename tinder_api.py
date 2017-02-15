@@ -30,6 +30,7 @@ Known endpoints:
 """
 
 
+
 """ TO DO :
 1. Figure out sorting by date
 2. Create thread to generate all matches info upon startup
@@ -197,17 +198,17 @@ def report(person_id, cause):
 def get_match_info():
 	matches = get_updates()['matches']
 	name_dict = {}
-	for match in matches:
-		person = match['person']
-		name = person['name']
-		person_id = person['_id']
+	for match in matches[:len(matches) - 1]:
+		PERSON = match['person']
+		name = PERSON['name']
+		person_id = PERSON['_id']
 		match_id = match['id']
-		ping_time = person['ping_time']
-		birthday = person['birth_date'][:10]
+		ping_time = PERSON['ping_time']
+		birthday = PERSON['birth_date'][:10]
 		message_count = match['message_count']
 		# photos = get_photos_by_person_id(person_id)
-		bio = person['bio']
-		gender = person['gender']
+		bio = PERSON['bio']
+		gender = PERSON['gender']
 		# distance = get_person(person_id)['results']['distance_mi']
 		name_dict[person_id] = {
 			"name": name,
@@ -221,6 +222,7 @@ def get_match_info():
 			# "distance": distance
 		}
 	return name_dict
+
 
 def get_match_id_by_name(name):
 	match_info = get_match_info()
