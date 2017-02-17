@@ -1,8 +1,7 @@
 import json
-from datetime import datetime
 
 import requests
-import tinder_config as config
+import config
 
 headers = {
     'app_version': '6.9.4',
@@ -29,17 +28,6 @@ Known endpoints:
 		https://api.gotinder.com/passport/user/travel
 """
 
-
-
-""" TO DO :
-1. Figure out sorting by date
-2. Create thread to generate all matches info upon startup
-3. Create master function? since all the functions are similar just with different
-	endpoints and GET/POST
-4. Look for error/test cases?
-5. How can i use this ??
-"""
-
 def get_auth_token(fb_auth_token, fb_user_id):
 	url = config.host + '/auth'
 	req = requests.post(url,
@@ -53,7 +41,12 @@ def get_auth_token(fb_auth_token, fb_user_id):
 	except:
 		return {"error": "could not authorize"}
 
+print("Getting your Auth Token...")
 tinder_auth_token = get_auth_token(config.fb_auth_token, config.fb_user_id)
+if "error" in tinder_auth_token: 
+	print("Something went wrong!")
+else:
+	print("Success!")
 
 # INPUT : None
 # OUTPUT: A dict of the recommended users to swipe on
@@ -143,7 +136,7 @@ def get_person(person_id):
 # OUTPUT: Success or Failure msg
 def send_msg(match_id, msg):
 	url = config.host + '/user/matches/%s' % match_id
-	r = requests.get(url, headers=headers, data=json.dumps({"message": msg}))
+	r = requests.post(url, headers=headers, data=json.dumps({"message": msg}))
 	return r.json()
 
 def superlike(person_id):
@@ -167,92 +160,6 @@ def report(person_id, cause):
 	url = config.host + '/report/%s' % person_id
 	r = requests.post(url, headers=headers, data={"cause": cause})
 	return r.json()
-
-
-################################################
-################################################
-################################################
-################################################
-
-# To sort by distance
-# the call is get_person(id)['results']['distance_mi']
-
-# To sort by time
-# the call is get_updates()['matches'][INDEX]['person']['ping_time']
-
-# To sort by total messages
-# the call is get_updates()['matches'][INDEX]['message_count']
-
-# To sort by gender:
-# the call is get_updates()['matches'][0]['person']['gender']
-
-# To get bio:
-# the call is get_updates()['matches'][INDEX]['person']['bio']
-
-# To get list of photos:
-# the call is get_photos_by_person_id(person_id)
-
-# To get person_id by name:
-# the call is get_match_id_by_name
-
-def get_match_info():
-	matches = get_updates()['matches']
-	name_dict = {}
-	for match in matches[:len(matches) - 1]:
-		PERSON = match['person']
-		name = PERSON['name']
-		person_id = PERSON['_id']
-		match_id = match['id']
-		ping_time = PERSON['ping_time']
-		birthday = PERSON['birth_date'][:10]
-		message_count = match['message_count']
-		# photos = get_photos_by_person_id(person_id)
-		bio = PERSON['bio']
-		gender = PERSON['gender']
-		# distance = get_person(person_id)['results']['distance_mi']
-		name_dict[person_id] = {
-			"name": name,
-			"ping_time": ping_time,
-			"match_id": match_id,
-			"birthday": birthday,
-			"message_count": message_count,
-			# "photos": photos,
-			"bio": bio,
-			"gender": gender,
-			# "distance": distance
-		}
-	return name_dict
-
-
-def get_match_id_by_name(name):
-	match_info = get_match_info()
-	for match in match_info:
-		match_name = match_info[match]['name']
-		if match_name == name:
-			return match_info[match]['match_id']
-	return {"error": "No matches by name of %s" % name}
-
-def get_photos_by_person_id(person_id):
-	person = get_person(person_id)
-	photo_urls = []
-	for photo in person['results']['photos']:
-		photo_urls.append(photo['url'])
-	return photo_urls
-
-# def sort_by_message_count():
-# 	matches = get_match_info()
-# 	msg_count = []
-# 	for match in matches:
-# 		msg_count.append(match['message_count'])
-
-# Upon starting the program i should start a separate thread that basically begins get_matches
-# so that all the data is stored locally after about a minute but behind the scenes.
-
-
-# It is probably a good idea to 
-# go through each match and create a dict from 
-# name -> match_id 
-# and then create another thing that will list each matches name
 
 
 
