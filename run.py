@@ -1333,17 +1333,29 @@ def convert_from_datetime(difference):
 	h, m = divmod(m, 60)
 	return ("%d days, %d hrs %02d min %02d sec" % (days, h, m, s))
 
+# def how_long_has_it_been():
+# 	matches = api.get_updates()['matches']
+# 	now = datetime.utcnow()
+# 	for match in matches[:len(matches) - 1]:
+# 		name = match['person']['name']
+# 		ping_time = match['person']['ping_time']
+# 		ping_time = ping_time[:len(ping_time) - 5]
+# 		datetime_ping = datetime.strptime(ping_time, '%Y-%m-%dT%H:%M:%S')
+# 		difference = now - datetime_ping
+# 		since = convert_from_datetime(difference)
+# 		print(name, "-->", since)
+
 def how_long_has_it_been():
-	matches = api.get_updates()['matches']
-	now = datetime.utcnow()
-	for match in matches[:len(matches) - 1]:
-		name = match['person']['name']
-		ping_time = match['person']['ping_time']
-		ping_time = ping_time[:len(ping_time) - 5]
-		datetime_ping = datetime.strptime(ping_time, '%Y-%m-%dT%H:%M:%S')
-		difference = now - datetime_ping
-		since = convert_from_datetime(difference)
-		print(name, "-->", since)
+  global match_info
+  now = datetime.utcnow()
+  for person in match_info:
+    name = match_info[person]['name']
+    ping_time = match_info[person]['ping_time']
+    ping_time = ping_time[:len(ping_time) - 5]
+    datetime_ping = datetime.strptime(ping_time, '%Y-%m-%dT%H:%M:%S')
+    difference = now - datetime_ping
+    since = convert_from_datetime(difference)
+    print(name, "-->", since)
 
 class MyThread(Thread):
 	def __init__(self, val):
