@@ -102,6 +102,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>/profile</td>
 			<td>Change your search preferences</td>
 			<td>{"age_filter_min": age_filter_min,
+				"gender_filter": gender_filter,
 				"gender": gender,
 				"age_filter_max": age_filter_max, 
 				"distance_filter": distance_filter}</td>
