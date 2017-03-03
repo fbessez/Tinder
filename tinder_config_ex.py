@@ -1,4 +1,6 @@
-fb_auth_token = <fb_token>
+import fb_auth_token 
+
+fb_auth_token = fb_auth_token.get_fb_access_token(<fbusername>, <fbpassword>)
 fb_user_id = <id>
 
 
