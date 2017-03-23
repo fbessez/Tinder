@@ -6,27 +6,27 @@ import tinder_api as api
 
 ################################################
 ################################################
+'''
+This file collects important data on your matches,
+allows you to sort them by last_activity_date, age,
+gender, message count, and their average successRate.
+
+The only thing that is not supported on this is 
+getting your matches distance as this requires a
+different api call [api.get_person(id)] which would
+severely slow down the data collection into match_info.
+
+So, since it is not entirely important to have distance,
+we will proceed without it. Perhaps further down the road
+I will cache this information so that it does not have to 
+be re-retrieved every time you refresh your match updates.
+
+'''
 ################################################
 ################################################
 
-# To sort by time
-# the call is get_updates()['matches'][INDEX]['person']['ping_time']
 
-# To sort by total messages
-# the call is get_updates()['matches'][INDEX]['message_count']
-
-# To sort by gender:
-# the call is get_updates()['matches'][0]['person']['gender']
-
-# To get bio:
-# the call is get_updates()['matches'][INDEX]['person']['bio']
-
-# To get list of photos:
-# the call is get_photos_by_person_id(person_id)
-
-# To get person_id by name:
-# the call is get_match_id_by_name
-
+# Gets all important information on all of your matches
 def get_match_info():
 	matches = api.get_updates()['matches']
 	now = datetime.utcnow()
@@ -45,7 +45,7 @@ def get_match_info():
 			messages = match['messages']
 			birthday = match['person']['birth_date']
 			avg_successRate = get_avg_successRate(person)
-			# distance = person_json['results']['distance_mi'] #Takes too long...
+			# distance = api.get_person(person_id)['results']['distance_mi'] #Takes too long...
 
 			match_info[person_id] = {
 				"name": name,
@@ -69,14 +69,14 @@ def get_match_info():
 	print("All data stored in match_info")
 	return match_info
 
-# Query the name 
+# Query by match name 
 def get_match_id_by_name(name):
 	global match_info
 	list_of_ids = []
 	for match in match_info:
 		match_name = match_info[match]['name']
 		if match_name == name:
-			list_of_ids += match_info[match]['match_id']
+			list_of_ids = list_of_ids + [match_info[match]['match_id']]
 	if len(list_of_ids) > 0:
 		return list_of_ids
 	return {"error": "No matches by name of %s" % name}
@@ -98,7 +98,7 @@ def calculate_age(birthday_string):
 	return today.year - birthyear - ((today.month, today.day) < (birthmonth, birthday))
 
 # Gets the average successRate of the person
-# perhaps an indicator of... something? 
+# perhaps an indicator of... something?
 def get_avg_successRate(person):
 	photos = person['photos']
 	avg = 0
