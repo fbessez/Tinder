@@ -2,7 +2,7 @@
 
 First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
 
-**Note: This was written in February 2017. API might be outdated.**
+**Note: This was updated in March 2017. API might be outdated.**
 
 ### API Details 
 <table>
@@ -183,7 +183,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 ### Config File
 <h5> <strong> facebook_access_token and fb_user_id </strong></h5>
 
-Very simple now. Just input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py! Happy Swiping!
+It is very simple now. Just input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py which grants you access to your data! Happy Swiping!
 <br>
 
 <strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong> 
