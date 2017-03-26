@@ -1,7 +1,7 @@
 import json
-
 import requests
 import config
+# from datetime import datetime
 
 headers = {
     'app_version': '6.9.4',
@@ -50,6 +50,7 @@ def get_auth_token(fb_auth_token, fb_user_id):
 
 print("Getting your Auth Token...")
 tinder_auth_token = get_auth_token(config.fb_access_token, config.fb_user_id)
+print("Your access_token is %s" % config.fb_access_token)
 if "error" in tinder_auth_token:
     print("Something went wrong!")
 else:
@@ -173,6 +174,15 @@ def match_info(match_id):
 #     url = config.host + '/matches/%s' % message_id
 #     r = requests.get(url, headers=headers)
 #     return r.json()
+
+# See all friends of yours that have Tinder
+# ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+
+def see_friends():
+    url = "https://api.gotinder.com/group/friends"
+    r = requests.get(url, headers=headers)
+    return r.json()['results']
+# Ólafur Jóhann Ólafsson
 
 #################################
 #################################
