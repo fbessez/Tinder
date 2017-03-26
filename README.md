@@ -89,7 +89,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		<tr>
 			<td>/updates</td>
 			<td>Get all updates since the given date -- inserting "" will give you all updates since creating a Tinder account (i.e. matches, messages sent, etc.)</td>
-			<td>{"last_activity_date": ""}</td>
+			<td>{"last_activity_date": ""} Input a timestamp: '2017-03-25T20:58:00.404Z' for updates since that time.</td>
 			<td>POST</td>
 		</tr>
 		<tr>
