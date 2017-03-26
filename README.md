@@ -72,7 +72,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>/user/matches/_id</td>
 			<td>Send Message to that id</td>
 			<td>{"message": TEXT GOES HERE}</td>
-			<td>GET</td>
+			<td>POST</td>
 		</tr>
 		<tr>
 			<td>/user/_id</td>
@@ -146,13 +146,13 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		</tr>
 		<tr>
 			<td>/matches/{match id}</td>
-			<td>Get a match from its id</td>
+			<td>Get a match from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
 			<td>{}</td>
 			<td>GET</td>
 		</tr>
 		<tr>
 			<td>/message/{message id}</td>
-			<td>Get a message from its id</td>
+      <td>Get a message from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
 			<td>{}</td>
 			<td>GET</td>
 		</tr>
@@ -201,3 +201,4 @@ It is very simple now. Just input your facebook username/email and password in y
 <strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong> 
 
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password as paramaters to the get_fb_access_token function.
+
