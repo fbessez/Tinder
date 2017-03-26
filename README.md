@@ -72,7 +72,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>/user/matches/_id</td>
 			<td>Send Message to that id</td>
 			<td>{"message": TEXT GOES HERE}</td>
-			<td>GET</td>
+			<td>POST</td>
 		</tr>
 		<tr>
 			<td>/user/_id</td>

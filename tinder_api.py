@@ -10,6 +10,9 @@ headers = {
     "User-agent": "Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)",
 }
 
+#
+
+
 """
 Known endpoints:
     tested:
@@ -23,9 +26,13 @@ Known endpoints:
         -- https://api.gotinder.com/user/ping
         -- https://api.gotinder.com/report/{_id}
         -- https://api.gotinder.com/{like|pass}/{_id}
+        -- https://api.gotinder.com/matches/{match_id}
+
     untested:
         https://api.gotinder.com/group/{like|pass}/{id}
         https://api.gotinder.com/passport/user/travel
+        https://api.gotinder.com/message/{message_id}
+
 """
 
 def get_auth_token(fb_auth_token, fb_user_id):
@@ -151,8 +158,89 @@ def dislike(person_id):
     return r.json()
 
 # Cause must be one of the given options
-# I WILL CHECK THESE LATER
 def report(person_id, cause):
     url = config.host + '/report/%s' % person_id
     r = requests.post(url, headers=headers, data={"cause": cause})
     return r.json()
+
+def match_info(match_id):
+    url = config.host + '/matches/%s' % match_id
+    r = requests.get(url, headers=headers)
+    return r.json()
+
+
+# def message_by_id(message_id):
+#     url = config.host + '/matches/%s' % message_id
+#     r = requests.get(url, headers=headers)
+#     return r.json()
+
+#################################
+#################################
+#################################
+#################################
+#################################
+#################################
+# More abstract version of these API calls
+
+def get_url(keyword, required_input):
+    urls = {
+    "recs": "https://api.gotinder.com/user/recs", 
+    "person": "https://api.gotinder.com/user/%s" % required_input,
+    "profile": "https://api.gotinder.com/profile",
+    "meta": "https://api.gotinder.com/meta",
+    "like": "https://api.gotinder.com/like/%s" % required_input,
+    "pass": "https://api.gotinder.com/pass/%s" % required_input,
+    "superlike": "https://api.gotinder.com/like/%s/super",
+    "match": "https://api.gotinder.com/matches/%s" % required_input,
+    }
+    return urls[keyword]
+
+def get(keyword, required_input, message = None):
+    url = get_url(keyword, required_input)
+    r = requests.get(url, headers=headers, data=message)
+    return r.json()
+
+def post_url(keyword, required_input):
+    urls = {
+        "send_msg": "https://api.gotinder.com/user/matches/%s" % required_input,
+        "auth": "https://api.gotinder.com/auth",
+        "ping": "https://api.gotinder.com/user/ping", 
+        "updates": "https://api.gotinder.com/updates",
+        "profile": "https://api.gotinder.com/profile",
+        "report": "https://api.gotinder.com/report/%s" % required_input
+        }
+    return urls[keyword]
+
+def dataformatter(keyword, data):
+    if keyword == "send_msg":
+        return json.dumps({"message": data[0]})
+        # data[0] = message
+    elif keyword == "auth":
+        return json.dumps({'facebook_token': data[0], 'facebook_id': data[1]})
+        # data[0] = fb_auth_token, data[1] = fb_user_id
+    elif keyword == "ping":
+        return json.dumps({"lat": data[0], "lon": data[1]})
+        # data[0] = latitude, data[1] = longitude
+    elif keyword == "updates":
+        return json.dumps({"last_activity_date": data[0]})
+        # data[0] = timestamp
+    elif keyword == "profile":
+        return json.dumps({"age_filter_min": data[0], "gender_filter": data[1], "gender": data[2], "age_filter_max": data[3], "distance_filter": data[4]})
+        # data[0] = age_filter_min, data[1] = gender_filter, data[2] = gender, data[3] = age_filter_max, data[4] = distance_filter
+        # 18 >= age_filter_min <= 46
+        # 22 >- age_filter_max <= 55
+        # age_filter_min <= age_filter_max - 4
+        # gender 0 = looking for males, gender 1 = looking for females
+        # 1 <= distance_filter >= 100 in miles
+    elif keyword == "report":
+        return json.dumps({"cause": data[0]})
+        # data[0] = reason
+    else:
+        return None
+
+def post(keyword, required_input, data=None):
+    url = post_url(keyword, required_input)
+    data = dataformatter(keyword, data)
+    r = requests.post(url, headers=headers, data=data)
+    return r.json()
+
