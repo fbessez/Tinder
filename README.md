@@ -201,3 +201,7 @@ It is very simple now. Just input your facebook username/email and password in y
 <strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong> 
 
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password as paramaters to the get_fb_access_token function.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5daf7f0f106d3a90143b5f203e5007f5809e982f
