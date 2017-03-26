@@ -203,16 +203,17 @@ Creates a local dictionary containing the following keys on each of your matches
 
 <h3> Sorting matches </h3> by "age", "last_activity_date", "message_count", "successRate", and "gender".
 Will return the following structure:
-```json
+```javascript
 [('123456789123456789', {'messages': [], 'age': 19, 'match_id': '123456789123456789abcdefghi', 'name': 'Carmelo', 'photos': ['http://images.gotinder.com/123456789123456789.jpg', 'http://images.gotinder.com/123456789123456789.jpg', 'http://images.gotinder.com/123456789123456789.jpg', 'http://images.gotinder.com/123456789123456789.jpg'], 'message_count': 0, 'last_activity_date': '0 days, 22 hrs 23 min 45 sec', 'ping_time': '2017-03-25T23:22:08.954Z', 'gender': 1, 'bio': 'I don't like to win sometimes', 'avg_successRate': 0.7837966008217391}), (124325209304918217394, {...})...]
 ```
 
-<h3> Friends Pingtimes </h3> 
+<h3> Friends' Pingtimes </h3> 
 friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
 friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
-The following is a sample result for friends_pingtimes()
-``` `code()`
+The following is a sample result for friends_pingtimes():
+
+`
 'Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec'
 'Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec'
 ...
-```
+`
