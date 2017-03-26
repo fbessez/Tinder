@@ -157,44 +157,35 @@ def sort_by_value(valueName):
 # This doesn't sort it...Maybe make it a list?
 # Can't return a sorted dict.
 
+
+# Will return the last_activity_date for each facebook friend of yours who has a Tinder
+def friends_pingtimes(): 
+	friend_results = api.see_friends()
+	now = datetime.utcnow()
+	for friend in friend_results:
+		name = friend['name']
+		user_id = friend['user_id']
+		ping_time = api.get_person(user_id)['results']['ping_time']
+		last_activitydate = get_last_activity_date(now, ping_time)
+		print(name, ": ------> ", last_activitydate)
+	return
+
+# Will return the last_activity_date for the facebook friend that you indicate
+def friend_pingtime_by_name(fullname):
+	friend_results = api.see_friends()
+	now = datetime.utcnow()
+	for friend in friend_results:
+		if friend['name'] == fullname:
+			user_id = friend['user_id']
+			ping_time = api.get_person(user_id)['results']['ping_time']
+			last_activitydate = get_last_activity_date(now, ping_time)
+			print(fullname, ": ------> ", last_activitydate)
+		else:
+			continue
+	print("That exhausts all of your friends")
+	return
+
 match_info = get_match_info()
-
-### GLOBALS:
-'''
-match_info
-			{
-				"name": name, 
-				"ping_time": ping_time,
-				"last_activity_date": get_last_activity_date(now, ping_time),
-				"match_id": match_id,
-				"message_count": message_count,
-				"photos": photos,
-				"bio": bio,
-				"gender": gender,
-				"avg_successRate": avg_successRate,
-				"messages": messages
-				# "distance": distance,
-			}
-'''
-
-##### Thread no longer necessary because
-##### it runs very quickly...
-# class MyThread(Thread):
-# 	def __init__(self, val):
-# 		Thread.__init__(self)
-# 		self.val = val
-# 	def run(self):
-# 		global match_info
-# 		match_info = get_match_info()
-# 		print("All match info stored in local var: match_info")
-
-# matchthread = MyThread(0)
-# matchthread.start()
-# print("Functions: how_long_has_it_been, get_photos_by_person_id, get_match_id_by_name")
-# print("Gathering data on your matches...")
-# while match_info == {}:
-# 	print("...")
-# 	time.sleep(2)
 
 
 
