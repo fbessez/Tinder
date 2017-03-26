@@ -211,7 +211,7 @@ Will return the following structure:
 friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
 friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
 The following is a sample result for friends_pingtimes()
-```
+``` `code()`
 'Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec'
 'Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec'
 ...
