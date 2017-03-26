@@ -144,6 +144,18 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>{}</td>
 			<td>GET</td>
 		</tr>
+		<tr>
+			<td>/matches/{match id}</td>
+			<td>Get a match from its id</td>
+			<td>{}</td>
+			<td>GET</td>
+		</tr>
+		<tr>
+			<td>/message/{message id}</td>
+			<td>Get a message from its id</td>
+			<td>{}</td>
+			<td>GET</td>
+		</tr>
 	</tbody>
 </table>
 
