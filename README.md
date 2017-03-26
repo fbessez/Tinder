@@ -249,7 +249,9 @@ It is very simple now. Just input your facebook username/email and password in y
 	    'last_activity_date': '0 days, 22 hrs 23 min 45 sec',
 	    'ping_time': '2017-03-25T23:22:08.954Z',
 	    'gender': 1,
-	    'bio': 'I don'tliketowinsometimes', 'avg_successRate': 0.7837966008217391})
+	    'bio': 'I do not like to win sometimes', 'avg_successRate': 0.7837966008217391
+	    }
+	    )
 ]
 ```
 
