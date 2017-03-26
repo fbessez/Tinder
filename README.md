@@ -144,6 +144,18 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>{}</td>
 			<td>GET</td>
 		</tr>
+		<tr>
+			<td>/matches/{match id}</td>
+			<td>Get a match from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
+			<td>{}</td>
+			<td>GET</td>
+		</tr>
+		<tr>
+			<td>/message/{message id}</td>
+      <td>Get a message from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
+			<td>{}</td>
+			<td>GET</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -189,80 +201,3 @@ It is very simple now. Just input your facebook username/email and password in y
 <strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong> 
 
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password as paramaters to the get_fb_access_token function.
-
-
-
-
-<h2> Run.py Key Features </h2>
-
-<h3> Match_Info:</h3> 
-<h4> Creates a local dictionary containing the following keys on each of your matches </h4>
-
-```javascript
-{
-	  123456: {
-	    'messages': [
-	      
-	    ],
-	    'age': 20,
-	    'match_id': '123456789123456789',
-	    'name': 'Joakim',
-	    'photos': [
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg'
-	    ],
-	    'message_count': 0,
-	    'last_activity_date': '15 days, 16 hrs 46 min 57 sec',
-	    'ping_time': '2017-03-11T04:58:56.433Z',
-	    'gender': 1,
-	    'bio': 'New York Knicks Center',
-	    'avg_successRate': 0
-	  },
-	  56789: {
-	    ...
-	  }
-}
-```
-
-<h3> Sorting: </h3>
-<h4> Sorting matches by "age", "last_activity_date", "message_count", "successRate", and "gender" </h4>
-<h5> sort_by_successRate() will return the following structure: </h5>
-
-```javascript
-[
-	  ('123456789123456789',
-	  {
-	    'messages': [
-	      
-	    ],
-	    'age': 19,
-	    'match_id': '123456789123456789abcdefghi',
-	    'name': 'Carmelo',
-	    'photos': [
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg'
-	    ],
-	    'message_count': 0,
-	    'last_activity_date': '0 days, 22 hrs 23 min 45 sec',
-	    'ping_time': '2017-03-25T23:22:08.954Z',
-	    'gender': 1,
-	    'bio': 'I do not like to win sometimes', 'avg_successRate': 0.7837966008217391
-	    }
-	    )
-]
-```
-
-<h3> Friends' Pingtimes: </h3> 
-<h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
-friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
-The following is a sample result for friends_pingtimes(): </h4>
-
-`
-	"Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec"
-	"Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec"
-	...
-`
