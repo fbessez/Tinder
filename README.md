@@ -226,8 +226,9 @@ It is very simple now. Just input your facebook username/email and password in y
 }
 ```
 
-<h3> Sorting matches  by "age", "last_activity_date", "message_count", "successRate", and "gender" </h3>
-<h4> Will return the following structure: </h4>
+<h3> Sorting: </h3>
+<h4> Sorting matches by "age", "last_activity_date", "message_count", "successRate", and "gender" </h4>
+<h5> sort_by_successRate() will return the following structure: </h5>
 
 ```javascript
 [
@@ -255,7 +256,7 @@ It is very simple now. Just input your facebook username/email and password in y
 ]
 ```
 
-<h3> Friends' Pingtimes </h3> 
+<h3> Friends' Pingtimes: </h3> 
 <h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
 friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
 The following is a sample result for friends_pingtimes(): </h4>
