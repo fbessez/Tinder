@@ -198,7 +198,7 @@ It is very simple now. Just input your facebook username/email and password in y
 <h3> Match_Info:</h3> 
 <h4> Creates a local dictionary containing the following keys on each of your matches </h4>
 
-```json
+```javascript
 {
 	  123456: {
 	    'messages': [
@@ -228,7 +228,8 @@ It is very simple now. Just input your facebook username/email and password in y
 
 <h3> Sorting matches  by "age", "last_activity_date", "message_count", "successRate", and "gender" </h3>
 <h4> Will return the following structure: </h4>
-```json
+
+```javascript
 [
 	  ('123456789123456789',
 	  {
@@ -261,8 +262,9 @@ It is very simple now. Just input your facebook username/email and password in y
 <h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
 friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
 The following is a sample result for friends_pingtimes(): </h4>
-```
+
+`
 	"Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec"
 	"Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec"
 	...
-```
+`
