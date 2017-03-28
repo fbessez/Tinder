@@ -1,7 +1,8 @@
-from datetime import date, timedelta, datetime
-from threading import Thread
-import time
+from datetime import date, datetime
+# from threading import Thread
+# import time
 import tinder_api as api
+import config
 
 
 ################################################
@@ -66,7 +67,7 @@ def get_match_info():
 		    template = "An exception of type {0} occurred. Arguments:\n{1!r}"
 		    message = template.format(type(ex).__name__, ex.args)
 		    print(message)
-	print("All data stored in match_info")
+	print("All data stored in: match_info")
 	return match_info
 
 # Query by match name 
@@ -157,18 +158,21 @@ def sort_by_value(valueName):
 # This doesn't sort it...Maybe make it a list?
 # Can't return a sorted dict.
 
-
 # Will return the last_activity_date for each facebook friend of yours who has a Tinder
 def friends_pingtimes(): 
 	friend_results = api.see_friends()
 	now = datetime.utcnow()
+	i = 0 
+	dikt = {}
 	for friend in friend_results:
 		name = friend['name']
 		user_id = friend['user_id']
 		ping_time = api.get_person(user_id)['results']['ping_time']
 		last_activitydate = get_last_activity_date(now, ping_time)
-		print(name, ": ------> ", last_activitydate)
-	return
+		print(i, name, ": ------> ", last_activitydate)
+		dikt[name] = last_activitydate
+		i = i + 1
+	return sorted(dikt.items(), key=lambda x: x[1], reverse=True)
 
 # Will return the last_activity_date for the facebook friend that you indicate
 def friend_pingtime_by_name(fullname):
@@ -185,7 +189,10 @@ def friend_pingtime_by_name(fullname):
 	print("That exhausts all of your friends")
 	return
 
-match_info = get_match_info()
-
+if api.authverif() == True:
+	print("Gathering Data on your matches...")
+	match_info = get_match_info()
+else:
+	print("Something went wrong. You were not authorized.")
 
 

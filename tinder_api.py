@@ -10,9 +10,6 @@ headers = {
     "User-agent": "Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)",
 }
 
-#
-
-
 """
 Known endpoints:
     tested:
@@ -36,6 +33,10 @@ Known endpoints:
 """
 
 def get_auth_token(fb_auth_token, fb_user_id):
+    if "error" in fb_auth_token:
+        return {"error": "could not retrieve fb_auth_token"}
+    if "error" in fb_user_id:
+        return {"error": "could not retrieve fb_user_id"}
     url = config.host + '/auth'
     req = requests.post(url,
         headers=headers,
@@ -44,18 +45,18 @@ def get_auth_token(fb_auth_token, fb_user_id):
     try:
         tinder_auth_token = req.json()["token"]
         headers.update({"X-Auth-Token": tinder_auth_token})
+        print("Greetings, you have been authorized!")
+        # config.authorized = True
         return tinder_auth_token
     except:
-        return {"error": "could not authorize"}
+        return {"error": "Something went wrong. Sorry."}
 
-print("Getting your Auth Token...")
-tinder_auth_token = get_auth_token(config.fb_access_token, config.fb_user_id)
-print("Your access_token is %s" % config.fb_access_token)
-if "error" in tinder_auth_token:
-    print("Something went wrong!")
-else:
-    print("Success!")
-
+def authverif():
+    res = get_auth_token(config.fb_access_token, config.fb_user_id)
+    if "error" in res:
+        return False
+    return True
+    
 # INPUT : None
 # OUTPUT: A dict of the recommended users to swipe on
 # I think recommended means the users who have already 'liked' you
@@ -115,7 +116,7 @@ def get_meta():
     return r.json()
 
 def get_ping(lat, lon):
-    headers.update({"X-Auth-Token": tinder_auth_token})
+    # headers.update({"X-Auth-Token": tinder_auth_token})
     url = config.host + '/user/ping'
     r = requests.post(url, headers=headers, data={"lat": lat, "lon": lon})
     return r.json()
@@ -202,6 +203,7 @@ def get_url(keyword, required_input):
     "pass": "https://api.gotinder.com/pass/%s" % required_input,
     "superlike": "https://api.gotinder.com/like/%s/super",
     "match": "https://api.gotinder.com/matches/%s" % required_input,
+    "friends": "https://api.gotinder.com/group/friends",
     }
     return urls[keyword]
 
