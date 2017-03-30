@@ -4,6 +4,8 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 
 **Note: This was updated in March 2017. API might be outdated.**
 
+**Note: As of March 30, 2017, Tinder has set their ping_time attribute to a constant variable and is not updated any more. Therefore, it is no longer possible (to my knowledge) to see when users were last active.**
+
 ### API Details 
 <table>
 	<tbody>
