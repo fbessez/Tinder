@@ -38,7 +38,6 @@ def get_match_info():
 			name = person['name']
 			person_id = person['_id'] # for looking up profile
 			match_id = match['id'] # for sending messages
-			ping_time = person['ping_time']
 			message_count = match['message_count']
 			photos = get_photos(person)
 			bio = person['bio']
@@ -46,12 +45,11 @@ def get_match_info():
 			messages = match['messages']
 			birthday = match['person']['birth_date']
 			avg_successRate = get_avg_successRate(person)
+			# last_activity_date = match['last_activity_date']
 			# distance = api.get_person(person_id)['results']['distance_mi'] #Takes too long...
 
 			match_info[person_id] = {
 				"name": name,
-				"ping_time": ping_time,
-				"last_activity_date": get_last_activity_date(now, ping_time),
 				"match_id": match_id,
 				"message_count": message_count,
 				"photos": photos,
@@ -61,6 +59,8 @@ def get_match_info():
 				"messages": messages,
 				"age": calculate_age(birthday)
 				# "distance": distance,
+				# "last_activity_date": last_activity_date,
+				# "readable_activity_date": get_last_activity_date(now, last_activity_date)
 			}
 
 		except Exception as ex:
@@ -111,6 +111,23 @@ def get_avg_successRate(person):
 			return 0
 	return avg / len(photos)
 
+
+def sort_by_successRate():
+	global match_info
+	return sorted(match_info.items(), key=lambda x: x[1]['avg_successRate'], reverse=True)
+
+
+# This is the abstract version of sort_by_activity_date and sort_by_successRate
+# accepted valueNames are: "age", "message_count", "successRate", "gender"
+def sort_by_value(valueName):
+	global match_info
+	return sorted(match_info.items(), key=lambda x: x[1][valueName], reverse=True)
+# This doesn't sort it...Maybe make it a list?
+# Can't return a sorted dict.
+
+'''
+THIS DOES NOT WORK ANYMORE AS TINDER HAS REMOVED THEIR PINGTIME KEY FROM QUERIES
+
 # From difference to readable string
 def convert_from_datetime(difference):
 	# datetime will be an input of datetime.timedelta(difference.days, difference.seconds, difference.microseconds)
@@ -136,29 +153,17 @@ def how_long_has_it_been():
 	times = {}
 	for person in match_info:
 		name = match_info[person]['name']
-		ping_time = match_info[person]['ping_time']
+		ping_time = match_info[person]['last_activity_date']
 		since = get_last_activity_date(now, ping_time)
 		times[name] = since
 		print(name, "----->", since)
 	return times
 
-def sort_by_successRate():
-	global match_info
-	return sorted(match_info.items(), key=lambda x: x[1]['avg_successRate'], reverse=True)
-
 def sort_by_activity_date():
 	global match_info
 	return sorted(match_info.items(), key=lambda x: x[1]['last_activity_date'])
 
-# This is the abstract version of sort_by_activity_date and sort_by_successRate
-# accepted valueNames are: "age", "last_activity_date", "message_count", "successRate", "gender"
-def sort_by_value(valueName):
-	global match_info
-	return sorted(match_info.items(), key=lambda x: x[1][valueName], reverse=True)
-# This doesn't sort it...Maybe make it a list?
-# Can't return a sorted dict.
-
-# Will return the last_activity_date for each facebook friend of yours who has a Tinder
+Will return the last_activity_date for each facebook friend of yours who has a Tinder
 def friends_pingtimes(): 
 	friend_results = api.see_friends()
 	now = datetime.utcnow()
@@ -174,7 +179,7 @@ def friends_pingtimes():
 		i = i + 1
 	return sorted(dikt.items(), key=lambda x: x[1], reverse=True)
 
-# Will return the last_activity_date for the facebook friend that you indicate
+Will return the last_activity_date for the facebook friend that you indicate
 def friend_pingtime_by_name(fullname):
 	friend_results = api.see_friends()
 	now = datetime.utcnow()
@@ -188,6 +193,11 @@ def friend_pingtime_by_name(fullname):
 			continue
 	print("That exhausts all of your friends")
 	return
+
+def check_oli():
+	return friend_pingtime_by_name("Ólafur Jóhann Ólafsson")
+'''
+
 
 if api.authverif() == True:
 	print("Gathering Data on your matches...")
