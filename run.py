@@ -125,6 +125,21 @@ def sort_by_value(valueName):
 # This doesn't sort it...Maybe make it a list?
 # Can't return a sorted dict.
 
+def see_friends_profiles(name=None):
+	friends = api.see_friends()
+	if name == None:
+		return friends
+	else:
+		result_dict = {}
+		name = name.title()  # this turns fabien bessez-espina into Fabien Bessez-Espina
+		for friend in friends:
+			if name in friend["name"]:
+				print(friend["name"], ":", friend)
+				result_dict[friend["name"]] = friend
+		return result_dict
+
+
+
 '''
 THIS DOES NOT WORK ANYMORE AS TINDER HAS REMOVED THEIR PINGTIME KEY FROM QUERIES
 
