@@ -238,7 +238,7 @@ It is very simple now. Just input your facebook username/email and password in y
 ```
 
 <h3> Sorting: </h3>
-<h4> Sorting matches by "age", "last_activity_date", "message_count", "successRate", and "gender" </h4>
+<h4> Sorting matches by "age", "message_count", "successRate", and "gender" </h4>
 <h5> sort_by_successRate() will return the following structure: </h5>
 
 ```javascript
@@ -265,6 +265,51 @@ It is very simple now. Just input your facebook username/email and password in y
 	    }
 	    )
 ]
+```
+<h3> Spying on Facebook Friends: </h3>
+<h4> Given a name, it returns some profile information and their id. Once you have the ID, then you can call api.get_person(id) to get more in-depth information on your friends. </h4>
+<h5> see_friends_pingtimes() will return the following structure: </h5>
+
+
+```javascript
+
+{
+	  'Martin Shkreli': {
+	    'photo': [
+	      {
+	        'processedFiles': [
+	          {
+	            'url': 'https://graph.facebook.com/123456789/picture?height=84&width=84',
+	            'height': 84,
+	            'width': 84
+	          },
+	          {
+	            'url': 'https://graph.facebook.com/123456789/picture?height=172&width=172',
+	            'height': 172,
+	            'width': 172
+	          },
+	          {
+	            'url': 'https://graph.facebook.com/123456789/picture?height=320&width=320',
+	            'height': 320,
+	            'width': 320
+	          },
+	          {
+	            'url': 'https://graph.facebook.com/123456789/picture?height=640&width=640',
+	            'height': 640,
+	            'width': 640
+	          }
+	        ]
+	      }
+	    ],
+	    'in_squad': True,
+	    'name': 'Martin Shkreli',
+	    'user_id': '582bf320452u3yy1217f8'
+	  }
+}
+```
+
+
+<h2> The following is no longer available due to Tinder setting their ping_time to a constant date in 2014.</h2>
 ```
 
 <h3> Friends' Pingtimes: </h3> 

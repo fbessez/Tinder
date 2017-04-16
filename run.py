@@ -134,8 +134,8 @@ def see_friends_profiles(name=None):
 		name = name.title()  # this turns fabien bessez-espina into Fabien Bessez-Espina
 		for friend in friends:
 			if name in friend["name"]:
-				print(friend["name"], ":", friend)
 				result_dict[friend["name"]] = friend
+		if result_dict == {}: return "No friends by that name"
 		return result_dict
 
 
