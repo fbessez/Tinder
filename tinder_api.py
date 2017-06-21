@@ -1,3 +1,4 @@
+# coding=utf-8
 import json
 import requests
 import config
@@ -115,10 +116,10 @@ def get_meta():
     r = requests.get(url, headers=headers)
     return r.json()
 
-def get_ping(lat, lon):
+def update_location(lat, lon):
     # headers.update({"X-Auth-Token": tinder_auth_token})
     url = config.host + '/user/ping'
-    r = requests.post(url, headers=headers, data={"lat": lat, "lon": lon})
+    r = requests.get(url, headers=headers, data={"lat": lat, "lon": lon})
     return r.json()
 
 # Input: person_id --> the tinder_id of a user not yourself
@@ -169,6 +170,12 @@ def match_info(match_id):
     url = config.host + '/matches/%s' % match_id
     r = requests.get(url, headers=headers)
     return r.json()
+
+def see_history():
+    url = config.host + '/tinder/history'
+    r = requests.post(url, headers=headers, data={'last_activity_date': ''})
+    return r.json();
+
 
 
 # def message_by_id(message_id):

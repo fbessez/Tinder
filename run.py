@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from datetime import date, datetime
 # from threading import Thread
 # import time
@@ -33,33 +35,36 @@ def get_match_info():
 	now = datetime.utcnow()
 	match_info = {}
 	for match in matches[:len(matches) - 2]:
+		if match['person']['name'] == 'Sofia':
+			print(match)
 		try:
+
 			person = match['person']
 			name = person['name']
 			person_id = person['_id'] # for looking up profile
 			match_id = match['id'] # for sending messages
 			message_count = match['message_count']
 			photos = get_photos(person)
-			bio = person['bio']
+			# bio = person['bio']
 			gender = person['gender']
 			messages = match['messages']
 			birthday = match['person']['birth_date']
 			avg_successRate = get_avg_successRate(person)
-			# last_activity_date = match['last_activity_date']
-			# distance = api.get_person(person_id)['results']['distance_mi'] #Takes too long...
+			last_activity_date = match['last_activity_date']
+			distance = api.get_person(person_id)['results']['distance_mi'] #Takes too long...
 
 			match_info[person_id] = {
 				"name": name,
 				"match_id": match_id,
 				"message_count": message_count,
 				"photos": photos,
-				"bio": bio,
+				# "bio": bio,
 				"gender": gender,
 				"avg_successRate": avg_successRate,
 				"messages": messages,
-				"age": calculate_age(birthday)
-				# "distance": distance,
-				# "last_activity_date": last_activity_date,
+				"age": calculate_age(birthday),
+				"distance": distance,
+				"last_activity_date": last_activity_date,
 				# "readable_activity_date": get_last_activity_date(now, last_activity_date)
 			}
 
@@ -139,9 +144,7 @@ def see_friends_profiles(name=None):
 		return result_dict
 
 
-
-'''
-THIS DOES NOT WORK ANYMORE AS TINDER HAS REMOVED THEIR PINGTIME KEY FROM QUERIES
+# THIS DOES NOT WORK ANYMORE AS TINDER HAS REMOVED THEIR PINGTIME KEY FROM QUERIES
 
 # From difference to readable string
 def convert_from_datetime(difference):
@@ -178,40 +181,100 @@ def sort_by_activity_date():
 	global match_info
 	return sorted(match_info.items(), key=lambda x: x[1]['last_activity_date'])
 
-Will return the last_activity_date for each facebook friend of yours who has a Tinder
-def friends_pingtimes(): 
-	friend_results = api.see_friends()
-	now = datetime.utcnow()
-	i = 0 
-	dikt = {}
-	for friend in friend_results:
-		name = friend['name']
-		user_id = friend['user_id']
-		ping_time = api.get_person(user_id)['results']['ping_time']
-		last_activitydate = get_last_activity_date(now, ping_time)
-		print(i, name, ": ------> ", last_activitydate)
-		dikt[name] = last_activitydate
-		i = i + 1
-	return sorted(dikt.items(), key=lambda x: x[1], reverse=True)
+# # Will return the last_activity_date for each facebook friend of yours who has a Tinder
+# def friends_pingtimes(): 
+# 	friend_results = api.see_friends()
+# 	now = datetime.utcnow()
+# 	i = 0 
+# 	dikt = {}
+# 	j = 0 
+# 	for friend in friend_results:
+# 		name = friend['name']
+# 		user_id = friend['user_id']
+# 		ping_time = api.get_person(user_id)['results']['last_activity_date']
+# 		last_activitydate = get_last_activity_date(now, ping_time)
+# 		print(i, name, ": ------> ", last_activitydate)
+# 		dikt[name] = last_activitydate
+# 		i = i + 1
+# 	return sorted(dikt.items(), key=lambda x: x[1], reverse=True)
 
-Will return the last_activity_date for the facebook friend that you indicate
-def friend_pingtime_by_name(fullname):
-	friend_results = api.see_friends()
-	now = datetime.utcnow()
-	for friend in friend_results:
-		if friend['name'] == fullname:
-			user_id = friend['user_id']
-			ping_time = api.get_person(user_id)['results']['ping_time']
-			last_activitydate = get_last_activity_date(now, ping_time)
-			print(fullname, ": ------> ", last_activitydate)
-		else:
-			continue
-	print("That exhausts all of your friends")
-	return
+	# A friend object looks as follows
+	# 	{
+	#   'in_squad': False,
+	#   'photo': [
+	#     {
+	#       'processedFiles': [
+	#         {
+	#           'url': '',
+	#           'width': 84,
+	#           'height': 84
+	#         },
+	#         {
+	#           'url': '',
+	#           'width': 172,
+	#           'height': 172
+	#         },
+	#         {
+	#           'url': '',
+	#           'width': 320,
+	#           'height': 320
+	#         },
+	#         {
+	#           'url': '',
+	#           'width': 640,
+	#           'height': 640
+	#         }
+	#       ]
+	#     }
+	#   ],
+	#   'user_id': '582bf32045abd633680f17f8',
+	#   'name': 'Aaron Cheung'
+	# }
 
-def check_oli():
-	return friend_pingtime_by_name("Ólafur Jóhann Ólafsson")
-'''
+	# A person object looks as follows
+	# {
+	#   'results': {
+	#     'id': '582bf32045abd633680f17f8',
+	#     '_id': '582bf32045abd633680f17f8',
+	#     'distance_mi': 2612,
+	#     'spotify_top_artists': [Object],
+	#     'common_friend_count': 37,
+	#     'name': 'John',
+	#     'spotify_theme_track': {Object},
+	#     'common_like_count': 1,
+	#     'birth_date': '1995-06-24T20:33:23.403Z',
+	#     'common_likes': [Object],
+	#     'birth_date_info': 'fuzzy birthdate active, not displaying real birth_date',
+	#     'gender': 0,
+	#     'common_friends': [Object],
+	#     'jobs': [Object],
+	#     'bio': "Wesleyan '19",
+	#     'schools': [],
+	#     'ping_time': '2014-12-09T00:00:00.000Z',
+	#     'connection_count': 1709,
+	#   },
+	#   'status': 200
+	# }
+
+
+# # Will return the last_activity_date for the facebook friend that you indicate
+# def friend_pingtime_by_name(fullname):
+# 	friend_results = api.see_friends()
+# 	now = datetime.utcnow()
+# 	for friend in friend_results:
+# 		if friend['name'] == fullname:
+# 			user_id = friend['user_id']
+# 			ping_time = api.get_person(user_id)['results']['last_activity_date']
+# 			last_activitydate = get_last_activity_date(now, ping_time)
+# 			print(fullname, ": ------> ", last_activitydate)
+# 		else:
+# 			continue
+# 	print("That exhausts all of your friends")
+# 	return
+
+# def check_oli():
+# 	return friend_pingtime_by_name("Ólafur Jóhann Ólafsson")
+
 
 
 if api.authverif() == True:
