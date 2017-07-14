@@ -6,7 +6,7 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 
 **Note: As of March 30, 2017, Tinder has set their ping_time attribute to a constant variable and is not updated any more. Therefore, it is no longer possible (to my knowledge) to see when users were last active.**
 
-### API Details 
+### API Details
 <table>
 	<tbody>
 		<tr>
@@ -106,7 +106,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>{"age_filter_min": age_filter_min,
 				"gender_filter": gender_filter,
 				"gender": gender,
-				"age_filter_max": age_filter_max, 
+				"age_filter_max": age_filter_max,
 				"distance_filter": distance_filter}</td>
 			<td>POST</td>
 		</tr>
@@ -191,7 +191,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 	<li> <a href="https://github.com/kennethreitz/requests"> requests </a> </li>
 	<li> <a href="https://docs.python.org/3.5/library/json.html"> json </a> </li>
 	<li> <a href="https://docs.python.org/2/library/re.html"> re </a> </li>
-	<li> <a href="https://github.com/jmcarp/robobrowser"> robobrowser </a> </li> 
+	<li> <a href="https://github.com/jmcarp/robobrowser"> robobrowser </a> </li>
 </ul>
 
 ### Config File
@@ -200,20 +200,20 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 It is very simple now. Just input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py which grants you access to your data! Happy Swiping!
 <br>
 
-<strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong> 
+<strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong>
 
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password as paramaters to the get_fb_access_token function.
 
 <h2> Run.py Key Features </h2>
 
-<h3> Match_Info:</h3> 
+<h3> Match_Info:</h3>
 <h4> Creates a local dictionary containing the following keys on each of your matches </h4>
 
 ```javascript
 {
 	  123456: {
 	    'messages': [
-	      
+
 	    ],
 	    'age': 20,
 	    'match_id': '123456789123456789',
@@ -246,7 +246,7 @@ It is very simple now. Just input your facebook username/email and password in y
 	  ('123456789123456789',
 	  {
 	    'messages': [
-	      
+
 	    ],
 	    'age': 19,
 	    'match_id': '123456789123456789abcdefghi',
@@ -312,7 +312,7 @@ It is very simple now. Just input your facebook username/email and password in y
 <h2> The following is no longer available due to Tinder setting their ping_time to a constant date in 2014.</h2>
 ```
 
-<h3> Friends' Pingtimes: </h3> 
+<h3> Friends' Pingtimes: </h3>
 <h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
 friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
 The following is a sample result for friends_pingtimes(): </h4>

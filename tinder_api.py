@@ -1,7 +1,9 @@
 # coding=utf-8
 import json
-import requests
+
 import config
+import requests
+
 # from datetime import datetime
 
 headers = {
@@ -33,6 +35,7 @@ Known endpoints:
 
 """
 
+
 def get_auth_token(fb_auth_token, fb_user_id):
     if "error" in fb_auth_token:
         return {"error": "could not retrieve fb_auth_token"}
@@ -40,9 +43,10 @@ def get_auth_token(fb_auth_token, fb_user_id):
         return {"error": "could not retrieve fb_user_id"}
     url = config.host + '/auth'
     req = requests.post(url,
-        headers=headers,
-        data=json.dumps({'facebook_token': fb_auth_token, 'facebook_id': fb_user_id})
-        )
+                        headers=headers,
+                        data=json.dumps(
+                            {'facebook_token': fb_auth_token, 'facebook_id': fb_user_id})
+                        )
     try:
         tinder_auth_token = req.json()["token"]
         headers.update({"X-Auth-Token": tinder_auth_token})
@@ -52,16 +56,19 @@ def get_auth_token(fb_auth_token, fb_user_id):
     except:
         return {"error": "Something went wrong. Sorry."}
 
+
 def authverif():
     res = get_auth_token(config.fb_access_token, config.fb_user_id)
     if "error" in res:
         return False
     return True
-    
+
 # INPUT : None
 # OUTPUT: A dict of the recommended users to swipe on
 # I think recommended means the users who have already 'liked' you
 # r.json()["results"][index]["name"] == the person at index's name
+
+
 def get_recommendations():
     try:
         r = requests.get('https://api.gotinder.com/user/recs', headers=headers)
@@ -69,7 +76,7 @@ def get_recommendations():
     except:
         return {"error": "could not retrieve recommendations"}
 
-        ##### COULD DO LIKE IF "ERROR" IN r.json() then print this else do this.
+        # COULD DO LIKE IF "ERROR" IN r.json() then print this else do this.
 
 
 # INPUT: last_activity_date -> the date from which you want to see updates
@@ -79,18 +86,20 @@ def get_recommendations():
 # NOTES: You can do this to get messages sent, all matches...
 def get_updates(last_activity_date=""):
     r = requests.post('https://api.gotinder.com/updates',
-        headers=headers,
-        data=json.dumps({"last_activity_date": last_activity_date}))
+                      headers=headers,
+                      data=json.dumps({"last_activity_date": last_activity_date}))
     return r.json()
 
 # Returns the following keys:
-## ['squads_only', 'squads_discoverable', 'instagram',
+# ['squads_only', 'squads_discoverable', 'instagram',
 ## 'gender', 'bio', 'birth_date', 'name', 'interested_in',
 ## 'location', 'gender_filter', 'age_filter_min', 'photos',
 ## 'ping_time', 'squad_ads_shown', 'discoverable', 'facebook_id',
 ## 'pos', 'can_create_squad', 'age_filter_max', 'schools',
 ## 'pos_info', 'jobs', 'blend', 'distance_filter', '_id',
-## 'create_date']
+# 'create_date']
+
+
 def get_self():
     url = config.host + '/profile'
     r = requests.get(url, headers=headers)
@@ -108,13 +117,16 @@ def change_preferences(**kwargs):
     return r.json()
 
 # Returns metadata containing the following keys:
-## ['globals', 'client_resources', 'versions', 'purchases',
+# ['globals', 'client_resources', 'versions', 'purchases',
 ## 'status', 'groups', 'products', 'rating', 'tutorials',
-## 'travel', 'notifications', 'user']
+# 'travel', 'notifications', 'user']
+
+
 def get_meta():
     url = config.host + '/meta'
     r = requests.get(url, headers=headers)
     return r.json()
+
 
 def update_location(lat, lon):
     # headers.update({"X-Auth-Token": tinder_auth_token})
@@ -127,6 +139,8 @@ def update_location(lat, lon):
 #        bio, pictures, gender, birthdate...
 
 # NEED A FUNCTION TO GET THAT PERSON'S ID FROM THE UPDATES CALL
+
+
 def get_person(person_id):
     url = config.host + '/user/%s' % person_id
     r = requests.get(url, headers=headers)
@@ -140,20 +154,25 @@ def get_person(person_id):
 # INPUT: msg : string ->
 #    Desired message to be sent
 # OUTPUT: Success or Failure msg
+
+
 def send_msg(match_id, msg):
     url = config.host + '/user/matches/%s' % match_id
     r = requests.post(url, headers=headers, data=json.dumps({"message": msg}))
     return r.json()
+
 
 def superlike(person_id):
     url = config.host + '/like/%s/super' % person_id
     r = requests.get(url, headers=headers)
     return r.json()
 
+
 def like(person_id):
     url = config.host + '/like/%s' % person_id
     r = requests.get(url, headers=headers)
     return r.json()
+
 
 def dislike(person_id):
     url = config.host + '/pass/%s' % person_id
@@ -161,21 +180,24 @@ def dislike(person_id):
     return r.json()
 
 # Cause must be one of the given options
+
+
 def report(person_id, cause):
     url = config.host + '/report/%s' % person_id
     r = requests.post(url, headers=headers, data={"cause": cause})
     return r.json()
+
 
 def match_info(match_id):
     url = config.host + '/matches/%s' % match_id
     r = requests.get(url, headers=headers)
     return r.json()
 
+
 def see_history():
     url = config.host + '/tinder/history'
     r = requests.post(url, headers=headers, data={'last_activity_date': ''})
-    return r.json();
-
+    return r.json()
 
 
 # def message_by_id(message_id):
@@ -200,35 +222,39 @@ def see_friends():
 #################################
 # More abstract version of these API calls
 
+
 def get_url(keyword, required_input):
     urls = {
-    "recs": "https://api.gotinder.com/user/recs", 
-    "person": "https://api.gotinder.com/user/%s" % required_input,
-    "profile": "https://api.gotinder.com/profile",
-    "meta": "https://api.gotinder.com/meta",
-    "like": "https://api.gotinder.com/like/%s" % required_input,
-    "pass": "https://api.gotinder.com/pass/%s" % required_input,
-    "superlike": "https://api.gotinder.com/like/%s/super",
-    "match": "https://api.gotinder.com/matches/%s" % required_input,
-    "friends": "https://api.gotinder.com/group/friends",
+        "recs": "https://api.gotinder.com/user/recs",
+        "person": "https://api.gotinder.com/user/%s" % required_input,
+        "profile": "https://api.gotinder.com/profile",
+        "meta": "https://api.gotinder.com/meta",
+        "like": "https://api.gotinder.com/like/%s" % required_input,
+        "pass": "https://api.gotinder.com/pass/%s" % required_input,
+        "superlike": "https://api.gotinder.com/like/%s/super",
+        "match": "https://api.gotinder.com/matches/%s" % required_input,
+        "friends": "https://api.gotinder.com/group/friends",
     }
     return urls[keyword]
 
-def get(keyword, required_input, message = None):
+
+def get(keyword, required_input, message=None):
     url = get_url(keyword, required_input)
     r = requests.get(url, headers=headers, data=message)
     return r.json()
+
 
 def post_url(keyword, required_input):
     urls = {
         "send_msg": "https://api.gotinder.com/user/matches/%s" % required_input,
         "auth": "https://api.gotinder.com/auth",
-        "ping": "https://api.gotinder.com/user/ping", 
+        "ping": "https://api.gotinder.com/user/ping",
         "updates": "https://api.gotinder.com/updates",
         "profile": "https://api.gotinder.com/profile",
         "report": "https://api.gotinder.com/report/%s" % required_input
-        }
+    }
     return urls[keyword]
+
 
 def dataformatter(keyword, data):
     if keyword == "send_msg":
@@ -257,9 +283,9 @@ def dataformatter(keyword, data):
     else:
         return None
 
+
 def post(keyword, required_input, data=None):
     url = post_url(keyword, required_input)
     data = dataformatter(keyword, data)
     r = requests.post(url, headers=headers, data=data)
     return r.json()
-
