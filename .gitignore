@@ -1,4 +1,6 @@
-__pycache__
-Proxying.txt
+proxying.txt
 config.py
+api_abstract.py
 *.pyc
+__pycache__
+filters.py
