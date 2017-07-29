@@ -4,7 +4,7 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 
 **Note: This was updated in March 2017. API might be outdated.**
 
-**Note: As of March 30, 2017, Tinder has set their ping_time attribute to a constant variable and is not updated any more. Therefore, it is no longer possible (to my knowledge) to see when users were last active.**
+**Note: As of March 30, 2017, Tinder has set their ping_time attribute to a constant and is not updated any more. Therefore, it is no longer possible (to my knowledge) to see when users were last active.**
 
 ### API Details
 <table>
@@ -39,13 +39,13 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 		</tr>
 		<tr>
 			<td>User-agent</td>
-			<td>Tinder/4.7.1 (iPhone; iOS 9.2; Scale/2.00)</td>
+			<td>Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)</td>
 		</tr>
 	</tbody>
 </table>
 
 ### Known Endpoints
-Note: All endpoints are concatenated to the host api
+Note: All endpoints are concatenated to the host url
 
 Note: All curls must be sent with the headers as well (the only exception is that the /auth call must not have the X-Auth-Token header)
 <table>
@@ -54,7 +54,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<th>Endpoint</th>
 			<th>Purpose</th>
 			<th>Data?</th>
-			<th>Get/Post/Delete</th>
+			<th>Method</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -197,14 +197,13 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 ### Config File
 <h5> <strong> facebook_access_token and fb_user_id </strong></h5>
 
-It is very simple now. Just input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py which grants you access to your data! Happy Swiping!
+Simply input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py which grants you access to your data! Happy Swiping!
 <br>
 
-<strong> ** </strong> To see the non-programmatic way to get your facebook_access_token and facebook_id, visit <a href=https://github.com/fbessez/Tinder/blob/master/AuthPhotos/README.md> this README </a> and follow the instructions! <strong> ** </strong>
 
-<strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password as paramaters to the get_fb_access_token function.
+<strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password.
 
-<h2> Run.py Key Features </h2>
+<h2> features.py Key Features </h2>
 
 <h3> Match_Info:</h3>
 <h4> Creates a local dictionary containing the following keys on each of your matches </h4>
@@ -239,7 +238,7 @@ It is very simple now. Just input your facebook username/email and password in y
 
 <h3> Sorting: </h3>
 <h4> Sorting matches by "age", "message_count", "successRate", and "gender" </h4>
-<h5> sort_by_successRate() will return the following structure: </h5>
+<h5> sort_by_successRate() will return the following object: </h5>
 
 ```javascript
 [
@@ -266,9 +265,8 @@ It is very simple now. Just input your facebook username/email and password in y
 	    )
 ]
 ```
-<h3> Spying on Facebook Friends: </h3>
+<h3> Facebook Friends: </h3>
 <h4> Given a name, it returns some profile information and their id. Once you have the ID, then you can call api.get_person(id) to get more in-depth information on your friends. </h4>
-<h5> see_friends_pingtimes() will return the following structure: </h5>
 
 
 ```javascript
