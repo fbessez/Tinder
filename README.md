@@ -2,9 +2,7 @@
 
 First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
 
-**Note: This was updated in March 2017. API might be outdated.**
-
-**Note: As of March 30, 2017, Tinder has set their ping_time attribute to a constant and is not updated any more. Therefore, it is no longer possible (to my knowledge) to see when users were last active.**
+**Note: This was updated in September 2017. API might be outdated.**
 
 ### API Details
 <table>
