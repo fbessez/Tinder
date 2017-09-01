@@ -118,8 +118,8 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		</tr>
 		<tr>
 			<td>/report/_id</td>
-			<td>Report someone --> There are only a few accepted causes...</td>
-			<td>{"cause": CAUSE}</td>
+			<td>Report someone --> There are only a few accepted causes... (see tinder_api.py for options)</td>
+			<td>{"cause": cause, "text": explanation}</td>
 			<td>POST</td>
 		</tr>
 		<tr>
@@ -141,12 +141,6 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>GET</td>
 		</tr>
 		<tr>
-			<td>/group/{like|pass}/_id</td>
-			<td>Like or Pass on a group</td>
-			<td>{}</td>
-			<td>GET</td>
-		</tr>
-		<tr>
 			<td>/matches/{match id}</td>
 			<td>Get a match from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
 			<td>{}</td>
@@ -157,6 +151,18 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <td>Get a message from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
 			<td>{}</td>
 			<td>GET</td>
+		</tr>
+		<tr>
+			<td>/passport/user/reset</td>
+      		<td>Reset your location to your real location</td>
+			<td>{}</td>
+			<td>POST</td>
+		</tr>
+		<tr>
+			<td>/passport/user/travel</td>
+      		<td>Change your swiping location</td>
+			<td>{lat: latitutde, lon: longitude}</td>
+			<td>POST</td>
 		</tr>
 	</tbody>
 </table>
@@ -185,14 +191,6 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 	</tbody>
 </table>
 
-### Dependencies:
-<ul>
-	<li> <a href="https://docs.python.org/3/library/datetime.html"> datetime </a> </li>
-	<li> <a href="https://github.com/kennethreitz/requests"> requests </a> </li>
-	<li> <a href="https://docs.python.org/3.5/library/json.html"> json </a> </li>
-	<li> <a href="https://docs.python.org/2/library/re.html"> re </a> </li>
-	<li> <a href="https://github.com/jmcarp/robobrowser"> robobrowser </a> </li>
-</ul>
 
 ### Config File
 <h5> <strong> facebook_access_token and fb_user_id </strong></h5>
@@ -203,7 +201,7 @@ Simply input your facebook username/email and password in your config file. Then
 
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password.
 
-<h2> features.py Key Features </h2>
+<h2> Key Features </h2>
 
 <h3> Match_Info:</h3>
 <h4> Creates a local dictionary containing the following keys on each of your matches </h4>
@@ -237,8 +235,7 @@ Simply input your facebook username/email and password in your config file. Then
 ```
 
 <h3> Sorting: </h3>
-<h4> Sorting matches by "age", "message_count", "successRate", and "gender" </h4>
-<h5> sort_by_successRate() will return the following object: </h5>
+<h4> Sorting matches by "age", "message_count", and "gender" </h4>
 
 ```javascript
 [
@@ -265,6 +262,22 @@ Simply input your facebook username/email and password in your config file. Then
 	    )
 ]
 ```
+
+
+<h2> The following is no longer available due to Tinder setting their ping_time to a constant date in 2014 and/or the removal of Tinder Social.</h2>
+```
+
+<h3> Friends' Pingtimes: </h3>
+<h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
+friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
+The following is a sample result for friends_pingtimes(): </h4>
+
+`
+	"Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec"
+	"Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec"
+	...
+`
+
 <h3> Facebook Friends: </h3>
 <h4> Given a name, it returns some profile information and their id. Once you have the ID, then you can call api.get_person(id) to get more in-depth information on your friends. </h4>
 
@@ -305,18 +318,3 @@ Simply input your facebook username/email and password in your config file. Then
 	  }
 }
 ```
-
-
-<h2> The following is no longer available due to Tinder setting their ping_time to a constant date in 2014.</h2>
-```
-
-<h3> Friends' Pingtimes: </h3>
-<h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
-friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
-The following is a sample result for friends_pingtimes(): </h4>
-
-`
-	"Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec"
-	"Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec"
-	...
-`

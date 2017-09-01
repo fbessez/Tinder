@@ -28,7 +28,8 @@ def get_auth_token(fb_auth_token, fb_user_id):
         headers.update({"X-Auth-Token": tinder_auth_token})
         print("You have been successfully authorized!")
         return tinder_auth_token
-    except:
+    except Exception as e:
+        print(e)
         return {"error": "Something went wrong. Sorry, but we could not authorize you."}
 
 
@@ -80,12 +81,15 @@ def get_self():
 
 def change_preferences(**kwargs):
     '''
+    ex: change_preferences(age_filter_min=30, gender=0)
     kwargs: a dictionary - whose keys become separate keyword arguments and the values become values of these arguments
     age_filter_min: 18..46
     age_filter_max: 22..55
     age_filter_min <= age_filter_max - 4
     gender: 0 == seeking males, 1 == seeking females
     distance_filter: 1..100
+    discoverable: true | false
+    {"photo_optimizer_enabled":false}
     '''
     try:
         url = config.host + '/profile'
@@ -109,18 +113,37 @@ def get_meta():
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your metadata:", e)
 
-
 def update_location(lat, lon):
     '''
     Updates your location to the given float inputs
-    Note: Requires a passport / Tinder Plus)
+    Note: Requires a passport / Tinder Plus
     '''
     try:
-        url = config.host + '/user/ping'
-        r = requests.get(url, headers=headers, data={"lat": lat, "lon": lon})
+        url = config.host + '/passport/user/travel'
+        r = requests.post(url, headers=headers, data=json.dumps({"lat": lat, "lon": lon}))
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not update your location:", e)
+
+def reset_real_location():
+    try:
+        url = config.host + '/passport/user/reset'
+        r = requests.post(url, headers=header)
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not update your location:", e)
+
+
+def get_recs_v2():
+    '''
+    This works more consistently then the normal get_recommendations becuase it seeems to check new location
+    '''
+    try:
+        url = config.host + '/v2/recs/core?locale=en-US'
+        r = requests.get(url, headers=headers)
+        return r.json()
+    except Exception as e:
+        print('excepted')
 
 
 def get_person(id):
@@ -197,19 +220,10 @@ def match_info(match_id):
         print("Something went wrong. Could not get your match info:", e)
 
 
-def see_history():
-    try:
-        url = config.host + '/tinder/history'
-        r = requests.post(url, headers=headers, data={'last_activity_date': ''})
-        return r.json()
-    except requests.exceptions.RequestException as e:
-        print("Something went wrong. Could not see your history:", e)
-
-
-def see_friends():
-    try:
-        url = config.host + '/group/friends'
-        r = requests.get(url, headers=headers)
-        return r.json()['results']
-    except requests.exceptions.RequestException as e:
-        print("Something went wrong. Could not get your Facebook friends:", e)
+# def see_friends():
+#     try:
+#         url = config.host + '/group/friends'
+#         r = requests.get(url, headers=headers)
+#         return r.json()['results']
+#     except requests.exceptions.RequestException as e:
+#         print("Something went wrong. Could not get your Facebook friends:", e)

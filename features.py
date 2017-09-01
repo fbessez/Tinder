@@ -19,8 +19,7 @@ def get_match_info():
     matches = api.get_updates()['matches']
     now = datetime.utcnow()
     match_info = {}
-    # TODO: Why is this not just all matches?
-    for match in matches[:len(matches) - 2]:
+    for match in matches[:len(matches)]:
         try:
             person = match['person']
             person_id = person['_id']  # This ID for looking up person
@@ -100,7 +99,7 @@ def get_avg_successRate(person):
 def sort_by_value(sortType):
     '''
     Sort options are:
-        'age', 'message_count', 'successRate', 'gender', 'activity_date'
+        'age', 'message_count', 'gender'
     '''
     global match_info
     return sorted(match_info.items(), key=lambda x: x[1][sortType], reverse=True)
