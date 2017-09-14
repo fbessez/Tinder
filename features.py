@@ -41,7 +41,7 @@ def get_match_info():
             message = template.format(type(ex).__name__, ex.args)
             print(message)
             # continue
-    print("All data stored in: match_info")
+    print("All data stored in variable: match_info")
     return match_info
 
 
