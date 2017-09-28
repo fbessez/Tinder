@@ -136,7 +136,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 			<td>/like/_id/super</td>
 			<td>~Super Like~ someone a.k.a swipe up</td>
 			<td>{}</td>
-			<td>GET</td>
+			<td>POST</td>
 		</tr>
 		<tr>
 			<td>/matches/{match id}</td>
