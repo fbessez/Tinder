@@ -171,7 +171,7 @@ def send_msg(match_id, msg):
 def superlike(person_id):
     try:
         url = config.host + '/like/%s/super' % person_id
-        r = requests.get(url, headers=headers)
+        r = requests.post(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not superlike:", e)
