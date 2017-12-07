@@ -128,7 +128,7 @@ def update_location(lat, lon):
 def reset_real_location():
     try:
         url = config.host + '/passport/user/reset'
-        r = requests.post(url, headers=header)
+        r = requests.post(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not update your location:", e)
