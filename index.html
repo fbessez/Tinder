@@ -4,6 +4,65 @@
 		<title>Hank Quinlan, Horrible Cop</title>
 	</head>
 	<body>
+
+
+	    <div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 well well-lg">
+		    <div class="row" id="sync-params">
+			<div class="col-md-3">
+			    <div class="form-group">
+				<label>Force Engine</label>
+				<select class="form-control" id="force-engine-sync">
+				    <option value="None">-----SELECT-----</option>
+				    <option value="Oracle">Oracle</option>
+				    <option value="Druid">Druid</option>
+				</select>
+			    </div>
+			</div>
+			<div class="col-md-3">
+			    <div class="form-group">
+				<label for="force-rev-sync">Force Revision</label>
+				<input type="number" class="form-control" id="force-rev-sync" placeholder="Force Revision">
+			    </div>
+			</div>
+		    </div>
+		    <div class="row" id="async-params" hidden>
+			<div class="col-md-12">
+			    <div class="row">
+				<div class="col-md-3">
+				    <div class="form-group">
+					<label>Report Format</label>
+					<select class="form-control" id="format-async">
+					    <option value="None">-----SELECT-----</option>
+					    <option value="CSV">CSV</option>
+					    <option value="JSON">JSON</option>
+					</select>
+				    </div>
+				</div>
+				<div class="col-md-3">
+				    <div class="form-group">
+					<label>Force Engine</label>
+					<select class="form-control" id="force-engine-async">
+					    <option value="None">-----SELECT-----</option>
+					    <option value="Oracle">Oracle</option>
+					    <option value="Hive">Hive</option>
+					    <option value="Druid">Druid</option>
+					</select>
+				    </div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="col-md-12">
+			    <button type="button" class="lg-btn btn btn-primary" <!-- onclick="getFormattedJSON()" --> id="format-json">Do Nothing!</button>
+			</div>
+		    </div>
+		</div>
+		<div class="col-md-1"></div>
+	    </div>
+
 		<nav>
     		<ul>
         		<li><a href="/">Home</a></li>
