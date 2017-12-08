@@ -14,16 +14,6 @@ allows you to sort them by last_activity_date, age,
 gender, message count, and their average successRate.
 '''
 
-# Everything I add will be in this main
-def main():
-    print("runnint main")
-    #print(get_match_id_by_name('Taylor'))
-    print("getting match id by name: Natasha")
-    print(get_match_id_by_name("Natasha"))
-    print(get_match_id_by_name("Natasha"))
-    print(get_recommendations())
-
-
 def get_match_info():
     matches = api.get_updates()['matches']
     now = datetime.utcnow()
@@ -185,6 +175,5 @@ if __name__ == '__main__':
     if api.authverif() == True:
         print("Gathering Data on your matches...")
         match_info = get_match_info()
-        main()
     else:
         print("Something went wrong. You were not authorized.")
