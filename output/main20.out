@@ -1,0 +1,122 @@
+You have been successfully authorized!
+running main
+likes remaining: 100
+name: jessie, id: 599df92b5bb6da0f6cc3d89f
+Napping for 0.748804 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Sarah, id: 5871f3c1a31159ee49f1e416
+Napping for 0.563582 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: AshleyMae, id: 55adfa09d51b4cd85f7d5aa5
+Napping for 0.056546 seconds...
+	liking... {u'likes_remaining': 100, u'match': {u'common_like_count': 0, u'is_super_like': True, u'common_friend_count': 0, u'is_fast_match': False, u'is_boost_match': False, u'messages': [], u'last_activity_date': u'2017-12-23T16:42:53.693Z', u'dead': False, u'message_count': 0, u'participants': [u'5411d98b8ce312114adedd68', u'55adfa09d51b4cd85f7d5aa5'], u'closed': False, u'created_date': u'2017-12-23T16:42:53.693Z', u'following': True, u'super_liker': u'55adfa09d51b4cd85f7d5aa5', u'following_moments': True, u'_id': u'5411d98b8ce312114adedd6855adfa09d51b4cd85f7d5aa5', u'pending': False}}
+It's a match!
+{u'status': u'404', u'error': u''}
+name: Lila, id: 57df9acb4dd5f54d440b7ae5
+Napping for 0.377641 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Shannon, id: 5a3f18a7b86023b5127b2c43
+Napping for 0.940515 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Mary, id: 5a417ae59e6f7d692582c597
+Napping for 0.322937 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Kathleen, id: 5a3dec2deda0a18a2548f72f
+Napping for 1.031786 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Isabelle, id: 51218ff1411e14172800036f
+Napping for 0.672488 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Erica, id: 54f6a3bbb50238d47905b27b
+Napping for 1.062508 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Ronda, id: 56f35d201a5c1016437eea28
+Napping for 1.175895 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Anu, id: 58bd01a6fce36487718ca18f
+Napping for 0.484863 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Desie, id: 5a2f895f7d0da8f30cd58a92
+Napping for 0.766130 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Helen, id: 5361fdd50a7b16b90300ee0f
+Napping for 0.809666 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: AshleyMae, id: 55adfa09d51b4cd85f7d5aa5
+Napping for 0.210849 seconds...
+	liking... {u'likes_remaining': 100, u'match': {u'common_like_count': 0, u'is_super_like': True, u'common_friend_count': 0, u'is_fast_match': False, u'is_boost_match': False, u'messages': [], u'last_activity_date': u'2017-12-23T16:42:53.693Z', u'dead': False, u'message_count': 0, u'participants': [u'5411d98b8ce312114adedd68', u'55adfa09d51b4cd85f7d5aa5'], u'closed': False, u'created_date': u'2017-12-23T16:42:53.693Z', u'following': True, u'super_liker': u'55adfa09d51b4cd85f7d5aa5', u'following_moments': True, u'_id': u'5411d98b8ce312114adedd6855adfa09d51b4cd85f7d5aa5', u'pending': False}}
+It's a match!
+{u'status': u'404', u'error': u''}
+name: Praji, id: 53047620f5eff0be71000de0
+Napping for 1.033308 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Khin, id: 573872ff45489c3b1daf5166
+Napping for 0.071268 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Hua, id: 5a374973e4953290059792c3
+Napping for 0.722566 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Celia, id: 58ead910c9bb156c1db7a7e6
+Napping for 0.915133 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Monica, id: 5a3c97f271d7dc167bed842e
+Napping for 0.964822 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Gina, id: 5a31086fe49532900592d5e8
+Napping for 0.465030 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Alexis, id: 5a3b1e41d23d2a114cf3beeb
+Napping for 0.259617 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Luz, id: 57e0a9d50bea35c01138ebcc
+Napping for 1.110174 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Marissa, id: 58fc070e78acdde842545800
+Napping for 0.709491 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Kelci, id: 5a0ffcf40bd5546f7fd755f0
+Napping for 0.394558 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: AshleyMae, id: 55adfa09d51b4cd85f7d5aa5
+Napping for 0.514365 seconds...
+	liking... {u'likes_remaining': 100, u'match': {u'common_like_count': 0, u'is_super_like': True, u'common_friend_count': 0, u'is_fast_match': False, u'is_boost_match': False, u'messages': [], u'last_activity_date': u'2017-12-23T16:42:53.693Z', u'dead': False, u'message_count': 0, u'participants': [u'5411d98b8ce312114adedd68', u'55adfa09d51b4cd85f7d5aa5'], u'closed': False, u'created_date': u'2017-12-23T16:42:53.693Z', u'following': True, u'super_liker': u'55adfa09d51b4cd85f7d5aa5', u'following_moments': True, u'_id': u'5411d98b8ce312114adedd6855adfa09d51b4cd85f7d5aa5', u'pending': False}}
+It's a match!
+{u'status': u'404', u'error': u''}
+name: Purna, id: 5a3b2d2170ded1c15e105ad5
+Napping for 0.145236 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Christina, id: 56120bb7949f3ab1532c19cc
+Napping for 0.620591 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Kt, id: 5a3b5d4ae8ed357d5efacb46
+Napping for 0.689114 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
+name: Samira, id: 5a374cd7acf7656e05854907
+Napping for 0.373786 seconds...
+	liking... {u'likes_remaining': 100, u'match': False}
+Aww, it's not a match:(
