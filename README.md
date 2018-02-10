@@ -1,8 +1,8 @@
-# Tinder API Documentation -- 2017
+# Tinder API Documentation - 2017
 
 First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
 
-**Note: This was updated in September 2017. API might be outdated.**
+**Note: This was updated in November 2017. API might be outdated.**
 
 ### API Details
 <table>
@@ -176,16 +176,23 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 	<tbody>
 		<tr>
 			<td>200</td>
-			<td></td>
+			<td>Everything went okay, and the server returned a result (if any).</td>
+		</tr>
+		<tr>
+			<td>301</td>
+			<td>he server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint's name has changed.</td>
 		</tr>
 		<tr>
 			<td>400</td>
-			<td></td>
+			<td>The server thinks you made a bad request. This can happen when you don't send the information the API requires to process your request, among other things.</td>
 		</tr>
 		<tr>
-			<td>501</td>
-			<td></td>
+			<td>401</td>
+			<td>The server thinks you're not authenticated. This happens when you don't send the right credentials to access an API</td>
 		</tr>
+		<tr>
+			<td>404</td>
+			<td>The server didn't find the resource you tried to access.</td>
 	</tbody>
 </table>
 
@@ -198,6 +205,9 @@ Simply input your facebook username/email and password in your config file. Then
 
 
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password.
+
+
+<strong> Note: </strong> With the help of <a href=https://github.com/gloriamacia> gloriamacia </a>, we added now a jupyter notebook to make the usage even simpler. 
 
 <h2> Key Features </h2>
 
