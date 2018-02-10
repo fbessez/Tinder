@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	    <link rel="stylesheet" href="/css/bootstrap.min.css">
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	    <script type="text/javascript">
+		function hideShow() {
+		    var x = document.getElementById("textBox");
+		    x.removeAttr('hidden');
+		    if (x.style.display === "none") {
+			x.style.display = "block";
+		    } else {
+			x.style.display = "none";
+		    }
+		}
+
+
+
+	    </script>
+	</head>
+	<body>
+
+	    <div class="row text-center">
+		<div class=" text-center text-primary">
+		    <h3>API Debugging Tool</h3>
+		</div>
+	    </div>
+	    <div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 well well-lg">
+		    <div class="row" id="sync-params">
+			<div class="col-md-3">
+			    <div class="form-group">
+				<label>Dislike (left-swipe) those with </label>
+				<select class="form-control" id="force-engine-sync">
+				    <option value="None">-----SELECT-----</option>
+				    <option value="Oracle">bio</option>
+				    <option value="Druid">school</option>
+				</select>
+				<label> that </label>
+				<select class="form-control" id="force-engine-sync">
+				    <option value="None">-----SELECT-----</option>
+				    <option value="Oracle" onselect="hideShow()" > contains text </option>
+				    <option value="Druid"> is empty </option>
+				</select>
+				<textarea id="textBox" class="form-control" rows="1" cols="80" id="request-json" placeholder="text that would make you left-swipe"></textarea>
+			    </div>
+			</div>
+		    </div>
+		    <div class="row" id="async-params" hidden>
+			<div class="col-md-12">
+			    <div class="row">
+				<div class="col-md-3">
+				    <div class="form-group">
+					<label>Report Format</label>
+					<select class="form-control" id="format-async">
+					    <option value="None">-----SELECT-----</option>
+					    <option value="CSV">CSV</option>
+					    <option value="JSON">JSON</option>
+					</select>
+				    </div>
+				</div>
+				<div class="col-md-3">
+				    <div class="form-group">
+					<label>Force Engine</label>
+					<select class="form-control" id="force-engine-async">
+					    <option value="None">-----SELECT-----</option>
+					    <option value="Oracle">Oracle</option>
+					    <option value="Hive">Hive</option>
+					    <option value="Druid">Druid</option>
+					</select>
+				    </div>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		    <div class="row">
+			<div class="col-md-12">
+			    <button type="button" class="lg-btn btn btn-primary" onclick="hideShow()" id="format-json">Do Nothing!</button>
+			</div>
+		    </div>
+		</div>
+		<div class="col-md-1"></div>
+	    </div>
+
+		<nav>
+    		<ul>
+        		<li><a href="/">Home</a></li>
+	        	<li><a href="/about">About</a></li>
+        		<li><a href="/cv">CV</a></li>
+        		<li><a href="/blog">Blog</a></li>
+    		</ul>
+		</nav>
+		<div class="container">
+    		<div class="blurb">
+        		<h1>Hi there, I'm Hank1 Quinlan!</h1>
+				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
+    		</div><!-- /.blurb -->
+		</div><!-- /.container -->
+		<footer>
+    		<ul>
+        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
+        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
+			</ul>
+		</footer>
+	</body>
+</html>
+

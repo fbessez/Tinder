@@ -1,0 +1,87 @@
+{  
+   u'name':KurtBot001,
+   u'creation_time':1512707698396,
+   u'status':200,
+   u'swiping_strategy':{  
+      u'dislike_on':{  
+	      u'bio':{  
+		      u'contains':[  
+		         u'no hookups',
+		         u'not looking for hookups',
+		         u'not looking to hookup',
+		         u'we all deserve someone who gives you morning sex then serves you breakfast in bed'
+		      ]
+	      }
+      }
+   },
+   u'messeging_strategy':{  
+      u'message_after':{  
+	      u'num_responses':0,
+	      u'messages':[  
+	         u'Hey!',
+	         u'I sent these first messages using a program I made (shhhhhhh). If you respond, I will personally message you back, tho:^3'
+	      ]
+	      u'bio':{  
+		      u'contains':[  
+		         u'no hookups',
+		         u'not looking for hookups',
+		         u'we all deserve someone who gives you morning sex then serves you breakfast in bed'
+		      ]
+	      }
+      }
+      u'rate_limited_until':1512709209024,
+      u'likes_remaining':0,
+      u'dislike_on':{  
+	      u'bio':{  
+		      u'contains':[  
+		         u'no hookups',
+		         u'not looking for hookups',
+		         u'we all deserve someone who gives you morning sex then serves you breakfast in bed'
+		      ]
+	      }
+      }
+   },
+   u'rating':{  
+      u'rate_limited_until':1512709209024,
+      u'likes_remaining':0,
+      u'super_likes':{  
+         u'resets_at':         u'2017-12-08T16:55:49.185         Z',
+         u'superlike_refresh_interval':1,
+         u'new_alc_remaining':0,
+         u'allotment':1,
+         u'superlike_refresh_amount':5,
+         u'alc_remaining':0,
+         u'remaining':0,
+         u'superlike_refresh_interval_unit':u'd'
+      }
+   },
+   u'client_resources':{  
+      u'plus_screen':[  
+         u'unlimited_swipes',
+         u'boost',
+         u'who_you_',
+         u'who_sees_you',
+         u'passport',
+         u'your_profile',
+         u'super_like',
+         u'undo',
+         u'hide_ads'
+      ],
+      u'rate_card':{  
+         u'carousel':[  
+            {  
+               u'slug':u'unlimited_likes'
+            },
+            {  
+               u'slug':u'boost'
+            },
+            {  
+               u'slug':u'undo'
+            },
+            {  
+               u'slug':u'no_ads'
+            }
+         ]
+      }
+   },
+}

@@ -14,7 +14,6 @@ allows you to sort them by last_activity_date, age,
 gender, message count, and their average successRate.
 '''
 
-
 def get_match_info():
     matches = api.get_updates()['matches']
     now = datetime.utcnow()
@@ -28,7 +27,7 @@ def get_match_info():
                 "match_id": match['id'],  # This ID for messaging
                 "message_count": match['message_count'],
                 "photos": get_photos(person),
-                "bio": person['bio'],
+#                "bio": person['bio'],
                 "gender": person['gender'],
                 "avg_successRate": get_avg_successRate(person),
                 "messages": match['messages'],
@@ -148,15 +147,27 @@ def how_long_has_it_been():
         print(name, "----->", since)
     return times
 
+def get_likes_remaining():
+    return api.get_meta()['rating']['likes_remaining']
 
-def pause():
+def dislike_and_pause(id):
+    json = api.dislike(id)
+    pause(1.2)
+    return json
+
+def like_and_pause(id):
+    json = api.like(id)
+    pause(1.2)
+    return json
+
+def pause(max = 3):
     '''
     In order to appear as a real Tinder user using the app...
     When making many API calls, it is important to pause a...
     realistic amount of time between actions to not make Tinder...
     suspicious!
     '''
-    nap_length = 3 * random()
+    nap_length = max * random()
     print('Napping for %f seconds...' % nap_length)
     sleep(nap_length)
 
