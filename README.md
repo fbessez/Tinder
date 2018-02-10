@@ -1,8 +1,8 @@
-# Tinder API Documentation - 2017
+# Tinder API Documentation - 2018
 
 First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
 
-**Note: This was updated in November 2017. API might be outdated.**
+**Note: This was updated in February 2018 so it might be outdated.**
 
 ### API Details
 <table>
@@ -207,7 +207,7 @@ Simply input your facebook username/email and password in your config file. Then
 <strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password.
 
 
-<strong> Note: </strong> With the help of <a href=https://github.com/gloriamacia> gloriamacia </a>, we added now a jupyter notebook to make the usage even simpler. 
+<strong> Note: </strong> With the help of <a href=https://github.com/gloriamacia> gloriamacia </a>, we added now a jupyter notebook to make the usage even simpler.
 
 <h2> Key Features </h2>
 
