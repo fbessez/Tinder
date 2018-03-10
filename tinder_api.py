@@ -182,7 +182,8 @@ def get_person(id):
 
 def send_msg(match_id, msg):
     try:
-        url = config.host + '/user/matches/%s' % match_id
+        my_id = get_self()['_id']
+        url = config.host + '/user/matches/%s%s' % (match_id, my_id)
         r = requests.post(url, headers=headers,
                           data=json.dumps({"message": msg}))
         return r.json()
