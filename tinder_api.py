@@ -145,7 +145,29 @@ def get_recs_v2():
     except Exception as e:
         print('excepted')
 
+def set_webprofileusername(username):
+    '''
+    Sets the username for the webprofile: https://www.gotinder.com/@YOURUSERNAME
+    '''
+    try:
+        url = config.host + '/profile/username'
+        r = requests.put(url, headers=headers, 
+                         data=json.dumps({"username": username}))
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not set webprofile username:", e)
 
+def reset_webprofileusername(username):
+    '''
+    Resets the username for the webprofile
+    '''
+    try:
+        url = config.host + '/profile/username'
+        r = requests.delete(url, headers=headers)
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not delete webprofile username:", e)        
+        
 def get_person(id):
     '''
     Gets a user's profile via their id
