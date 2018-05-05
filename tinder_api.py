@@ -151,7 +151,7 @@ def set_webprofileusername(username):
     '''
     try:
         url = config.host + '/profile/username'
-        r = requests.put(url, headers=headers, 
+        r = requests.put(url, headers=headers,
                          data=json.dumps({"username": username}))
         return r.json()
     except requests.exceptions.RequestException as e:
@@ -166,8 +166,8 @@ def reset_webprofileusername(username):
         r = requests.delete(url, headers=headers)
         return r.json()
     except requests.exceptions.RequestException as e:
-        print("Something went wrong. Could not delete webprofile username:", e)        
-        
+        print("Something went wrong. Could not delete webprofile username:", e)
+
 def get_person(id):
     '''
     Gets a user's profile via their id
@@ -241,6 +241,13 @@ def match_info(match_id):
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your match info:", e)
 
+def all_matches():
+    try:
+        url = config.host + '/v2/matches'
+        r = requests.get(url, headers=headers)
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not get your match info:", e)
 
 # def see_friends():
 #     try:
