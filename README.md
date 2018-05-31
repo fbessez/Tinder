@@ -62,6 +62,12 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>{'facebook_token': INSERT_HERE, 'facebook_id': INSERT_HERE}</td>
          <td>POST</td>
       </tr>
+	  <tr>
+		 <td>/auth/login/accountkit</td>
+		 <td>For SMS authentication (two-factor)</td>
+		 <td>{'token': INSERT_HERE, 'id': INSERT_HERE, 'client_version':'9.0.1'}</td>
+		 <td>POST</td>
+	  </tr>
       <tr>
          <td>/user/recs</td>
          <td>Get match recommendations</td>
