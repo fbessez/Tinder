@@ -312,7 +312,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 
 Simply input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py which grants you access to your data! Happy Swiping!
 <br>
-<h5><strong> SMS Authentication (implemented by @Tagge) </strong></h5>
+<h5><strong> SMS Authentication (implemented by <a href='https://github.com/Tagge'>@Tagge</a>) </strong></h5>
 SMS authentication is even easier. Just run phone_auth_token.py . You'll be asked your phone number at runtime, you'll then have to type in the code you received by SMS, and it will return your token. We didn't directly implement it in the tinder_api.py because, as opposed to Facebook auth, there's a rate limit to the number of SMS you can receive in an hour (actually 60). It's therefore better to get your token once and use it within its lifetime (24 hours) rather than asking for a new one everytime.<br>
 With your token ready, add it to tinder_config_ex.py (value for tinder_token). You're now ready to roll !
 
