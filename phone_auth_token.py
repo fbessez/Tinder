@@ -33,7 +33,7 @@ def getToken(number, code, req_code):
         return token_response
     else:
         return token_response["data"]["api_token"]
-		
+
 phone_number = input("Please enter your phone number under the international format (country code + number)")
 log_code = sendCode(phone_number)
 sms_code = input("Please enter the code you've received by sms")
