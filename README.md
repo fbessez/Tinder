@@ -2,7 +2,7 @@
 
 First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
 
-**Note: This was updated in February 2018 so it might be outdated.**
+**Note: This was updated in June 2018 so it might be outdated.**
 
 ### API Details
 <table>
@@ -271,6 +271,24 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>Like a message</td>
          <td>{}</td>
          <td>POST</td>
+      </tr>
+      <tr>
+         <td>/v2/fast-match/preview</td>
+         <td>Get the thumbnail image shown in the messages-window (the one showing how many potential matches you have</td>
+         <td>{}</td>
+         <td>GET</td>
+      </tr>
+      <tr>
+         <td>/giphy/trending?limit={limit}</td>
+         <td>Get the trending gifs (tinder uses giphy) accessible in chat</td>
+         <td>{}</td>
+         <td>GET</td>
+      </tr>
+      <tr>
+         <td>/giphy/search?limit={limit}&query={query}</td>
+         <td>Get gifs (tinder uses giphy) based on a search accessible in chat</td>
+         <td>{}</td>
+         <td>GET</td>
       </tr>
    </tbody>
 </table>

@@ -9,6 +9,7 @@ headers = {
     'platform': 'ios',
     "content-type": "application/json",
     "User-agent": "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)",
+    "Accept": "application/json"
 }
 
 
@@ -248,6 +249,33 @@ def all_matches():
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your match info:", e)
+
+def fast_match_info():
+  try:
+      url = config.host + '/v2/fast-match/preview'
+      r = requests.get(url, headers=headers)
+      count = r.headers['fast-match-count']
+      # image is in the response but its in hex..
+      return count
+  except requests.exceptions.RequestException as e:
+      print("Something went wrong. Could not get your fast-match count:", e)
+
+def trending_gifs(limit=3):
+  try:
+      url = config.host + '/giphy/trending?limit=%s' % limit
+      r = requests.get(url, headers=headers)
+      return r.json()
+  except requests.exceptions.RequestException as e:
+      print("Something went wrong. Could not get the trending gifs:", e)
+
+def gif_query(query, limit=3):
+  try:
+      url = config.host + '/giphy/search?limit=%s&query=%s' % (limit, query)
+      r = requests.get(url, headers=headers)
+      return r.json()
+  except requests.exceptions.RequestException as e:
+      print("Something went wrong. Could not get your gifs:", e)
+
 
 # def see_friends():
 #     try:
