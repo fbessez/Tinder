@@ -5,3 +5,4 @@ api_abstract.py
 __pycache__
 find.py
 *.log
+*.egg-info
