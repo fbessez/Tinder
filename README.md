@@ -189,6 +189,12 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>GET</td>
       </tr>
       <tr>
+         <td>/v2/meta</td>
+         <td>Get your own meta data from V2 API (extra data like "top_picks" info)</td>
+         <td>{}</td>
+         <td>GET</td>
+      </tr>
+      <tr>
          <td>/report/_id</td>
          <td>Report someone --&gt; There are only a few accepted causes... (see tinder_api.py for options)</td>
          <td>{"cause": cause, "text": explanation}</td>
