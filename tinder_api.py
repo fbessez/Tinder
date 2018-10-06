@@ -190,6 +190,13 @@ def send_msg(match_id, msg):
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not send your message:", e)
 
+def unmatch(match_id):
+    try:
+        url = config.host + '/user/matches/%s' % match_id
+        r = requests.delete(url, headers=headers)
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not unmatch person:", e)
 
 def superlike(person_id):
     try:
