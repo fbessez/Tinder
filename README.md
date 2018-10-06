@@ -81,6 +81,12 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>POST</td>
       </tr>
       <tr>
+         <td>/user/matches/match_id</td>
+         <td>Unmatch person</td>
+         <td>{}</td>
+         <td>DELETE</td>
+      </tr>
+      <tr>
          <td>/user/_id</td>
          <td>Get a user's profile data</td>
          <td>{}</td>
