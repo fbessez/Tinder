@@ -9,9 +9,8 @@ headers = {
     'platform': 'ios',
     "content-type": "application/json",
     "User-agent": "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)",
-	"X-Auth-Token": config.tinder_token,
+    "X-Auth-Token": config.tinder_token,
 }
-
 
 
 def get_recommendations():
@@ -87,6 +86,7 @@ def get_meta():
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your metadata:", e)
 
+
 def update_location(lat, lon):
     '''
     Updates your location to the given float inputs
@@ -98,6 +98,7 @@ def update_location(lat, lon):
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not update your location:", e)
+
 
 def reset_real_location():
     try:
@@ -119,6 +120,7 @@ def get_recs_v2():
     except Exception as e:
         print('excepted')
 
+
 def set_webprofileusername(username):
     '''
     Sets the username for the webprofile: https://www.gotinder.com/@YOURUSERNAME
@@ -131,6 +133,7 @@ def set_webprofileusername(username):
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not set webprofile username:", e)
 
+
 def reset_webprofileusername(username):
     '''
     Resets the username for the webprofile
@@ -141,6 +144,7 @@ def reset_webprofileusername(username):
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not delete webprofile username:", e)
+
 
 def get_person(id):
     '''
@@ -214,6 +218,7 @@ def match_info(match_id):
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your match info:", e)
+
 
 def all_matches():
     try:
