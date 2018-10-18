@@ -1,1 +1,4 @@
-pip>=18.0
+pip>=18.1
+requests==2.20.0
+robobrowser==0.5.3
+lxml==4.2.5
