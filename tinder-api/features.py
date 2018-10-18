@@ -6,7 +6,10 @@ from datetime import date, datetime
 from random import random
 from time import sleep
 
-import config
+try:
+    import config
+except ImportError:
+    pass
 import tinder_api as api
 
 

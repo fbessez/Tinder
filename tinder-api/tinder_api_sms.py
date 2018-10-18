@@ -4,16 +4,11 @@ tinder_api_sms.py - Package level variables
 """
 
 import json
-import config
+try:
+    import config
+except ImportError:
+    pass
 import requests
-
-headers = {
-    'app_version': '6.9.4',
-    'platform': 'ios',
-    "content-type": "application/json",
-    "User-agent": "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)",
-    "X-Auth-Token": config.tinder_token,
-}
 
 
 def get_recommendations():
@@ -238,3 +233,12 @@ def all_matches():
 #         return r.json()['results']
 #     except requests.exceptions.RequestException as e:
 #         print("Something went wrong. Could not get your Facebook friends:", e)
+
+if __name__ == '__main__':
+    headers = {
+        'app_version': '6.9.4',
+        'platform': 'ios',
+        "content-type": "application/json",
+        "User-agent": "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)",
+        "X-Auth-Token": config.tinder_token,
+    }

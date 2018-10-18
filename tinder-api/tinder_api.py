@@ -4,7 +4,10 @@ tinder_api.py - Package level variables
 """
 
 import json
-import config
+try:
+    import config
+except ImportError:
+    pass
 import requests
 
 headers = {
