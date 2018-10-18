@@ -2,3 +2,4 @@ pip>=18.1
 requests==2.20.0
 robobrowser==0.5.3
 lxml==4.2.5
+pytest==3.9.1
