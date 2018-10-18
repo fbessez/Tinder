@@ -3,11 +3,11 @@
 ## Project Setup
 
 ### Open Source Docs
-- [ ] Gitignore
-- [ ] Readme
-- [ ] License
-- [ ] Changelog
-- [ ] Roadmap
+- [x] Gitignore
+- [x] Readme
+- [x] License
+- [x] Changelog
+- [x] Roadmap
 - [ ] Code of Conduct
 - [ ] Contributing
 - [ ] Pull request template
