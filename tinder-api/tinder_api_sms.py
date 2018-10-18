@@ -1,6 +1,9 @@
-# coding=utf-8
-import json
+#!/usr/bin/env python3
+"""
+tinder_api_sms.py - Package level variables
+"""
 
+import json
 import config
 import requests
 

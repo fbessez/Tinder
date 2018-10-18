@@ -1,5 +1,7 @@
-# coding=utf-8
-
+#!/usr/bin/env python3
+"""
+features.py - 
+"""
 from datetime import date, datetime
 from random import random
 from time import sleep

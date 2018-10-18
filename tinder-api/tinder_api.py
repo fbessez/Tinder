@@ -1,6 +1,9 @@
-# coding=utf-8
-import json
+#!/usr/bin/env python3
+"""
+tinder_api.py - Package level variables
+"""
 
+import json
 import config
 import requests
 
@@ -114,6 +117,7 @@ def get_meta():
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your metadata:", e)
 
+
 def update_location(lat, lon):
     '''
     Updates your location to the given float inputs
@@ -125,6 +129,7 @@ def update_location(lat, lon):
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not update your location:", e)
+
 
 def reset_real_location():
     try:
@@ -146,6 +151,7 @@ def get_recs_v2():
     except Exception as e:
         print('excepted')
 
+
 def set_webprofileusername(username):
     '''
     Sets the username for the webprofile: https://www.gotinder.com/@YOURUSERNAME
@@ -158,6 +164,7 @@ def set_webprofileusername(username):
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not set webprofile username:", e)
 
+
 def reset_webprofileusername(username):
     '''
     Resets the username for the webprofile
@@ -168,6 +175,7 @@ def reset_webprofileusername(username):
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not delete webprofile username:", e)
+
 
 def get_person(id):
     '''
@@ -242,6 +250,7 @@ def match_info(match_id):
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your match info:", e)
 
+
 def all_matches():
     try:
         url = config.host + '/v2/matches'
@@ -250,31 +259,34 @@ def all_matches():
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your match info:", e)
 
+
 def fast_match_info():
-  try:
-      url = config.host + '/v2/fast-match/preview'
-      r = requests.get(url, headers=headers)
-      count = r.headers['fast-match-count']
-      # image is in the response but its in hex..
-      return count
-  except requests.exceptions.RequestException as e:
-      print("Something went wrong. Could not get your fast-match count:", e)
+    try:
+        url = config.host + '/v2/fast-match/preview'
+        r = requests.get(url, headers=headers)
+        count = r.headers['fast-match-count']
+        # image is in the response but its in hex..
+        return count
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not get your fast-match count:", e)
+
 
 def trending_gifs(limit=3):
-  try:
-      url = config.host + '/giphy/trending?limit=%s' % limit
-      r = requests.get(url, headers=headers)
-      return r.json()
-  except requests.exceptions.RequestException as e:
-      print("Something went wrong. Could not get the trending gifs:", e)
+    try:
+        url = config.host + '/giphy/trending?limit=%s' % limit
+        r = requests.get(url, headers=headers)
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not get the trending gifs:", e)
+
 
 def gif_query(query, limit=3):
-  try:
-      url = config.host + '/giphy/search?limit=%s&query=%s' % (limit, query)
-      r = requests.get(url, headers=headers)
-      return r.json()
-  except requests.exceptions.RequestException as e:
-      print("Something went wrong. Could not get your gifs:", e)
+    try:
+        url = config.host + '/giphy/search?limit=%s&query=%s' % (limit, query)
+        r = requests.get(url, headers=headers)
+        return r.json()
+    except requests.exceptions.RequestException as e:
+        print("Something went wrong. Could not get your gifs:", e)
 
 
 # def see_friends():
