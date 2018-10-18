@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+"""
+login_fb.py - Login to Tinder using your Facebook credentials
+"""
 # Used from  https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py
 
 import re
-
 import requests
 import robobrowser
 
