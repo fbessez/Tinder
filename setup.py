@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-PROJECT = "tinder"
+PROJECT = "Tinder_API"
 VERSION = "0.0.0"
 DESC = "Python wrapper for the Tinder API"
 LONG_DESC = open("README.md").read().strip()
