@@ -22,9 +22,22 @@
 - [ ] API section
 
 ### Continuous Integration
-- [ ] Write passing (and failing) tests
-- [ ] Setup Travis CI
+- [x] Write passing (and failing) tests
+- [x] Setup Travis CI
 
 ### Scripts
 - [ ] Release
+
+## First release v0.0.0
+
+### Restructure
+
+### Doctests
+
+### Pytest
+- [ ] Client
+- [ ] Config
+- [ ] Endpoints
+- [ ] Utils
+
 
