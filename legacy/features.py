@@ -8,9 +8,9 @@ from time import sleep
 
 try:
     import config
+    import tinder_api as api
 except ImportError:
     pass
-import tinder_api as api
 
 
 '''
