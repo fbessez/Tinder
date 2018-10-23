@@ -24,9 +24,9 @@ class Client(Endpoints, object):
             "User-agent": Config.USER_AGENT,
             "Accept": "application/json",
         }
-        self.login()
+        self.login(username, password)
 
-    def login(self, username=None, password=None):
+    def login(self, username, password):
         if Config.TINDER_AUTH_TOKEN != '':
             self.headers.update({"X-Auth-Token": Config.TINDER_AUTH_TOKEN})
         else:
