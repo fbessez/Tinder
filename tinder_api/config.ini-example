@@ -1,0 +1,8 @@
+; config.ini
+[DEFAULT]
+FB_USERNAME = ''
+FB_PASSWORD = ''
+FB_TOKEN = ''
+FB_ID = ''
+
+TINDER_AUTH_TOKEN = ''
