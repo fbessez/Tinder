@@ -67,11 +67,11 @@ See also the list of [contributors](https://github.com/Vikash-Kothary/tinder-api
 * **Rich Taylor** -- Original Tinder API Documentation -- [@rtt](https://github.com/rtt)
 
 ## Built With
-* [Python 3.7.0](https://python.org/) -- Programming Language
+* [Python 3.5.0](https://python.org/) -- Programming Language
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ### Disclaimer
 This code is in no way affiliated with, authorized, maintained, sponsored or endorsed by Tinder or any of its affiliates or subsidiaries. This is an independent and unofficial API. Use at your own risk.
