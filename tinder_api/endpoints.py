@@ -3,8 +3,6 @@
 endpoints.py - All the endpoints
 """
 
-from .config import Config
-
 
 class Endpoints(object):
     """
@@ -56,7 +54,7 @@ class Endpoints(object):
         """
         count = None
         endpoint = '/v2/fast-match/preview'
-        url = Config.HOST + endpoint
+        url = self.config.HOST + endpoint
         r = requests.get(url, headers=self.headers)
         count = r.headers['fast-match-count']
         # image is in the response but its in hex..
