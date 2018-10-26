@@ -1,5 +1,6 @@
-proxying.txt
 config.ini
+tinder_api/tests/vcr_cassettes/*
+proxying.txt
 api_abstract.py
 find.py
 
