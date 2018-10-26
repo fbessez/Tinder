@@ -40,4 +40,6 @@
 - [ ] Endpoints
 - [ ] Utils
 
+- [ ] Consistant import format w/o circular imports
+
 

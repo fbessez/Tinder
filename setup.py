@@ -29,7 +29,7 @@ setup(name=PROJECT,
       classifiers=[
           "Programming Language :: Python",
           "Topic :: Software Development :: Libraries :: Python Modules",
-          "Development Status :: 4 - Beta",
+          "Development Status :: 3 - Alpha",
           "Intended Audience :: Developers",
           "Intended Audience :: End Users/Desktop",
           "Operating System :: OS Independent",

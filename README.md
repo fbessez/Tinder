@@ -2,7 +2,7 @@
 
 <!-- TODO: Shields (see:shields.io) -->
 
-> A python wrapper for the private Tinder API.
+> A Python wrapper for the private Tinder API.
 
 <!-- TODO: Project description -->
 
