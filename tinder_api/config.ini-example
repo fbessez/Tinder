@@ -1,8 +1,8 @@
-; config.ini
+; config.ini-example
 [DEFAULT]
-FB_USERNAME = ''
-FB_PASSWORD = ''
-FB_TOKEN = ''
-FB_ID = ''
+FB_USERNAME = example@domain.com
+FB_PASSWORD = password
+FB_TOKEN = 
+FB_ID = 
 
-TINDER_AUTH_TOKEN = ''
+TINDER_AUTH_TOKEN = 
