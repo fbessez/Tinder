@@ -5,8 +5,8 @@ client.py - API Client
 
 import requests
 import json
-from .config import Config
-from .utils import get_facebook_credentials
+from . import config as c
+from . import utils
 from .errors import AuthenticationError
 from .endpoints import Endpoints
 
@@ -14,32 +14,42 @@ from .endpoints import Endpoints
 class Client(Endpoints, object):
     """API Client"""
 
-    def __init__(self, username=None, password=None):
+    def __init__(self, username=None, password=None, config=None):
         """
         """
+        self.config = config
         self.headers = {
             'app_version': '6.9.4',
-            'platform': Config.OS_PLATFORM,
-            "content-type": Config.CONTENT_TYPE,
-            "User-agent": Config.USER_AGENT,
-            "Accept": "application/json",
+            'platform': self.config.OS_PLATFORM,
+            "content-type": self.config.CONTENT_TYPE,
+            "User-agent": self.config.USER_AGENT,
+            "Accept": self.config.ACCEPT,
         }
         self.login(username, password)
 
-    def login(self, username, password):
-        if Config.TINDER_AUTH_TOKEN != '':
-            self.headers.update({"X-Auth-Token": Config.TINDER_AUTH_TOKEN})
-        else:
-            if username == None or password == None:
-                username = Config.FB_USERNAME
-                password = Config.FB_PASSWORD
-            fb_auth_token, fb_user_id = get_facebook_credentials(username, password)
-            tinder_auth_token = self.get_auth_token(fb_auth_token, fb_user_id)
-            self.headers.update({"X-Auth-Token": tinder_auth_token})
+    def login(self, username=None, password=None):
+        """
+        """
+        # Get Tinder auth token if needed
+        if self.config.TINDER_AUTH_TOKEN == '':
+            # Get facebook token and id if needed
+            if self.config.FB_TOKEN == '' or self.config.FB_ID == '':
+                # Get facebook username and password from params if needed
+                if self.config.FB_USERNAME == '' or self.config.FB_PASSWORD == '':
+                    # Set username and password
+                    self.config.FB_USERNAME = username
+                    self.config.FB_PASSWORD = password
+                # Set facebook token and id
+                self.config.FB_TOKEN, self.config.FB_ID = utils.get_facebook_credentials(
+                    self.config.FB_USERNAME, self.config.FB_PASSWORD)
+            # Set tinder auth token
+            self.config.TINDER_AUTH_TOKEN = self.get_auth_token(
+                self.config.FB_TOKEN, self.config.FB_ID)
+        self.headers.update({"X-Auth-Token": self.config.TINDER_AUTH_TOKEN})
 
     def get_request(self, path):
         """"""
-        r = requests.get(Config.HOST + path, headers=self.headers)
+        r = requests.get(self.config.HOST + path, headers=self.headers)
         if (r.status_code != 200):
             raise RequestError(path)
         return r.json()
@@ -48,10 +58,10 @@ class Client(Endpoints, object):
         """"""
         r = {}
         if params == None:
-            r = requests.post(Config.HOST + path, headers=self.headers)
+            r = requests.post(self.config.HOST + path, headers=self.headers)
         else:
             data = json.dumps(params)
-            r = requests.post(Config.HOST + path, headers=self.headers, data=data)
+            r = requests.post(self.config.HOST + path, headers=self.headers, data=data)
         if (r.status_code != 200):
             raise RequestError(path)
         return r.json()
@@ -59,14 +69,14 @@ class Client(Endpoints, object):
     def put_request(self, path, params):
         """"""
         data = json.dumps(params)
-        r = requests.put(Config.HOST + path, headers=self.headers, data=data)
+        r = requests.put(self.config.HOST + path, headers=self.headers, data=data)
         if (r.status_code != 200):
             raise RequestError(path)
         return r.json()
 
     def delete_request(self, path):
         """"""
-        r = requests.delete(Config.HOST + path, headers=self.headers)
+        r = requests.delete(self.config.HOST + path, headers=self.headers)
         if (r.status_code != 200):
             raise RequestError(path)
         return r.json()
