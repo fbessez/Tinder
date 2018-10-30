@@ -14,4 +14,5 @@ setup(name='Tinder',
       license='MIT License',
       zip_safe=False,
       keywords=['tinder-api', 'tinder', 'python-3', 'robobrowser'],
-      #classifiers=[])
+      #classifiers=[]
+     )
