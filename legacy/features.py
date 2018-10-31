@@ -1,11 +1,16 @@
-# coding=utf-8
-
+#!/usr/bin/env python3
+"""
+features.py - 
+"""
 from datetime import date, datetime
 from random import random
 from time import sleep
 
-import config
-import tinder_api as api
+try:
+    import config
+    import tinder_api as api
+except ImportError:
+    pass
 
 
 '''
