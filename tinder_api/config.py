@@ -57,13 +57,14 @@ class DevelopmentConfig(Config):
 
     config = configparser.ConfigParser()
     config_file = utils.find_file('config.ini')
-    config.read(config_file)
+    if config_file:
+        config.read(config_file)
 
-    FB_USERNAME = config.get(ENVIRONMENT, 'FB_USERNAME')
-    FB_PASSWORD = config.get(ENVIRONMENT, 'FB_PASSWORD')
-    FB_TOKEN = config.get(ENVIRONMENT, 'FB_TOKEN')
-    FB_ID = config.get(ENVIRONMENT, 'FB_ID')
-    TINDER_AUTH_TOKEN = config.get(ENVIRONMENT, 'TINDER_AUTH_TOKEN')
+        FB_USERNAME = config.get(ENVIRONMENT, 'FB_USERNAME')
+        FB_PASSWORD = config.get(ENVIRONMENT, 'FB_PASSWORD')
+        FB_TOKEN = config.get(ENVIRONMENT, 'FB_TOKEN')
+        FB_ID = config.get(ENVIRONMENT, 'FB_ID')
+        TINDER_AUTH_TOKEN = config.get(ENVIRONMENT, 'TINDER_AUTH_TOKEN')
 
     def save():
         config[ENVIRONMENT]['FB_USERNAME'] = FB_USERNAME
@@ -78,13 +79,13 @@ class DevelopmentConfig(Config):
 class CIConfig(Config):
     """Loads login credentials from environment variables
     """
-    FB_USERNAME = os.getenv('FB_USERNAME', '')
-    FB_PASSWORD = os.getenv('FB_PASSWORD', '')
-    FB_TOKEN = os.getenv('FB_TOKEN', '')
-    FB_ID = os.getenv('FB_ID', '')
+    FB_USERNAME = os.getenv('FB_USERNAME', None)
+    FB_PASSWORD = os.getenv('FB_PASSWORD', None)
+    FB_TOKEN = os.getenv('FB_TOKEN', None)
+    FB_ID = os.getenv('FB_ID', None)
 
     # Tinder Credentials
-    TINDER_AUTH_TOKEN = os.getenv('TINDER_AUTH_TOKEN', '')
+    TINDER_AUTH_TOKEN = os.getenv('TINDER_AUTH_TOKEN', None)
 
     def save():
         pass
