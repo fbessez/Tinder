@@ -17,11 +17,6 @@ class ClientError(Exception):
     pass
 
 
-class CredentialsError(ClientError):
-    """Credentials error"""
-    pass
-
-
 class AuthenticationError(ClientError):
     """Authentication error"""
     pass
