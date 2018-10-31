@@ -6,7 +6,7 @@ client.py - API Client
 import requests
 import json
 from .config import Config
-from .utils import Utils
+from .utils import FBUtils
 from .errors import RequestError
 from .endpoints import Endpoints
 
@@ -31,16 +31,16 @@ class Client(Endpoints, object):
         """
         """
         # Get Tinder auth token if needed
-        if Config.TINDER_AUTH_TOKEN == '':
+        if Config.TINDER_AUTH_TOKEN == None:
             # Get facebook token and id if needed
-            if Config.FB_TOKEN == '' or Config.FB_ID == '':
+            if Config.FB_TOKEN == None or Config.FB_ID == None:
                 # Get facebook username and password from params if needed
-                if Config.FB_USERNAME == '' or Config.FB_PASSWORD == '':
+                if Config.FB_USERNAME == None or Config.FB_PASSWORD == None:
                     # Set username and password
                     Config.FB_USERNAME = username
                     Config.FB_PASSWORD = password
                 # Set facebook token and id
-                Config.FB_TOKEN, Config.FB_ID = Utils.get_facebook_credentials(
+                Config.FB_TOKEN, Config.FB_ID = FBUtils.get_facebook_credentials(
                     Config.FB_USERNAME, Config.FB_PASSWORD)
             # Set tinder auth token
             Config.TINDER_AUTH_TOKEN = self.get_auth_token(
