@@ -2,12 +2,13 @@
 #PROJECT_VERSION := $(shell python setup.py --version)
 #TEST_PATH=./tinder_api/tests
 
-#.PHONY: requirements env build install tests clean-pyc clean-build
+.PHONY: requirements env build install tests clean-pyc clean-build
 
 requirements:
 	@echo 'Install python3 requirements into a linux machine'
-	sudo apt-get install python3-pip python3-venv
-	sudo pip3 install virtualenv
+	sudo apt-get -y install python3-pip python3-venv
+	pip install --upgrade pip
+	pip3 install virtualenv
 
 env:
 	@echo 'Install requirements into virtualenv'
@@ -26,7 +27,7 @@ install: build
 tests:
 	@echo 'Run tests'
 	python3 -m pytest 
-	#--doctest-modules
+	# --doctest-modules
 
 clean-pyc:
 	find . -type d -name '__pycache__' -exec rm --force --recursive {} +
