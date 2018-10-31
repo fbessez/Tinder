@@ -7,8 +7,8 @@
 requirements:
 	@echo 'Install python3 requirements into a linux machine'
 	sudo apt-get -y install python3-pip python3-venv
-	pip install --upgrade pip
-	pip3 install virtualenv
+	pip3 install --user --upgrade pip
+	pip3 install virtualenv --user
 
 env:
 	@echo 'Install requirements into virtualenv'
@@ -26,7 +26,7 @@ install: build
 
 tests:
 	@echo 'Run tests'
-	python3 -m pytest 
+	python3 -m pytest
 	# --doctest-modules
 
 clean-pyc:
