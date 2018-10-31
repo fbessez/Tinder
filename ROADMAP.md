@@ -40,6 +40,13 @@
 - [ ] Endpoints
 - [ ] Utils
 
-- [ ] Consistant import format w/o circular imports
-
+### Examples
+- [ ] Login
+- [x] View Profile
+- [ ] Edit Profile
+- [ ] Settings
+- [ ] My Tinder Plus
+- [ ] Recommendations
+- [ ] Top Picks
+- [ ] Matches
 
