@@ -4,7 +4,6 @@ config.py -
 """
 
 import os
-from . import utils
 
 
 class Config:
