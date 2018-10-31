@@ -8,6 +8,7 @@ import robobrowser
 import requests
 import json
 from .config import Config
+from .errors import AuthenticationError
 
 
 class FBUtils:
@@ -19,10 +20,10 @@ class FBUtils:
 
         fb_access_token = FBUtils.get_fb_access_token(username, password)
         if fb_access_token == None:
-            raise AuthenticationError()
+            raise AuthenticationError('No FB Access Token')
         fb_id = FBUtils.get_fb_id(fb_access_token)
         if fb_id == None:
-            raise AuthenticationError()
+            raise AuthenticationError('No FB ID')
         return fb_access_token, fb_id
 
     @staticmethod
