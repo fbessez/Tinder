@@ -3,18 +3,19 @@
 tests/test_client.py - Test client
 """
 
-from ..client import Client
-from ..config import Config
+from tinder_api.client import Client
+from tinder_api.config import Config
 
 
 def test_client_with_params():
     """Test client with the username and password set as parametes
     """
-    #tinder = Client('', '')
-    pass
+    username = ''
+    password = ''
+    return Client(username=username, password=password)
 
 
-def test_client_with_config():
+def test_client_with_env():
     """Test client with the username and password set as parametes
     """
     pass

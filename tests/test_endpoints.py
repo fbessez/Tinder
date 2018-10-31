@@ -3,20 +3,21 @@
 tests/test_endpoints.py - Test endpoints
 """
 
+import pytest
 import vcr
-from pytest import fixture
-from ..client import Client
-from .. import config as c
+from tinder_api.client import Client
 
 
-@fixture
+@pytest.fixture
 def tinder_client():
     """Returns testing client
     """
-    return Client(config=c.DevelopmentConfig)
+    return Client()
+
+VCR_BASE_PATH = './tests/vcr_cassettes'
 
 
-@vcr.use_cassette('./tinder_api/tests/vcr_cassettes/recs.yml', filter_query_parameters=['X-Auth-Token'])
+@vcr.use_cassette(VCR_BASE_PATH + '/recs.yml', filter_query_parameters=['X-Auth-Token'])
 def test_recs(tinder_client):
     """Test get recommendations v2
     """
