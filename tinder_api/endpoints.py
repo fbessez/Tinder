@@ -2,7 +2,7 @@
 """
 endpoints.py - All the endpoints
 """
-
+import requests
 
 class Endpoints(object):
     """

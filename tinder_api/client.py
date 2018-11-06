@@ -5,10 +5,13 @@ client.py - API Client
 
 import requests
 import json
-from .config import Config
-from .utils import FBUtils
-from .errors import RequestError
-from .endpoints import Endpoints
+
+from tinder_api.config import Config
+from tinder_api.utils import FBUtils
+from tinder_api.errors import RequestError
+from tinder_api.endpoints import Endpoints
+
+
 
 
 class Client(Endpoints, object):
