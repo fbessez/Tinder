@@ -2,7 +2,7 @@
 #PROJECT_VERSION := $(shell python setup.py --version)
 #TEST_PATH=./tinder_api/tests
 
-.PHONY: requirements env build install tests clean-pyc clean-build
+.PHONY: requirements env build install tests examples clean-pyc clean-build
 
 requirements:
 	@echo 'Install python3 requirements into a linux machine'
@@ -28,6 +28,10 @@ tests:
 	@echo 'Run tests'
 	python3 -m pytest
 	# --doctest-modules
+
+examples:
+	@echo 'Run example notebooks'
+	jupyter notebook --notebook-dir=./examples/
 
 clean-pyc:
 	find . -type d -name '__pycache__' -exec rm --force --recursive {} +
