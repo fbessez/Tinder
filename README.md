@@ -286,7 +286,13 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       </tr>
       <tr>
          <td>/v2/fast-match/preview</td>
-         <td>Get the thumbnail image shown in the messages-window (the one showing how many potential matches you have</td>
+         <td>Get the non blurred thumbnail image shown in the messages-window (the one showing the likes you received)</td>
+         <td>{}</td>
+         <td>GET</td>
+      </tr>
+      <tr>
+         <td>/v2/fast-match/count</td>
+         <td>Get the number of likes you received</td>
          <td>{}</td>
          <td>GET</td>
       </tr>
