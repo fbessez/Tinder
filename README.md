@@ -339,6 +339,11 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 		<tr>
 			<td>404</td>
 			<td>The server didn't find the resource you tried to access.</td>
+		</tr>
+		<tr>
+			<td>503</td>
+			<td>Back-end server is at capacity.</td>
+		</tr>
 	</tbody>
 </table>
 
