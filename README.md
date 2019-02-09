@@ -322,11 +322,12 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 	<tbody>
 		<tr>
 			<td>200</td>
-			<td>Everything went okay, and the server returned a result (if any).</td>
+			<td>Everything went okay, and 
+				returned a result (if any).</td>
 		</tr>
 		<tr>
 			<td>301</td>
-			<td>he server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint's name has changed.</td>
+			<td>The server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint's name has changed.</td>
 		</tr>
 		<tr>
 			<td>400</td>
