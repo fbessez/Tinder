@@ -427,7 +427,6 @@ With your token ready, add it to tinder_config_ex.py (value for tinder_token). Y
 
 
 <h2> The following is no longer available due to Tinder setting their ping_time to a constant date in 2014 and/or the removal of Tinder Social.</h2>
-```
 
 <h3> Friends' Pingtimes: </h3>
 <h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
