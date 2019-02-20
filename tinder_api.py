@@ -4,14 +4,14 @@ import json
 import config
 import requests
 
-headers = {
+get_headers = {
     'app_version': '6.9.4',
     'platform': 'ios',
-    "content-type": "application/json",
     "User-agent": "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)",
     "Accept": "application/json"
 }
-
+headers = get_headers.copy()
+headers['content-type'] = "application/json"
 
 def get_auth_token(fb_auth_token, fb_user_id):
     if "error" in fb_auth_token:
@@ -27,6 +27,7 @@ def get_auth_token(fb_auth_token, fb_user_id):
     try:
         tinder_auth_token = req.json()["token"]
         headers.update({"X-Auth-Token": tinder_auth_token})
+        get_headers.update({"X-Auth-Token": tinder_auth_token})
         print("You have been successfully authorized!")
         return tinder_auth_token
     except Exception as e:
@@ -224,7 +225,7 @@ def superlike(person_id):
 def like(person_id):
     try:
         url = config.host + '/like/%s' % person_id
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=get_headers)
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not like:", e)
@@ -233,7 +234,7 @@ def like(person_id):
 def dislike(person_id):
     try:
         url = config.host + '/pass/%s' % person_id
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=get_headers)
         return r.json()
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not dislike:", e)
