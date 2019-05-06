@@ -77,7 +77,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 	<tr>
 		<td>/v2/matches</td>
 		<td>Get your matches</td>
-		<td>query in link should have count=1-100</td>
+		<td>query in link should have count=1-100 e.g: /v2/matches?count=50</td>
 		<td>GET</td>
 	   </tr>
       <tr>
