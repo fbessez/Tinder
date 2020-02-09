@@ -65,19 +65,19 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
        <td>/v2/auth/sms/send?auth_type=sms</td>
        <td>Part 1 of SMS authentication (two-factor)</td>
-       <td>{'phone_number': INSERT_HERE}</td>
+       <td>{'phone_number': string}</td>
 		 <td>POST</td>
 	  </tr>
       <tr>
-		 <td>/v2/auth/login/sms</td>
+		 <td>/v2/auth/sms/validate?auth_type=sms</td>
 		 <td>Part 2 of SMS authentication (two-factor)</td>
-		 <td>{'otp_code': INSERT_HERE, 'phone_number': INSERT_HERE }</td>
+		 <td>{'otp_code': string, 'phone_number': string }</td>
 		 <td>POST</td>
 	  </tr>
      	<tr>
 		 <td>/v2/auth/login/sms</td>
 		 <td>Part 3 of SMS authentication (two-factor)</td>
-		 <td>{'refresh_token': INSERT_HERE}</td>
+		 <td>{'refresh_token': string}</td>
 		 <td>POST</td>
 	  </tr>
       <tr>
