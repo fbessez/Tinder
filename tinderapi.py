@@ -1,10 +1,40 @@
 from tinder_api_sms import *
 import urllib.request
 import os
+from time import sleep
 
 
 recs = get_recommendations()['results']
 
+def auto_like():
+    matched_ids = []
+    firstmatch = len(matched_ids)
+    i = 0
+    count = 70
+    matches_dict = all_matches('{}'.format(count))
+    matches = matches_dict['data']['matches']
+    # get first match list
+    for user in matches:
+        person = user['person']
+        matched_ids.append(user['id'])
+        
+    while True:
+        # like girl in recommendations
+        for girl in recs:
+            i += 1
+            like(girl['_id'])
+            print('{} liked {}'.format(i, girl['name']))
+            # get second match list
+            for user in matches:
+                person = user['person']
+                if person['id'] not in matched_ids:
+                    matched_ids.append(person['id'])
+                    secondmatch = len(matched_ids)
+            # check if second list are longer than first list
+            if  firstmatch < secondmatch:
+                print("It's a Match: {}".format(girl['name']))
+                matched_ids.append(girl['_id'])
+            sleep(3)
 
 def fetch_image():
     print('fetching image...')
