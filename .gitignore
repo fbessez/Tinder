@@ -6,3 +6,8 @@ __pycache__
 find.py
 *.log
 *.egg-info
+images
+.vscode
+tp.txt
+.DS_store
+*.json
