@@ -21,20 +21,24 @@ def auto_like():
     while True:
         # like girl in recommendations
         for girl in recs:
+            distance_km = girl['distance_mi'] * 1.609
             i += 1
             like(girl['_id'])
             print('{} liked {}'.format(i, girl['name']))
+            print('School: {} '.format(girl['schools']))
+            print('{} km'.format(distance_km))
+            print('------------------------------------------')
             # get second match list
             for user in matches:
                 person = user['person']
-                if person['id'] not in matched_ids:
-                    matched_ids.append(person['id'])
-                    secondmatch = len(matched_ids)
+                matched_ids.append(user['id'])
+                secondmatch = len(matched_ids)
             # check if second list are longer than first list
-            if  firstmatch < secondmatch:
+            if  secondmatch - firstmatch == 1:
                 print("It's a Match: {}".format(girl['name']))
                 matched_ids.append(girl['_id'])
-            sleep(3)
+            sleep(2)
+            
 
 def fetch_image():
     print('fetching image...')
