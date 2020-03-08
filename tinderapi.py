@@ -2,9 +2,11 @@ from tinder_api_sms import *
 import urllib.request
 import os
 from time import sleep
+import datetime
 
 
 recs = get_recommendations()['results']
+
 
 def auto_like():
     matched_ids = []
@@ -17,7 +19,6 @@ def auto_like():
     for user in matches:
         person = user['person']
         matched_ids.append(user['id'])
-        
     while True:
         # like girl in recommendations
         for girl in recs:
@@ -72,7 +73,9 @@ def get_match_id():
         person = user['person']
         i += 1
         print(i,user['id'] , person['name'])
-        print(user['last_activity_date'])
+        matchage= int(person['birth_date'][:4]) - int(str(datetime.date.today())[:4])
+        print('age: {} ({}) '.format(matchage, person['birth_date'][:4]))
+        print('__________________________________________')
         
         
 def get_token():
