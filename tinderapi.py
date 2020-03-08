@@ -41,7 +41,7 @@ def auto_like():
             sleep(2)
             
 
-def fetch_image():
+def fetch_image(times):
     print('fetching image...')
     i = 0
     # get each recommend in recs
@@ -61,6 +61,8 @@ def fetch_image():
             urllib.request.urlretrieve(photo['url'], fullfilename)
             print('downloaded: {} {}.jpg'.format(person['name'], foldercount))
             foldercount += 1
+        if i > times:
+            break
         print(' ')
         
 
@@ -78,10 +80,3 @@ def get_match_id():
         print('__________________________________________')
         
         
-def get_token():
-    try:
-        r = requests.get('https://api.gotinder.com/ws/generate?locale=en', headers=headers)
-        return r.json()
-    except requests.exceptions.RequestException as e:
-        print("Something went wrong with getting recomendations:", e)
-
