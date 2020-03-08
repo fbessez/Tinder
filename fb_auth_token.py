@@ -18,20 +18,22 @@ def get_fb_access_token(email, password):
     s.submit_form(f)
     f = s.get_form()
     try:
-        s.submit_form(f, submit=f.submit_fields['__CONFIRM__'])
+        s.submit_form(f, submit=f.submit_fields["__CONFIRM__"])
         access_token = re.search(
-            r"access_token=([\w\d]+)", s.response.content.decode()).groups()[0]
+            r"access_token=([\w\d]+)", s.response.content.decode()
+        ).groups()[0]
         return access_token
     except Exception as ex:
         print("access token could not be retrieved. Check your username and password.")
         print("Official error: %s" % ex)
-        return {"error": "access token could not be retrieved. Check your username and password."}
+        return {
+            "error": "access token could not be retrieved. Check your username and password."
+        }
 
 
 def get_fb_id(access_token):
     if "error" in access_token:
         return {"error": "access token could not be retrieved"}
     """Gets facebook ID from access token"""
-    req = requests.get(
-        'https://graph.facebook.com/me?access_token=' + access_token)
+    req = requests.get("https://graph.facebook.com/me?access_token=" + access_token)
     return req.json()["id"]
