@@ -1,14 +1,12 @@
 # -*- coding: UTF-8 -*-
 from tinder_api_sms import *
 from time import sleep
-import urllib.request
-import os
-import json
+import urllib.request, os, json, datetime, random
 
 try:
     recs = get_recommendations()["results"]
 except KeyError:
-    print("no recommendations found, try filter further distance")
+    print("no recommendations found")
 
 
 def settings():
@@ -62,11 +60,11 @@ def settings():
 
 def fetch_data():
     settings()
-    print("start fetching images")
+    print("found {} girls - start fetching images".format(len(recs)))
     i = 1
     # get each recommend in recs
     for person in recs:
-        foldercount = 0
+        imagecount = 0
         i += 1
         print("{}___________{} - {}___________".format("\033[5m", i, person["name"]))
         print("\033[0m")
@@ -101,11 +99,11 @@ def fetch_data():
             urllib.request.urlretrieve(
                 photo["url"],
                 os.path.join(
-                    "images/{}".format(person["_id"]), "{}.jpg".format(foldercount)
+                    "images/{}".format(person["_id"]), "{}.jpg".format(imagecount)
                 ),
             )
-            print("fetching: images/{}/{}.jpg".format(person["name"], foldercount))
-            foldercount += 1
+            print("fetching: images/{}/{}.jpg".format(person["name"], imagecount))
+            imagecount += 1
         print(" ")
     print("{}DONE!!!".format("\033[92m"))
 
@@ -113,13 +111,26 @@ def fetch_data():
 def get_match_id():
     i = 0
     count = 70
-    matches_dict = all_matches("{}".format(count))
+    matches_dict = all_matches(count)
     matches = matches_dict["data"]["matches"]
     for user in matches:
         person = user["person"]
         i += 1
         print(i, user["id"], person["name"])
-        matchage = int(person["birth_date"][:4]) - int(str(datetime.date.today())[:4])
+        matchage = int(str(datetime.date.today())[:4]) - int(person["birth_date"][:4])
         print("age: {} ({}) ".format(matchage, person["birth_date"][:4]))
         print("__________________________________________")
 
+
+def auto_like():
+
+    # Auto Like
+    i = 0
+    print("Found {} girls - start botting".format(len(recs)))
+    for girl in recs:
+        sleeptime = random.randint(1, 2)
+        i += 1
+        like(girl["_id"])
+        print("{}. liked  {}".format(i, girl["name"]), end="\n\n")
+        sleep(sleeptime)
+    print("liked {} in total".format((i)))
