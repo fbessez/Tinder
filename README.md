@@ -175,6 +175,11 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>POST</td>
       </tr>
       <tr>
+         <td>/v1/activity/feed?direction=past&eventTypes=1023</td>
+         <td>Get activity feed, including old and updated bios for comparison</td>
+         <td>{}</td>
+         <td>GET</td>
+      <tr>
          <td>/instagram/authorize</td>
          <td>Auth Instagram</td>
          <td>{}</td>
