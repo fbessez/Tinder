@@ -62,10 +62,22 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>{'facebook_token': INSERT_HERE, 'facebook_id': INSERT_HERE}</td>
          <td>POST</td>
       </tr>
-	  <tr>
-		 <td>/auth/login/accountkit</td>
-		 <td>For SMS authentication (two-factor)</td>
-		 <td>{'token': INSERT_HERE, 'id': INSERT_HERE, 'client_version':'9.0.1'}</td>
+      <tr>
+       <td>/v2/auth/sms/send?auth_type=sms</td>
+       <td>Part 1 of SMS authentication (two-factor)</td>
+       <td>{'phone_number': string}</td>
+		 <td>POST</td>
+	  </tr>
+      <tr>
+		 <td>/v2/auth/sms/validate?auth_type=sms</td>
+		 <td>Part 2 of SMS authentication (two-factor)</td>
+		 <td>{'otp_code': string, 'phone_number': string }</td>
+		 <td>POST</td>
+	  </tr>
+     	<tr>
+		 <td>/v2/auth/login/sms</td>
+		 <td>Part 3 of SMS authentication (two-factor)</td>
+		 <td>{'refresh_token': string}</td>
 		 <td>POST</td>
 	  </tr>
       <tr>
