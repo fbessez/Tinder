@@ -24,20 +24,24 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 		<tr>
 			<th>Header</th>
 			<th>Example</th>
+			<th>Notes</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>X-Auth-Token</td>
 			<td>See "How to get facebook_token" below</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td>Content-type</td>
 			<td>application/json</td>
+			<td>Shouldn't be sent to `/like/_id` nor `/pass/_id` (#63)</td>
 		</tr>
 		<tr>
 			<td>User-agent</td>
 			<td>Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)</td>
+			<td></td>
 		</tr>
 	</tbody>
 </table>
