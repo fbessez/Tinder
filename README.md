@@ -1,510 +1,184 @@
-# Tinder API Documentation - 2018
+# Tinder API Documentation - 2020
 
-First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md'>@rtt</a> who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
+First off, I want to give a shoutout to [@rtt](https://gist.github.com/rtt/10403467#file-tinder-api-documentation-md) who initially posted the Tinder API Documentation that I found most of these endpoints on. I am writing this to provide a more up-to-date resource for working with the Tinder API.
 
-**Note: This was updated in June 2018 so it might be outdated.**
+**Note: This was updated in May 2020 so it might be outdated.**
 
-### API Details
-<table>
-	<tbody>
-		<tr>
-			<td>Host</td>
-			<td>api.gotinder.com</td>
-		</tr>
-		<tr>
-			<td>Protocol</td>
-			<td>SSL</td>
-		</tr>
-	</tbody>
-</table>
+## API Documentation
+
+### Host and Protocol
+
+| Host | Protocol |
+|--|--|
+| api.gotinder.com | SSL |
 
 ### Required Headers
-<table>
-	<thead>
-		<tr>
-			<th>Header</th>
-			<th>Example</th>
-			<th>Notes</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>X-Auth-Token</td>
-			<td>See "How to get facebook_token" below</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>Content-type</td>
-			<td>application/json</td>
-			<td>Shouldn't be sent to `/like/_id` nor `/pass/_id` (#63)</td>
-		</tr>
-		<tr>
-			<td>User-agent</td>
-			<td>Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)</td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
+
+| Header | Example | Notes |
+|---|---|---|
+| X-Auth-Token | See "How to get facebook_token" below |  |
+| Content-type | application/json |  |
+| User-agent | Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00) |  |
 
 ### Known Endpoints
+
 Note: All endpoints are concatenated to the host url
 
 Note: All curls must be sent with the headers as well (the only exception is that the /auth call must not have the X-Auth-Token header)
-<table>
-   <thead>
-      <tr>
-         <th>Endpoint</th>
-         <th>Purpose</th>
-         <th>Data?</th>
-         <th>Method</th>
-      </tr>
-   </thead>
-   <tbody>
-      <tr>
-         <td>/auth</td>
-         <td>For authenticating</td>
-         <td>{'facebook_token': INSERT_HERE, 'facebook_id': INSERT_HERE}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-       <td>/v2/auth/sms/send?auth_type=sms</td>
-       <td>Part 1 of SMS authentication (two-factor)</td>
-       <td>{'phone_number': string}</td>
-		 <td>POST</td>
-	  </tr>
-      <tr>
-		 <td>/v2/auth/sms/validate?auth_type=sms</td>
-		 <td>Part 2 of SMS authentication (two-factor)</td>
-		 <td>{'otp_code': string, 'phone_number': string }</td>
-		 <td>POST</td>
-	  </tr>
-     	<tr>
-		 <td>/v2/auth/login/sms</td>
-		 <td>Part 3 of SMS authentication (two-factor)</td>
-		 <td>{'refresh_token': string}</td>
-		 <td>POST</td>
-	  </tr>
-      <tr>
-         <td>/user/recs</td>
-         <td>Get match recommendations</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-	<tr>
-		<td>/v2/matches</td>
-		<td>Get your matches</td>
-		<td>query in link should have count=1-100 e.g: /v2/matches?count=50</td>
-		<td>GET</td>
-	   </tr>
-      <tr>
-         <td>/user/matches/_id</td>
-         <td>Send Message to that id</td>
-         <td>{"message": TEXT GOES HERE}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/user/matches/match_id</td>
-         <td>Unmatch person</td>
-         <td>{}</td>
-         <td>DELETE</td>
-      </tr>
-      <tr>
-         <td>/user/_id</td>
-         <td>Get a user's profile data</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/user/ping</td>
-         <td>Change your location</td>
-         <td>{"lat": lat, "lon": lon}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/updates</td>
-         <td>Get all updates since the given date -- inserting "" will give you all updates since creating a Tinder account (i.e. matches, messages sent, etc.)</td>
-         <td>{"last_activity_date": ""} Input a timestamp: '2017-03-25T20:58:00.404Z' for updates since that time.</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>Get your own profile data</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>Change your search preferences</td>
-         <td>{"age_filter_min": age_filter_min, "gender_filter": gender_filter, "gender": gender, "age_filter_max": age_filter_max, "distance_filter": distance_filter}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>(Tinder Plus Only) hide/show age</td>
-         <td>{"hide_age":boolean}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>(Tinder Plus Only) hide/show distance</td>
-         <td>{"hide_distance":boolean}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>(Tinder Plus Only) hide/show ads</td>
-         <td>{"hide_ads":boolean}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>(Tinder Plus Only) Set Tinder Blend options to "Recent Activity": Shows more recently active users</td>
-         <td>{"blend":"recency"}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>(Tinder Plus Only) Set Tinder Blend options to "Optimal": Scientifically proven to get you more matches</td>
-         <td>{"blend":"optimal"}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/profile</td>
-         <td>(Tinder Plus Only) Set discovery settings to only people who already liked you</td>
-         <td>{"discoverable_party":"liked"}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/passport/user/travel</td>
-         <td>(Tinder Plus Only) Travel to coordinate</td>
-         <td>{"lat":lat,"lon":lon}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/v1/activity/feed?direction=past&eventTypes=1023</td>
-         <td>Get activity feed, including old and updated bios for comparison</td>
-         <td>{}</td>
-         <td>GET</td>
-      <tr>
-         <td>/instagram/authorize</td>
-         <td>Auth Instagram</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/v2/profile/spotify/</td>
-         <td>Get Spotify settings</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/v2/profile/spotify/theme</td>
-         <td>Set Spotify song</td>
-         <td>{"id":song_id}</td>
-         <td>PUT</td>
-      </tr>
-      <tr>
-         <td>/profile/username</td>
-         <td>Change your webprofile username</td>
-         <td>{"username": username}</td>
-         <td>PUT</td>
-      </tr>
-      <tr>
-         <td>/profile/username</td>
-         <td>Reset your webprofile username</td>
-         <td>{}</td>
-         <td>DELETE</td>
-      </tr>
-      <tr>
-         <td>/meta</td>
-         <td>Get your own meta data (swipes left, people seen, etc..)</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/v2/meta</td>
-         <td>Get your own meta data from V2 API (extra data like "top_picks" info)</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/report/_id</td>
-         <td>Report someone --&gt; There are only a few accepted causes... (see tinder_api.py for options)</td>
-         <td>{"cause": cause, "text": explanation}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/like/_id</td>
-         <td>Like someone a.k.a swipe right</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/pass/_id</td>
-         <td>Pass on someone a.k.a swipe left</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/like/_id/super</td>
-         <td>~Super Like~ someone a.k.a swipe up</td>
-         <td>{}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/matches/{match id}</td>
-         <td>Get a match from its id (thanks <a href="https://github.com/jtabet"> @jtabet </a>)</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/message/{message id}</td>
-         <td>Get a message from its id (thanks <a href="https://github.com/jtabet"> @jtabet </a>)</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/passport/user/reset</td>
-         <td>Reset your location to your real location</td>
-         <td>{}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/passport/user/travel</td>
-         <td>Change your swiping location</td>
-         <td>{"lat": latitutde, "lon": longitude}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/user/{user_id}/common_connections</td>
-         <td>Get common connection of a user</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/profile/job</td>
-         <td>Set job</td>
-         <td>{"company":{"id":"17767109610","name":"University of Miami","displayed":true},"title":{"id":"106123522751852","name":"Research Assistant","displayed":true}}</td>
-         <td>PUT</td>
-      </tr>
-      <tr>
-         <td>/profile/job</td>
-         <td>Delete job</td>
-         <td>{}</td>
-         <td>DELETE</td>
-      </tr>
-      <tr>
-         <td>/profile/school</td>
-         <td>Set school(s)</td>
-         <td>{"schools":[{"id":school_id}]}</td>
-         <td>PUT</td>
-      </tr>
-      <tr>
-         <td>/profile/school</td>
-         <td>Reset school</td>
-         <td>{}</td>
-         <td>DELETE</td>
-      </tr>
-      <tr>
-         <td>/message/{message_id}/like</td>
-         <td>Like a message</td>
-         <td>{}</td>
-         <td>POST</td>
-      </tr>
-      <tr>
-         <td>/v2/fast-match/preview</td>
-         <td>Get the non blurred thumbnail image shown in the messages-window (the one showing the likes you received)</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/v2/fast-match/count</td>
-         <td>Get the number of likes you received</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/giphy/trending?limit={limit}</td>
-         <td>Get the trending gifs (tinder uses giphy) accessible in chat</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-      <tr>
-         <td>/giphy/search?limit={limit}&query={query}</td>
-         <td>Get gifs (tinder uses giphy) based on a search accessible in chat</td>
-         <td>{}</td>
-         <td>GET</td>
-      </tr>
-   </tbody>
-</table>
+
+| Endpoint| Purpose| Data?| Method |
+|--|--|--|--|
+| /auth| For authenticating| {'facebook_token': INSERT_HERE, 'facebook_id': INSERT_HERE}| POST|
+| /v2/auth/sms/send?auth_type=sms| Part 1 of SMS authentication (two-factor)| {'phone_number': string}| POST|
+| /v2/auth/sms/validate?auth_type=sms| Part 2 of SMS authentication (two-factor)| {'otp_code': string, 'phone_number': string }| POST|
+| /v2/auth/login/sms| Part 3 of SMS authentication (two-factor)| {'refresh_token': string}| POST|
+| /user/recs| Get match recommendations| {}| GET|
+| /v2/matches| Get your matches| query in link should have count=1-100 e.g: /v2/matches?count=50| GET|
+| /user/matches/_id| Send Message to that id| {"message": TEXT GOES HERE}| POST|
+| /user/matches/match_id| Unmatch person| {}| DELETE |
+| /user/_id| Get a user's profile data| {}| GET|
+| /user/ping| Change your location| {"lat": lat, "lon": lon}| POST|
+| /updates| Get all updates since the given date -- inserting "" will give you all updates since creating a Tinder account (i.e. matches, messages sent, etc.) | {"last_activity_date": ""} Input a timestamp: '2017-03-25T20:58:00.404Z' for updates since that time.| POST|
+| /profile| Get your own profile data| {}| GET|
+| /profile| Change your search preferences| {"age_filter_min": age_filter_min, "gender_filter": gender_filter, "gender": gender, "age_filter_max": age_filter_max, "distance_filter": distance_filter} | POST|
+| /profile| (Tinder Plus Only) hide/show age| {"hide_age":boolean}| POST|
+| /profile| (Tinder Plus Only) hide/show distance| {"hide_distance":boolean}| POST|
+| /profile| (Tinder Plus Only) hide/show ads| {"hide_ads":boolean}| POST|
+| /profile| (Tinder Plus Only) Set Tinder Blend options to "Recent Activity": Shows more recently active users| {"blend":"recency"}| POST|
+| /profile| (Tinder Plus Only) Set Tinder Blend options to "Optimal": Scientifically proven to get you more matches| {"blend":"optimal"}| POST|
+| /profile| (Tinder Plus Only) Set discovery settings to only people who already liked you| {"discoverable_party":"liked"}| POST|
+| /passport/user/travel| (Tinder Plus Only) Travel to coordinate| {"lat":lat,"lon":lon}| POST|
+| /v1/activity/feed?direction=past&eventTypes=1023 | Get activity feed, including old and updated bios for comparison| {}| GET|
+| /instagram/authorize| Auth Instagram| {}| GET|
+| /v2/profile/spotify/| Get Spotify settings| {}| GET|
+| /v2/profile/spotify/theme| Set Spotify song| {"id":song_id}| PUT|
+| /profile/username| Change your webprofile username| {"username": username}| PUT|
+| /profile/username| Reset your webprofile username| {}| DELETE |
+| /meta| Get your own meta data (swipes left, people seen, etc..)| {}| GET|
+| /v2/meta| Get your own meta data from V2 API (extra data like "top_picks" info)| {}| GET|
+| /report/_id| Report someone --> There are only a few accepted causes... (see tinder_api.py for options)| {"cause": cause, "text": explanation}| POST|
+| /like/_id| Like someone a.k.a swipe right| {}| GET|
+| /pass/_id| Pass on someone a.k.a swipe left| {}| GET|
+| /like/_id/super| ~Super Like~ someone a.k.a swipe up| {}| POST|
+| /matches/{match id}| Get a match from its id (thanks [@jtabet](https://github.com/jtabet) )| {}| GET|
+| /message/{message id}| Get a message from its id (thanks [@jtabet](https://github.com/jtabet) )| {}| GET|
+| /passport/user/reset| Reset your location to your real location| {}| POST|
+| /passport/user/travel| Change your swiping location| {"lat": latitutde, "lon": longitude}| POST|
+| /user/{user_id}/common_connections| Get common connection of a user| {}| GET|
+| /profile/job| Set job| {"company":{"id":"17767109610","name":"University of Miami","displayed":true},"title":{"id":"106123522751852","name":"Research Assistant","displayed":true}}| PUT|
+| /profile/job| Delete job| {}| DELETE |
+| /profile/school| Set school(s)| {"schools":[{"id":school_id}]}| PUT|
+| /profile/school| Reset school| {}| DELETE |
+| /message/{message_id}/like| Like a message| {}| POST|
+| /v2/fast-match/preview| Get the non blurred thumbnail image shown in the messages-window (the one showing the likes you received)| {}| GET|
+| /v2/fast-match/count| Get the number of likes you received| {}| GET|
+| /giphy/trending?limit={limit}| Get the trending gifs (tinder uses giphy) accessible in chat| {}| GET|
+| /giphy/search?limit={limit}&query={query}| Get gifs (tinder uses giphy) based on a search accessible in chat| {}| GET|
 
 ### Status Codes
-<table>
-	<thead>
-		<tr>
-			<th>Status Code</th>
-			<th>Explanation</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>200</td>
-			<td>Everything went okay, and 
-				returned a result (if any).</td>
-		</tr>
-		<tr>
-			<td>301</td>
-			<td>The server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint's name has changed.</td>
-		</tr>
-		<tr>
-			<td>400</td>
-			<td>The server thinks you made a bad request. This can happen when you don't send the information the API requires to process your request, among other things.</td>
-		</tr>
-		<tr>
-			<td>401</td>
-			<td>The server thinks you're not authenticated. This happens when you don't send the right credentials to access an API</td>
-		</tr>
-		<tr>
-			<td>404</td>
-			<td>The server didn't find the resource you tried to access.</td>
-		</tr>
-		<tr>
-			<td>503</td>
-			<td>Back-end server is at capacity.</td>
-		</tr>
-	</tbody>
-</table>
+
+|Status Code|Explanation|
+|--|--|
+|200|Everything went okay, and returned a result (if any).|
+|301|The server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint's name has changed.|
+|400|The server thinks you made a bad request. This can happen when you don't send the information the API requires to process your request, among other things.|
+|401|The server thinks you're not authenticated. This happens when you don't send the right credentials to access an API.|
+|404|The server didn't find the resource you tried to access.|
+|503|Back-end server is at capacity.|
 
 
-### Config File
-<h5> <strong> facebook_access_token and fb_user_id </strong></h5>
+## Library documentation
 
-Simply input your facebook username/email and password in your config file. Then, the fb_auth_token.py module will programmatically retrieve your facebook_access_token and fb_user_id. These are then used to generate your tinder_auth_token in tinder_api.py which grants you access to your data! Happy Swiping!
-<br>
-<h5><strong> SMS Authentication (implemented by <a href='https://github.com/Tagge'>@Tagge</a>) </strong></h5>
-SMS authentication is even easier. Just run phone_auth_token.py . You'll be asked your phone number at runtime, you'll then have to type in the code you received by SMS, and it will return your token. We didn't directly implement it in the tinder_api.py because, as opposed to Facebook auth, there's a rate limit to the number of SMS you can receive in an hour (actually 60). It's therefore better to get your token once and use it within its lifetime (24 hours) rather than asking for a new one everytime.<br>
-With your token ready, add it to tinder_config_ex.py (value for tinder_token). You're now ready to roll !
+### ~~Config File~~
 
+[@SeanLF](https://github.com/SeanLF) has removed the use of the config file after refactoring this library to use the Tinder_API class.
 
-<strong> Note: </strong> With the help of <a href=https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py> philliperemy </a>, I have included a programatic way to acquire your facebook_token. Now, in your config.py just input your facebook username and password.
+### Tinder_API usage
 
+`tinder-api.py` contains a class called Tinder_API that provides a python wrapper for the Tinder API.
 
-<strong> Note: </strong> With the help of <a href=https://github.com/gloriamacia> gloriamacia </a>, we added now a jupyter notebook to make the usage even simpler.
+You may also look at the jupyter notebook (`Tinder API.ipynb`) for more code. Thanks to [@GloriaMacia](https://github.com/gloriamacia) and [@SeanLF](https://github.com/SeanLF) for making this possible.
 
-<h2> Key Features </h2>
+#### Optional parameter when instantiating Tinder_API
 
-<h3> Match_Info:</h3>
-<h4> Creates a local dictionary containing the following keys on each of your matches </h4>
+- `host`: defaults to `https://api.gotinder.com`.
+- `api_token`: specify if you have it already.
 
-```javascript
-{
-	  123456: {
-	    'messages': [
+#### Authenticating with Facebook
 
-	    ],
-	    'age': 20,
-	    'match_id': '123456789123456789',
-	    'name': 'Joakim',
-	    'photos': [
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg'
-	    ],
-	    'message_count': 0,
-	    'last_activity_date': '15 days, 16 hrs 46 min 57 sec',
-	    'ping_time': '2017-03-11T04:58:56.433Z',
-	    'gender': 1,
-	    'bio': 'New York Knicks Center',
-	    'avg_successRate': 0
-	  },
-	  56789: {
-	    ...
-	  }
-}
+Use the `facebook_auth_token.py` module to obtain Facebook credentials. Built with the help of [@PhillipeRemy](https://github.com/philipperemy/Deep-Learning-Tinder/blob/master/tinder_token.py)
+
+```python
+from tinder_api import Tinder_API
+from tinder_api import facebook_auth_token
+
+# User provides facebook_username & facebook_password.
+facebook_auth_token = facebook_auth_token.get_facebook_access_token(facebook_username, facebook_password)
+facebook_user_id = facebook_auth_token.get_facebook_id(facebook_access_token)
+tinder_api = Tinder_API()
+tinder_api.get_facebook_auth_token(facebook_auth_token, facebook_user_id)
+# You can now call the API.
 ```
 
-<h3> Sorting: </h3>
-<h4> Sorting matches by "age", "message_count", and "gender" </h4>
+#### SMS Authentication
 
-```javascript
-[
-	  ('123456789123456789',
-	  {
-	    'messages': [
+As opposed to Facebook auth, there's a rate limit to the number of SMS you can receive in an hour (supposedly 60).
+Therefore, it is better to get your token once and use it within its 24 hour lifetime rather than asking for a new one everytime.
+(implemented by [@Tagge](https://github.com/Tagge))
 
-	    ],
-	    'age': 19,
-	    'match_id': '123456789123456789abcdefghi',
-	    'name': 'Carmelo',
-	    'photos': [
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg',
-	      'http://images.gotinder.com/123456789123456789.jpg'
-	    ],
-	    'message_count': 0,
-	    'last_activity_date': '0 days, 22 hrs 23 min 45 sec',
-	    'ping_time': '2017-03-25T23:22:08.954Z',
-	    'gender': 1,
-	    'bio': 'I do not like to win sometimes', 'avg_successRate': 0.7837966008217391
-	    }
-	    )
-]
+```python
+from tinder_api import Tinder_API
+
+tinder_api = Tinder_API()
+# User provides the phone number.
+tinder_api.send_otp_code(phone_number)
+# User receives and provides OTP code.
+refresh_token = tinder_api.get_refresh_token(phone_number, otp_code)
+# Obtain an api_token valid for 24 hours.
+api_token = tinder_api.get_api_token(refresh_token)
+# You can now call the API.
+
+# When api_token expires, call with the refresh token you have hopefully stored somewhere.
+api_token = tinder_api.get_api_token(refresh_token)
+# You can now call the API.
 ```
 
+##### If you already have an API token stored
 
-<h2> The following is no longer available due to Tinder setting their ping_time to a constant date in 2014 and/or the removal of Tinder Social.</h2>
+```python
+from tinder_api import Tinder_API
+
+# stored_api_token could be stored in a web session object.
+tinder_api = Tinder_API(api_token=stored_api_token)
 ```
 
-<h3> Friends' Pingtimes: </h3>
-<h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
-friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
-The following is a sample result for friends_pingtimes(): </h4>
+### Helper functions
 
-`
-	"Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec"
-	"Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec"
-	...
-`
+See the documentation in `helpers.py` for more information, in particular for parameter and return documentation.
 
-<h3> Facebook Friends: </h3>
-<h4> Given a name, it returns some profile information and their id. Once you have the ID, then you can call api.get_person(id) to get more in-depth information on your friends. </h4>
+```python
+def get_match_info(matches): # Wrap API data to python object for manipulation by helpers.
 
+def get_match_id_by_name(match_info, name): # Returns a list of IDs that have the same requested name.
 
-```javascript
+def get_photos(person): # Get a person's photos.
 
-{
-	  'Martin Shkreli': {
-	    'photo': [
-	      {
-	        'processedFiles': [
-	          {
-	            'url': 'https://graph.facebook.com/123456789/picture?height=84&width=84',
-	            'height': 84,
-	            'width': 84
-	          },
-	          {
-	            'url': 'https://graph.facebook.com/123456789/picture?height=172&width=172',
-	            'height': 172,
-	            'width': 172
-	          },
-	          {
-	            'url': 'https://graph.facebook.com/123456789/picture?height=320&width=320',
-	            'height': 320,
-	            'width': 320
-	          },
-	          {
-	            'url': 'https://graph.facebook.com/123456789/picture?height=640&width=640',
-	            'height': 640,
-	            'width': 640
-	          }
-	        ]
-	      }
-	    ],
-	    'in_squad': True,
-	    'name': 'Martin Shkreli',
-	    'user_id': '582bf320452u3yy1217f8'
-	  }
-}
+def calculate_age(birth_date_string): # Converts birthday string to age.
+
+def get_avg_success_rate(person): # Success Rate is determined by Tinder for their 'Smart Photos' feature
+
+def sort_by_value(match_info, sort_type): # Sorts matches by the type requested.
+
+def how_long_in_words(duration, include_seconds=False): # Converts a datetime difference into words.
+
+def how_long_in_words_since(ping_time): # How long since a person was seen on Tinder.
+
+def how_long_since_last_seen(person): # How long since a person was seen on Tinder.
+
+def how_long_since_last_seen_all(match_info): # How long since each matched person was seen on Tinder.
+
+def pause(): # In order to appear as a real Tinder user using the app...
+             # When making many API calls, it is important to pause a...
+             # realistic amount of time between actions to not make Tinder...
+             # suspicious!
 ```
