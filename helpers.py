@@ -34,15 +34,14 @@ def get_match_info(matches):
                 'photos': get_photos(person),
                 'bio': person['bio'],
                 'gender': person['gender'],
-                'avg_success_rate': get_avg_success_rate(person),
                 'messages': match['messages'],
                 'age': calculate_age(match['person']['birth_date']),
                 'distance': person['distance_mi'], # in miles
-                'last_activity_date': match['last_activity_date'],
             }
         except Exception as ex:
             template = "An exception of type {0} occurred. Arguments:\n{1!r}"
             message = template.format(type(ex).__name__, ex.args)
+            return {'error': message, 'exception': ex}
     return match_info
 
 
@@ -96,25 +95,6 @@ def calculate_age(birth_date_string):
     return today.year - birth_year - ((today.month, today.day) < (birth_month, birth_day))
 
 
-def get_avg_success_rate(person):
-    '''
-    Success Rate is determined by Tinder for their 'Smart Photos' feature
-
-    :param person: whose success rate are you requesting?
-
-    :return: average success rate.
-    '''
-    photos = person['photos']
-    curr_avg = 0
-    for photo in photos:
-        try:
-            photo_successRate = photo['successRate']
-            curr_avg += photo_successRate
-        except:
-            return -1
-    return curr_avg / len(photos)
-
-
 def sort_by_value(match_info, sort_type):
     '''
     Sorts matches by the type requested.
@@ -124,57 +104,6 @@ def sort_by_value(match_info, sort_type):
     :param sort_type: one of: 'age', 'message_count', 'gender'.
     '''
     return sorted(match_info.items(), key=lambda x: x[1][sort_type], reverse=True)
-
-
-def how_long_in_words(duration, include_seconds=False):
-    '''
-    Converts a datetime difference into words.
-
-    :param duration: datetime difference.
-
-    :param include_seconds: whether to include seconds or not.
-
-    :return: duration in words.
-    '''
-    secs = duration.seconds
-    days = duration.days
-    m, s = divmod(secs, 60)
-    h, m = divmod(m, 60)
-    how_long = ("%d days, %d hrs %02d min" % (days, h, m))
-    if include_seconds:
-        how_long = ("%s %02d s" % (how_long, s))
-    return how_long
-
-
-def how_long_in_words_since(ping_time):
-    '''
-    How long since a person was seen on Tinder.
-
-    :return: duration formatted as a `string`.
-    '''
-    ping_time = ping_time[:len(ping_time) - 5]
-    datetime_ping = datetime.strptime(ping_time, '%Y-%m-%dT%H:%M:%S')
-    return how_long_in_words(datetime.utcnow() - datetime_ping)
-
-
-def how_long_since_last_seen(person):
-    '''
-    How long since a person was seen on Tinder.
-
-    :return: duration formatted as a `string`.
-    '''
-    return how_long_in_words_since(person['last_activity_date'])
-
-
-def how_long_since_last_seen_all(match_info):
-    '''
-    How long since each matched person was seen on Tinder.
-
-    :param match_info: value from calling :method: `get_match_info`.
-
-    :return: `dict`.
-    '''
-    return { match_info[person]['name']: how_long_since_last_seen(person) for person in match_info }
 
 
 def pause():

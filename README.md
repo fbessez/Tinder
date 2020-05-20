@@ -165,17 +165,7 @@ def get_photos(person): # Get a person's photos.
 
 def calculate_age(birth_date_string): # Converts birthday string to age.
 
-def get_avg_success_rate(person): # Success Rate is determined by Tinder for their 'Smart Photos' feature
-
 def sort_by_value(match_info, sort_type): # Sorts matches by the type requested.
-
-def how_long_in_words(duration, include_seconds=False): # Converts a datetime difference into words.
-
-def how_long_in_words_since(ping_time): # How long since a person was seen on Tinder.
-
-def how_long_since_last_seen(person): # How long since a person was seen on Tinder.
-
-def how_long_since_last_seen_all(match_info): # How long since each matched person was seen on Tinder.
 
 def pause(): # In order to appear as a real Tinder user using the app...
              # When making many API calls, it is important to pause a...
