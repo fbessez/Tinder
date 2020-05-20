@@ -70,7 +70,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
 | /profile/school| Set school(s)| {"schools":[{"id":school_id}]}| PUT|
 | /profile/school| Reset school| {}| DELETE |
 | /message/{message_id}/like| Like a message| {}| POST|
-| /v2/fast-match/preview| Get the non blurred thumbnail image shown in the messages-window (the one showing the likes you received)| {}| GET|
+| /v2/fast-match/teasers| Get the non blurred thumbnail image shown in the messages-window (the one showing the likes you received)| {}| GET|
 | /v2/fast-match/count| Get the number of likes you received| {}| GET|
 | /giphy/trending?limit={limit}| Get the trending gifs (tinder uses giphy) accessible in chat| {}| GET|
 | /giphy/search?limit={limit}&query={query}| Get gifs (tinder uses giphy) based on a search accessible in chat| {}| GET|

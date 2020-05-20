@@ -439,7 +439,7 @@ class Tinder_API(object):
             return {'error': 'Something went wrong. Could not get your match info.', 'exception': e}
 
 
-    def fast_match_info(self):
+    def fast_match_count(self):
         '''
         Get your match count. Returns a value between 0 and 99.
         '''
@@ -451,6 +451,20 @@ class Tinder_API(object):
             count = r.headers['fast-match-count']
             # image is in the response but its in hex..
             return count
+        except Exception as e:
+            return {'error': 'Something went wrong. Could not get your fast-match count.', 'exception': e}
+
+    
+    def fast_match_teasers(self):
+        '''
+        Get the non blurred thumbnail image shown in the messages-window (the one showing the likes you received).
+        '''
+        if self._auth_key not in self.headers:
+            return self._not_authenticated_error
+        try:
+            url = self.host + '/v2/fast-match/teasers'
+            r = requests.get(url, headers=self.headers)
+            return r.json()
         except Exception as e:
             return {'error': 'Something went wrong. Could not get your fast-match count.', 'exception': e}
 
