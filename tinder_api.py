@@ -486,3 +486,47 @@ class Tinder_API(object):
         except Exception as e:
             return {'error': 'Something went wrong. Could not get your gifs.', 'exception': e}
 
+
+    def custom_request(self, resource, http_verb='get', data={}):
+        '''
+        Allow calling any resource of the Tinder API.
+
+        :param resource: resource (part of the link after host).
+
+        :param data: data to be sent with the request
+
+        :param http_verb: HTTP verb.
+            Can be: get, head, post, patch, put, delete, options
+
+        :return: response object
+        '''
+        if self._auth_key not in self.headers:
+            return self._not_authenticated_error
+        try:
+            http_verb_functions={ 'get': requests.get, 'head': requests.head, 'post': requests.post, 'patch': requests.patch, 'put': requests.put, 'delete': requests.delete, 'options': requests.options }
+            request_has_body={ 'get': False, 'head': False, 'post': True, 'patch': True, 'put': True, 'delete': True, 'options': False }
+
+            http_verb = http_verb.lower()
+            url = self.host + resource
+            http_verb_function = http_verb_functions[http_verb.lower()]
+
+            if not request_has_body[http_verb]:
+                url += self.data_to_query_string(data)
+
+            # call API and developer must figure out what to do with the response
+            return http_verb_function(url, headers=self.headers, data=data)
+        except Exception as e:
+            return {'error': 'Something went wrong.', 'exception': e}
+
+
+    def data_to_query_string(self, data):
+        '''
+        Converts a dict into a query string
+
+        :param data: data to be included in a query string
+
+        :return: query string
+        '''
+        if type(data) is dict and data is not {}:
+            return '?' + '&'.join([f"{key}={value}" for key, value in data.items()])
+        return ''
