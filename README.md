@@ -26,6 +26,8 @@ Note: All endpoints are concatenated to the host url
 
 Note: All curls must be sent with the headers as well (the only exception is that the /auth call must not have the X-Auth-Token header)
 
+[@SeanLF](https://github.com/SeanLF) found some API endpoints from the [main.js](https://tinder.com/static/build/chunks/main-04c2dfb832c46d4a6eec.js) and included them in `api_endpoints.json`
+
 | Endpoint| Purpose| Data?| Method |
 |--|--|--|--|
 | /auth| For authenticating| {'facebook_token': INSERT_HERE, 'facebook_id': INSERT_HERE}| POST|

@@ -1,0 +1,546 @@
+{
+  "authApiPath": "/v2/auth/login",
+  "services": {
+    "account": {
+      "endpoints": {
+        "sendEmail": {
+          "path": "/v2/account/account-email/send",
+          "method": "POST"
+        },
+        "sendRecoveryEmail": {
+          "path": "/v2/account/recovery/send",
+          "method": "POST"
+        },
+        "verifyEmail": {
+          "path": "/v2/account/account-email/confirm",
+          "method": "POST"
+        },
+        "dismissEmail": {
+          "path": "/v2/account/account-email/dismiss",
+          "method": "POST"
+        },
+        "removeEmail": {
+          "path": "/v2/account/account-email/remove",
+          "method": "POST"
+        },
+        "confirmRecoveryEmail": {
+          "path": "/v2/account/recovery/confirm",
+          "method": "POST"
+        },
+        "recoverySmsValidate": {
+          "path": "/v2/account/recovery/validate",
+          "method": "POST"
+        },
+        "submitUserConsent": {
+          "path": "/v2/account/consents",
+          "method": "POST"
+        }
+      }
+    },
+    "auth": {
+      "endpoints": {
+        "smsSend": {
+          "path": "/v2/auth/sms/send",
+          "method": "POST"
+        },
+        "smsValidate": {
+          "path": "/v2/auth/sms/validate",
+          "method": "POST"
+        },
+        "resetNotifications": {
+          "path": "/v2/push/notifications",
+          "method": "PUT"
+        },
+        "smsVerificationValidateCode": {
+          "path": "/v2/auth/validate",
+          "method": "POST"
+        },
+        "logout": {
+          "path": "/v2/auth/logout",
+          "method": "POST"
+        },
+        "tokenExchange": {
+          "path": "/v2/auth/token/exchange",
+          "unAuthed": true
+        },
+        "verifyCaptchaResponse": {
+          "path": "/v2/auth/verify-captcha",
+          "method": "POST"
+        },
+        "appealBan": {
+          "path": "/challenge/verify",
+          "method": "POST"
+        },
+        "multifactorAuth": {
+          "path": "/v3/auth/login",
+          "method": "POST",
+          "requestSchema": [
+            "authgateway",
+            "AuthGatewayRequest"
+          ],
+          "responseSchema": [
+            "authgateway",
+            "AuthGatewayResponse"
+          ]
+        }
+      }
+    },
+    "mediaservice": {
+      "endpoints": {
+        "delete": {
+          "path": "/mediaservice",
+          "method": "DELETE",
+          "requestSchema": [
+            "mediaservice",
+            "DeleteMediaRequest"
+          ],
+          "responseSchema": [
+            "mediaservice",
+            "ClientDataProto"
+          ]
+        },
+        "details": {
+          "path": "/mediaservice/details",
+          "method": "PUT",
+          "requestSchema": [
+            "mediaservice",
+            "UpdateMediaDetailsRequest"
+          ],
+          "responseSchema": [
+            "mediaservice",
+            "ClientDataProto"
+          ]
+        },
+        "photo": {
+          "path": "/mediaservice/photo",
+          "method": "POST"
+        },
+        "placeholders": {
+          "path": "/mediaservice/placeholders",
+          "method": "POST",
+          "requestSchema": [
+            "mediaservice",
+            "CreatePlaceholderRequest"
+          ],
+          "responseSchema": [
+            "mediaservice",
+            "ClientDataProto"
+          ]
+        },
+        "order": {
+          "path": "/mediaservice/order",
+          "method": "PUT",
+          "requestSchema": [
+            "mediaservice",
+            "OrderMediaRequest"
+          ],
+          "responseSchema": [
+            "mediaservice",
+            "ClientDataProto"
+          ]
+        }
+      }
+    },
+    "experiments": {
+      "endpoints": {
+        "preAuthBuckets": {
+          "path": "/v2/buckets",
+          "method": "POST"
+        }
+      }
+    },
+    "insendio": {
+      "endpoints": {
+        "getCampaigns": {
+          "path": "/v2/campaigns",
+          "method": "GET"
+        },
+        "setCampaignViewed": {
+          "path": "/v2/campaigns/view",
+          "method": "POST"
+        }
+      }
+    },
+    "meta": {
+      "endpoints": {
+        "getMeta": {
+          "path": "/v2/meta",
+          "method": "GET"
+        },
+        "postMeta": {
+          "path": "/v2/meta",
+          "method": "POST"
+        }
+      }
+    },
+    "onboarding": {
+      "endpoints": {
+        "getOnboardingFields": {
+          "path": "/v2/onboarding/fields",
+          "method": "GET"
+        },
+        "updateOnboardingFields": {
+          "path": "/v2/onboarding/fields",
+          "method": "POST"
+        },
+        "updateOnboardingPhoto": {
+          "path": "/v2/onboarding/photo",
+          "method": "POST"
+        },
+        "completeOnboarding": {
+          "path": "/v2/onboarding/complete",
+          "method": "POST"
+        },
+        "deleteOnboarding": {
+          "path": "/v2/onboarding/user",
+          "method": "DELETE"
+        }
+      }
+    },
+    "passport": {
+      "endpoints": {
+        "fetchPopularLocations": {
+          "path": "/location/popular",
+          "method": "GET"
+        },
+        "submitPassportLocation": {
+          "path": "/passport/user/travel",
+          "method": "POST"
+        },
+        "resetPassportLocation": {
+          "path": "/passport/user/reset",
+          "method": "POST"
+        }
+      }
+    },
+    "profile": {
+      "endpoints": {
+        "authenticateInstagram": {
+          "path": "/instagram/authenticate",
+          "method": "POST"
+        },
+        "city": {
+          "path": "/v2/profile/city"
+        },
+        "contactCard": {
+          "path": "/v2/profile/contact-card"
+        },
+        "deauthorizeInstagram": {
+          "path": "/instagram/deauthorize",
+          "method": "POST"
+        },
+        "deleteAccount": {
+          "path": "/profile",
+          "method": "DELETE"
+        },
+        "deleteInterests": {
+          "path": "/v2/profile/userinterests",
+          "method": "DELETE"
+        },
+        "getInstagramOAuthUrl": {
+          "path": "/instagram/authorize",
+          "method": "GET"
+        },
+        "getUserProfile": {
+          "path": "/v2/profile"
+        },
+        "setUserProfile": {
+          "path": "/v2/profile",
+          "method": "POST"
+        },
+        "setUserJob": {
+          "path": "/v2/profile/job",
+          "method": "POST"
+        },
+        "setUserSchool": {
+          "path": "/v2/profile/school",
+          "method": "POST"
+        },
+        "setUserEmailSettings": {
+          "path": "/v2/profile/email_settings",
+          "method": "POST"
+        },
+        "fetchEmailSubscriptions": {
+          "path": "/v2/subscriptions/web",
+          "method": "GET"
+        },
+        "updateEmailSubscriptions": {
+          "path": "/v2/subscriptions/web",
+          "method": "POST"
+        },
+        "readReceiptSubscription": {
+          "path": "/v2/subscriptions/readreceipts"
+        },
+        "consumeReadReceipt": {
+          "path": "/v2/readreceipt/{matchId}"
+        },
+        "media": {
+          "path": "/media"
+        },
+        "startBoost": {
+          "path": "/boost",
+          "method": "POST"
+        },
+        "sendTutorialViewed": {
+          "path": "/v2/profile/tutorials",
+          "method": "POST"
+        },
+        "sendBoostResult": {
+          "path": "/boost/result",
+          "method": "GET"
+        },
+        "setHelpformCookies": {
+          "path": "/contact/request",
+          "method": "POST"
+        },
+        "submitTermsOfService": {
+          "path": "/v2/profile/terms-of-service",
+          "method": "POST"
+        },
+        "getPhotos": {
+          "path": "/profile/photos"
+        },
+        "dismissPhoneVerification": {
+          "path": "/v2/account/sms/dismiss",
+          "method": "POST"
+        },
+        "tinderUProfile": {
+          "path": "/v2/profile/tinderu",
+          "method": "POST"
+        },
+        "autocomplete": {
+          "path": "/v2/profile/autocomplete"
+        },
+        "verificationSelfieStart": {
+          "path": "/v2/verification/selfie/start"
+        },
+        "verificationSelfieSubmit": {
+          "path": "/v2/media/submit"
+        },
+        "verificationSelfieComplete": {
+          "path": "/v2/verification/selfie/complete"
+        }
+      }
+    },
+    "purchase": {
+      "endpoints": {
+        "purchase": {
+          "path": "/purchase/web",
+          "method": "POST"
+        },
+        "purchase3d": {
+          "path": "/purchase/web/3d",
+          "method": "POST"
+        },
+        "purchaseLatest": {
+          "path": "/purchase/payment/latest"
+        },
+        "getPurchases": {
+          "path": "/purchase"
+        },
+        "purchaseGetTaxDetails": {
+          "path": "/purchase/cc/tax/{zip}",
+          "method": "POST"
+        },
+        "purchaseEnableAutoRenew": {
+          "path": "/purchase/web/{documentId}/auto-renew",
+          "method": "PUT"
+        },
+        "purchaseDisableAutoRenew": {
+          "path": "/purchase/web/{documentId}/auto-renew",
+          "method": "DELETE"
+        },
+        "purchaseUpdateLatestCard": {
+          "path": "/purchase/payment/card",
+          "method": "POST"
+        },
+        "purchaseRestore": {
+          "path": "/purchase/web/restore",
+          "method": "POST"
+        },
+        "cancelSubscription": {
+          "path": "/purchase/web/{purchaseId}/cancel",
+          "method": "POST"
+        },
+        "updateEmail": {
+          "path": "/purchase/web/billing/email",
+          "method": "PUT"
+        },
+        "getIncentiveEligibility": {
+          "path": "/v2/incentives/eligibility",
+          "method": "POST"
+        },
+        "redeemIncentive": {
+          "path": "/v2/incentives/redeem",
+          "method": "POST"
+        },
+        "getIncentiveIntroPriceProduct": {
+          "path": "/v2/incentives/introprice/product",
+          "method": "POST"
+        },
+        "redeemIncentiveIntroPrice": {
+          "path": "/v2/incentives/introprice/redeem",
+          "method": "POST"
+        },
+        "introPriceViewed": {
+          "path": "/v2/purchase/discount/view",
+          "method": "POST"
+        }
+      }
+    },
+    "recs": {
+      "endpoints": {
+        "getRecs": {
+          "path": "/v2/recs/core"
+        },
+        "recLike": {
+          "path": "/like/{userId}",
+          "method": "POST"
+        },
+        "recSuperlike": {
+          "path": "/like/{userId}/super",
+          "method": "POST"
+        },
+        "recDislike": {
+          "path": "/pass/{userId}"
+        },
+        "getFastMatchRecs": {
+          "path": "/v2/fast-match"
+        },
+        "fastMatchCount": {
+          "path": "/v2/fast-match/count"
+        },
+        "fastMatchTeaser": {
+          "path": "/v2/fast-match/teaser"
+        },
+        "fastMatchTeasers": {
+          "path": "/v2/fast-match/teasers"
+        },
+        "removeSuperlike": {
+          "path": "/like/{userId}/super",
+          "method": "DELETE"
+        }
+      }
+    },
+    "report": {
+      "endpoints": {
+        "report": {
+          "path": "/report/{matchId}",
+          "method": "POST"
+        },
+        "reportUser": {
+          "path": "/report/user/{userId}",
+          "method": "POST"
+        },
+        "acknowledgeReport": {
+          "path": "/report/ack",
+          "method": "POST"
+        }
+      }
+    },
+    "tinderU": {
+      "endpoints": {
+        "verifyStatus": {
+          "path": "/v2/tinderu/verify",
+          "method": "POST"
+        }
+      }
+    },
+    "user": {
+      "endpoints": {
+        "likeMessage": {
+          "path": "/message/{messageId}/like"
+        },
+        "getOtherUserById": {
+          "path": "/user/{userId}"
+        },
+        "getUpdates": {
+          "path": "/updates",
+          "method": "POST"
+        },
+        "getMatches": {
+          "path": "/v2/matches"
+        },
+        "getMatch": {
+          "path": "/v2/matches/{matchId}"
+        },
+        "getMatchMessages": {
+          "path": "/v2/matches/{matchId}/messages"
+        },
+        "sendMessage": {
+          "path": "/user/matches/{matchId}",
+          "method": "POST"
+        },
+        "setMatchSeen": {
+          "path": "/v2/seen/{matchId}",
+          "method": "POST"
+        },
+        "setLastSeenMatchMessage": {
+          "path": "/v2/seen/{matchId}/{messageId}",
+          "method": "POST"
+        },
+        "unmatch": {
+          "path": "/user/matches/{matchId}",
+          "method": "DELETE"
+        },
+        "registerDevice": {
+          "path": "/v2/push/devices/{deviceParam}",
+          "method": "POST"
+        },
+        "unregisterDevice": {
+          "path": "/v2/push/devices/{deviceParam}",
+          "method": "DELETE"
+        },
+        "getWebsocketToken": {
+          "path": "/ws/generate"
+        },
+        "getAgeVerificationUrl": {
+          "path": "/1.0/age-verification/url"
+        }
+      }
+    },
+    "giphy": {
+      "endpoints": {
+        "trending": {
+          "path": "/giphy/trending",
+          "method": "GET"
+        },
+        "search": {
+          "path": "/giphy/search",
+          "method": "GET"
+        }
+      }
+    },
+    "spotify": {
+      "endpoints": {
+        "searchSpotifyTracks": {
+          "path": "/v2/profile/spotify/search",
+          "method": "GET"
+        },
+        "fetchPopularSongs": {
+          "path": "/v2/profile/spotify/popular",
+          "method": "GET"
+        },
+        "updateAnthem": {
+          "path": "/v2/profile/spotify/theme"
+        }
+      }
+    },
+    "feedback": {
+      "endpoints": {
+        "sendFeedback": {
+          "path": "/feedback",
+          "method": "POST"
+        }
+      }
+    },
+    "crm": {
+      "endpoints": {
+        "getPrompts": {
+          "path": "/v2/crmapi/prompts",
+          "method": "GET"
+        }
+      }
+    }
+  }
+}
