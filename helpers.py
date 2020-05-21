@@ -72,11 +72,7 @@ def get_photos(person):
 
     :return: list of photo urls.
     '''
-    photos = person['photos']
-    photo_urls = []
-    for photo in photos:
-        photo_urls.append(photo['url'])
-    return photo_urls
+    return [photo.get('url', '') for photo in person.get('photos', {})]
 
 
 def calculate_age(birth_date_string):
@@ -93,6 +89,18 @@ def calculate_age(birth_date_string):
     birth_day = int(birth_date_string[8:10])
     today = date.today()
     return today.year - birth_year - ((today.month, today.day) < (birth_month, birth_day))
+
+
+def distance_in_km(distance_mi):
+    '''
+    Converts miles into km
+
+    :param distance_mi: distance in miles (int)
+    
+    :return: distance in km (int)
+    '''
+    ONE_MILE_IN_KM = 1.60934
+    return round(ONE_MILE_IN_KM*distance_in_km)
 
 
 def sort_by_value(match_info, sort_type):
