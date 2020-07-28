@@ -265,6 +265,8 @@ def match_info(match_id):
         print("Something went wrong. Could not get your match info:", e)
 
 # The web api calls this with count=60 and message=0, page_token will be None initially
+# message=0 downloads all the matches with no messages
+# message=1 download all the matches with messages
 def all_matches(count=60, message=0, page_token=None):
     try:
         url = config.host + '/v2/matches?locale=en&count=' + str(count) + '&message=' + str(message) + '&is_tinder_u=false'
@@ -272,9 +274,12 @@ def all_matches(count=60, message=0, page_token=None):
             url = url + '&page_token=' + page_token
         r = requests.get(url, headers=headers)
         json = r.json()
-        if 'data' in json.keys() and 'next_page_token' in json['data'].keys():
-                next_page_data = all_matches(count, message, json['data']['next_page_token'])
-                json['data']['matches'] = json['data']['matches'] + next_page_data['data']['matches']
+        if 'data' in json and 'next_page_token' in json['data']:
+            next_page_data = all_matches(count, message, json['data']['next_page_token'])
+            json['data']['matches'] = json['data']['matches'] + next_page_data['data']['matches']
+        elif message <= 0:
+            next_page_data = all_matches(count, 1, None)
+            json['data']['matches'] = json['data']['matches'] + next_page_data['data']['matches']
         return json
     except requests.exceptions.RequestException as e:
         print("Something went wrong. Could not get your match info:", e)
