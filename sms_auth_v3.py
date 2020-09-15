@@ -70,7 +70,6 @@ class TinderSMSAuth(object):
             if "loginResult" in response.keys() and "authToken" in response["loginResult"].keys():
                 self.refreshtoken = response["loginResult"]["refreshToken"]
                 self.authtoken = response["loginResult"]["authToken"]
-                userid = response["userId"]
                 with open("smstoken.txt", "w") as fh:
                     fh.write(self.authtoken + "," + self.refreshtoken)
                 return self.session.headers.update({"X-Auth-Token": self.authtoken})
