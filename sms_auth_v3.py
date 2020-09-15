@@ -67,6 +67,15 @@ class TinderSMSAuth(object):
             r = self.session.post(self.url + "/v3/auth/login", data=messageresponse)
             response = AuthGatewayResponse().parse(r.content).to_dict()
             print(response)
+            if "validateEmailOtpState" in response.keys():
+                emailoptresponse = input("Check your email and input the verification code just sent to you: ")
+                refreshtoken = response["validateEmailOtpState"]["refreshToken"]
+                email = input("Input your email: ")
+                resp = bytes(AuthGatewayRequest(
+                    email_otp=EmailOtp(otp=emailoptresponse, email=email, refresh_token=refreshtoken)))
+                r = self.session.post(self.url + "/v3/auth/login", data=resp)
+                response = AuthGatewayResponse().parse(r.content).to_dict()
+                print(response)
             if "loginResult" in response.keys() and "authToken" in response["loginResult"].keys():
                 self.refreshtoken = response["loginResult"]["refreshToken"]
                 self.authtoken = response["loginResult"]["authToken"]
