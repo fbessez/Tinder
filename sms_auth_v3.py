@@ -26,6 +26,7 @@ class TinderSMSAuth(object):
         self.userid = None
         self.email = email
         if Path("smstoken.txt").exists():
+            print("smstoken.txt found, if you wish to auth again, delete smstoken.txt")
             with open("smstoken.txt", "r") as fh:
                 tokens = fh.read()
                 t = tokens.split(",")
@@ -46,11 +47,11 @@ class TinderSMSAuth(object):
         messageout = AuthGatewayRequest(Phone(phone=phonenumber))
         seconds = random.uniform(100, 250)
         headers = {
-                'tinder-version': "11.23.0", 'install-id': self.installid,
-                'user-agent': "Tinder Android Version 11.23.0", 'connection': "close",
+                'tinder-version': "11.24.0", 'install-id': self.installid,
+                'user-agent': "Tinder Android Version 11.24.0", 'connection': "close",
                 'platform-variant': "Google-Play", 'persistent-device-id': self.deviceid,
                 'accept-encoding': "gzip, deflate", 'appsflyer-id': "1600144077225-7971032049730563486",
-                'platform': "android", 'app-version': "3994", 'os-version': "25", 'app-session-id': self.appsessionid,
+                'platform': "android", 'app-version': "4023", 'os-version': "25", 'app-session-id': self.appsessionid,
                 'x-supported-image-formats': "webp", 'funnel-session-id': self.funnelid,
                 'app-session-time-elapsed': format(seconds, ".3f"), 'accept-language': "en-US",
                 'content-type': "application/x-protobuf"
