@@ -49,11 +49,14 @@ class TinderSMSAuth(object):
         print(response)
         if "validatePhoneOtpState" in response.keys() and response["validatePhoneOtpState"]["smsSent"]:
             otpresponse = input("OTP Response from SMS: ")
-            if self.refreshtoken is not None:
-                resp = PhoneOtp(phone=self.phonenumber, otp=otpresponse, refresh_token=self.refreshtoken)
-            else:
-                resp = PhoneOtp(phone=self.phonenumber, otp=otpresponse)
+            resp = PhoneOtp(phone=self.phonenumber, otp=otpresponse)
             messageresponse = AuthGatewayRequest(phone_otp=resp)
+            seconds += random.uniform(30, 90)
+            header_timer = {"app-session-time-elapsed": format(seconds, ".3f")}
+            return self.loginwrapper(messageresponse, seconds, header_timer)
+        elif "getPhoneState" in response.keys():
+            self.refreshtoken = response['getPhoneState']['refreshToken']
+            messageresponse = AuthGatewayRequest(refresh_auth=RefreshAuth(refresh_token=self.refreshtoken))
             seconds += random.uniform(30, 90)
             header_timer = {"app-session-time-elapsed": format(seconds, ".3f")}
             return self.loginwrapper(messageresponse, seconds, header_timer)
@@ -65,6 +68,14 @@ class TinderSMSAuth(object):
             messageresponse = AuthGatewayRequest(email_otp=EmailOtp(otp=emailoptresponse, email=self.email, refresh_token=refreshtoken))
             seconds += random.uniform(30, 90)
             header_timer = {"app-session-time-elapsed": format(seconds, ".3f")}
+            return self.loginwrapper(messageresponse, seconds, header_timer)
+        elif "getEmailState" in response.keys():
+            refreshtoken = response['getEmailState']['refreshToken']
+            if self.email is None:
+                self.email = input("Input your email: ")
+            seconds += random.uniform(30, 90)
+            header_timer = {"app-session-time-elapsed": format(seconds, ".3f")}
+            messageresponse = AuthGatewayRequest(refresh_auth=RefreshAuth(refresh_token=refreshtoken))
             return self.loginwrapper(messageresponse, seconds, header_timer)
         elif "error" in response.keys() and response["error"]["message"] == 'INVALID_REFRESH_TOKEN':
             print("Refresh token error, restarting auth")
@@ -88,15 +99,15 @@ class TinderSMSAuth(object):
         self.session.post(self.url + "/v2/buckets", json=payload)
         if self.refreshtoken is not None:
             print("Attempting to refresh auth token with saved refresh token")
-            messageout = AuthGatewayRequest(refresh_auth=RefreshAuth(refresh_token=self.refreshtoken))
+            messageout = AuthGatewayRequest(get_initial_state=GetInitialState(refresh_token=self.refreshtoken))
         else:
             phonenumber = input("phone number (starting with 1, numbers only): ")
             self.phonenumber = phonenumber
             messageout = AuthGatewayRequest(phone=Phone(phone=self.phonenumber))
         seconds = random.uniform(100, 250)
         headers = {
-                'tinder-version': "11.24.0", 'install-id': self.installid,
-                'user-agent': "Tinder Android Version 11.24.0", 'connection': "close",
+                'tinder-version': "12.6.0", 'install-id': self.installid,
+                'user-agent': "Tinder Android Version 12.6.0", 'connection': "close",
                 'platform-variant': "Google-Play", 'persistent-device-id': self.deviceid,
                 'accept-encoding': "gzip, deflate", 'appsflyer-id': "1600144077225-7971032049730563486",
                 'platform': "android", 'app-version': "4023", 'os-version': "25", 'app-session-id': self.appsessionid,
