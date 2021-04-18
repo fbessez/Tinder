@@ -75,7 +75,7 @@ class TinderSMSAuth(object):
                 self.email = input("Input your email: ")
             seconds += random.uniform(30, 90)
             header_timer = {"app-session-time-elapsed": format(seconds, ".3f")}
-            messageresponse = AuthGatewayRequest(refresh_auth=RefreshAuth(refresh_token=refreshtoken))
+            messageresponse = AuthGatewayRequest(email=Email(email=self.email, refresh_token=refreshtoken))
             return self.loginwrapper(messageresponse, seconds, header_timer)
         elif "error" in response.keys() and response["error"]["message"] == 'INVALID_REFRESH_TOKEN':
             print("Refresh token error, restarting auth")
