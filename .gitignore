@@ -6,3 +6,11 @@ __pycache__
 find.py
 *.log
 *.egg-info
+smstoken.txt
+
+google/protobuf/.DS_Store
+
+google/.DS_Store
+/google/
+
+.DS_Store

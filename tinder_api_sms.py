@@ -5,14 +5,12 @@ import config
 import requests
 
 headers = {
-    'app_version': '6.9.4',
-    'platform': 'ios',
+    'app_version': '11.24.0',
+    'platform': 'Android',
     "content-type": "application/json",
-    "User-agent": "Tinder/7.5.3 (iPhone; iOS 10.3.2; Scale/2.00)",
-	"X-Auth-Token": config.tinder_token,
+    "User-agent": "Tinder Android Version 11.24.0",
+	"X-Auth-Token": "fe9d68e8-d340-4b09-b218-a73c94063c97",
 }
-
-
 
 def get_recommendations():
     '''
@@ -230,3 +228,4 @@ def all_matches():
 #         return r.json()['results']
 #     except requests.exceptions.RequestException as e:
 #         print("Something went wrong. Could not get your Facebook friends:", e)
+
