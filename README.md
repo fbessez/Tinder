@@ -90,12 +90,6 @@ Note: All curls must be sent with the headers as well (the only exception is tha
          <td>{}</td>
          <td>GET</td>
       </tr>
-	<tr>
-		<td>/v2/matches</td>
-		<td>Get your matches</td>
-		<td>query in link should have count=1-100 e.g: /v2/matches?count=50</td>
-		<td>GET</td>
-	   </tr>
       <tr>
          <td>/user/matches/_id</td>
          <td>Send Message to that id</td>
