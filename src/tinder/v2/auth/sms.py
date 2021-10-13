@@ -10,6 +10,7 @@ import requests
 
 import tinder.v2.auth as auth
 from tinder.user import User
+from tinder import Url
 
 class SMSAuthException(auth.AuthException):
     pass
@@ -24,6 +25,9 @@ class SMSUser(User):
 
     def __init__(self, phone_number: str, email: str = None, token_fn: str = None) -> None:
         super().__init__()
+
+        self._phone_number = phone_number
+        self._email = email
 
         self._auth_token: str = None
         self._refresh_token: str = None
@@ -63,10 +67,18 @@ class SMSUser(User):
             fh.write(self._auth_token + ',' + self._refresh_token)
             print(f'[+] Auth tokens saved to `{token_fn}`')
 
+    def _post_login(self, url: Url, payload: dict) -> dict:
+        r = self._session.post(url, json=payload)
+        response = r.json()
+
+        if 'error' in response:
+            raise SMSAuthException(response['error']['message'])
+
+        return response
+
     def _get_otp(self) -> str:
         data = {'phone_number': self._phone_number}
-        r = self._session.post(auth.CODE_REQUEST_EP, data=json.dumps(data), verify=False)
-        response = r.json()
+        response = self._post_login(auth.CODE_REQUEST_EP, data)
 
         if not response['data']['sms_sent']:
             raise SMSNotSent
@@ -76,8 +88,7 @@ class SMSUser(User):
 
     def _get_refresh_token(self, otp_code: str) -> str:
         data = {'otp_code': otp_code, 'phone_number': self._phone_number}
-        r = self._session.post(auth.CODE_VALIDATE_EP, data=json.dumps(data), verify=False)
-        response = r.json()
+        response = self._post_login(auth.CODE_VALIDATE_EP, data)
 
         if not response['data']['validated']:
             raise ValidationFailed
@@ -86,8 +97,7 @@ class SMSUser(User):
 
     def _get_api_token(self) -> str:
         data = {'refresh_token': self._refresh_token}
-        r = self._session.post(auth.TOKEN_EP, data=json.dumps(data), verify=False)
-        response = r.json()
+        response = self._post_login(auth.TOKEN_EP, data)
 
         return response['data']['api_token']
 

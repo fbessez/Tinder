@@ -70,13 +70,12 @@ class FBUSer(User):
     def login(self):
         fb_token = self._get_fb_token()
         fb_id = self._get_fb_id(fb_token)
+        data = {'token': fb_token, 'facebook_id': fb_id}
 
         try:
             r = self._session.post(
                 auth.LOGIN_FB_EP,
-                data=json.dumps(
-                    {'token': fb_token, 'facebook_id': fb_id}
-                )
+                json=data
             )
 
             print(r.json())
