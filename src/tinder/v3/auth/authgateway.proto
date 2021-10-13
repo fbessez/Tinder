@@ -1,12 +1,12 @@
-syntax = "proto3";
+syntax = 'proto3';
 
 package tinder.services.authgateway;
 
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
+import 'google/protobuf/wrappers.proto';
+import 'google/protobuf/timestamp.proto';
 
 option java_multiple_files = true;
-option java_package = "com.tinder.generated.model.services.shared.authgateway";
+option java_package = 'com.tinder.generated.model.services.shared.authgateway';
 
 message MetaProto {
     google.protobuf.Timestamp upstream_time = 1;

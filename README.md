@@ -30,7 +30,7 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 	<tbody>
 		<tr>
 			<td>X-Auth-Token</td>
-			<td>See "How to get facebook_token" below</td>
+			<td>See 'How to get facebook_token' below</td>
 			<td></td>
 		</tr>
 		<tr>
@@ -99,7 +99,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/user/matches/_id</td>
          <td>Send Message to that id</td>
-         <td>{"message": TEXT GOES HERE}</td>
+         <td>{'message': TEXT GOES HERE}</td>
          <td>POST</td>
       </tr>
       <tr>
@@ -117,13 +117,13 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/user/ping</td>
          <td>Change your location</td>
-         <td>{"lat": lat, "lon": lon}</td>
+         <td>{'lat': lat, 'lon': lon}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/updates</td>
-         <td>Get all updates since the given date -- inserting "" will give you all updates since creating a Tinder account (i.e. matches, messages sent, etc.)</td>
-         <td>{"last_activity_date": ""} Input a timestamp: '2017-03-25T20:58:00.404Z' for updates since that time.</td>
+         <td>Get all updates since the given date -- inserting '' will give you all updates since creating a Tinder account (i.e. matches, messages sent, etc.)</td>
+         <td>{'last_activity_date': ''} Input a timestamp: '2017-03-25T20:58:00.404Z' for updates since that time.</td>
          <td>POST</td>
       </tr>
       <tr>
@@ -135,49 +135,49 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/profile</td>
          <td>Change your search preferences</td>
-         <td>{"age_filter_min": age_filter_min, "gender_filter": gender_filter, "gender": gender, "age_filter_max": age_filter_max, "distance_filter": distance_filter}</td>
+         <td>{'age_filter_min': age_filter_min, 'gender_filter': gender_filter, 'gender': gender, 'age_filter_max': age_filter_max, 'distance_filter': distance_filter}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/profile</td>
          <td>(Tinder Plus Only) hide/show age</td>
-         <td>{"hide_age":boolean}</td>
+         <td>{'hide_age':boolean}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/profile</td>
          <td>(Tinder Plus Only) hide/show distance</td>
-         <td>{"hide_distance":boolean}</td>
+         <td>{'hide_distance':boolean}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/profile</td>
          <td>(Tinder Plus Only) hide/show ads</td>
-         <td>{"hide_ads":boolean}</td>
+         <td>{'hide_ads':boolean}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/profile</td>
-         <td>(Tinder Plus Only) Set Tinder Blend options to "Recent Activity": Shows more recently active users</td>
-         <td>{"blend":"recency"}</td>
+         <td>(Tinder Plus Only) Set Tinder Blend options to 'Recent Activity': Shows more recently active users</td>
+         <td>{'blend':'recency'}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/profile</td>
-         <td>(Tinder Plus Only) Set Tinder Blend options to "Optimal": Scientifically proven to get you more matches</td>
-         <td>{"blend":"optimal"}</td>
+         <td>(Tinder Plus Only) Set Tinder Blend options to 'Optimal': Scientifically proven to get you more matches</td>
+         <td>{'blend':'optimal'}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/profile</td>
          <td>(Tinder Plus Only) Set discovery settings to only people who already liked you</td>
-         <td>{"discoverable_party":"liked"}</td>
+         <td>{'discoverable_party':'liked'}</td>
          <td>POST</td>
       </tr>
       <tr>
          <td>/passport/user/travel</td>
          <td>(Tinder Plus Only) Travel to coordinate</td>
-         <td>{"lat":lat,"lon":lon}</td>
+         <td>{'lat':lat,'lon':lon}</td>
          <td>POST</td>
       </tr>
       <tr>
@@ -200,13 +200,13 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/v2/profile/spotify/theme</td>
          <td>Set Spotify song</td>
-         <td>{"id":song_id}</td>
+         <td>{'id':song_id}</td>
          <td>PUT</td>
       </tr>
       <tr>
          <td>/profile/username</td>
          <td>Change your webprofile username</td>
-         <td>{"username": username}</td>
+         <td>{'username': username}</td>
          <td>PUT</td>
       </tr>
       <tr>
@@ -223,14 +223,14 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       </tr>
       <tr>
          <td>/v2/meta</td>
-         <td>Get your own meta data from V2 API (extra data like "top_picks" info)</td>
+         <td>Get your own meta data from V2 API (extra data like 'top_picks' info)</td>
          <td>{}</td>
          <td>GET</td>
       </tr>
       <tr>
          <td>/report/_id</td>
          <td>Report someone --&gt; There are only a few accepted causes... (see tinder_api.py for options)</td>
-         <td>{"cause": cause, "text": explanation}</td>
+         <td>{'cause': cause, 'text': explanation}</td>
          <td>POST</td>
       </tr>
       <tr>
@@ -253,13 +253,13 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       </tr>
       <tr>
          <td>/matches/{match id}</td>
-         <td>Get a match from its id (thanks <a href="https://github.com/jtabet"> @jtabet </a>)</td>
+         <td>Get a match from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
          <td>{}</td>
          <td>GET</td>
       </tr>
       <tr>
          <td>/message/{message id}</td>
-         <td>Get a message from its id (thanks <a href="https://github.com/jtabet"> @jtabet </a>)</td>
+         <td>Get a message from its id (thanks <a href='https://github.com/jtabet'> @jtabet </a>)</td>
          <td>{}</td>
          <td>GET</td>
       </tr>
@@ -272,7 +272,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/passport/user/travel</td>
          <td>Change your swiping location</td>
-         <td>{"lat": latitutde, "lon": longitude}</td>
+         <td>{'lat': latitutde, 'lon': longitude}</td>
          <td>POST</td>
       </tr>
       <tr>
@@ -284,7 +284,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/profile/job</td>
          <td>Set job</td>
-         <td>{"company":{"id":"17767109610","name":"University of Miami","displayed":true},"title":{"id":"106123522751852","name":"Research Assistant","displayed":true}}</td>
+         <td>{'company':{'id':'17767109610','name':'University of Miami','displayed':true},'title':{'id':'106123522751852','name':'Research Assistant','displayed':true}}</td>
          <td>PUT</td>
       </tr>
       <tr>
@@ -296,7 +296,7 @@ Note: All curls must be sent with the headers as well (the only exception is tha
       <tr>
          <td>/profile/school</td>
          <td>Set school(s)</td>
-         <td>{"schools":[{"id":school_id}]}</td>
+         <td>{'schools':[{'id':school_id}]}</td>
          <td>PUT</td>
       </tr>
       <tr>
@@ -425,7 +425,7 @@ With your token ready, add it to tinder_config_ex.py (value for tinder_token). Y
 ```
 
 <h3> Sorting: </h3>
-<h4> Sorting matches by "age", "message_count", and "gender" </h4>
+<h4> Sorting matches by 'age', 'message_count', and 'gender' </h4>
 
 ```javascript
 [
@@ -459,12 +459,12 @@ With your token ready, add it to tinder_config_ex.py (value for tinder_token). Y
 
 <h3> Friends' Pingtimes: </h3>
 <h4> friends_pingtimes() will return the following for each facebook friend of yours who has a Tinder
-friend_pingtime_by_name("Joakim Noah") will return the pingtime for only that particular friend.
+friend_pingtime_by_name('Joakim Noah') will return the pingtime for only that particular friend.
 The following is a sample result for friends_pingtimes(): </h4>
 
 `
-	"Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec"
-	"Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec"
+	'Joakim Noah -----> 15 days, 16 hrs 46 min 57 sec'
+	'Carmelo Anthony ------> 0 days, 22 hrs 23 min 45 sec'
 	...
 `
 

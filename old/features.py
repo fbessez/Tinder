@@ -5,7 +5,7 @@ from random import random
 from time import sleep
 
 import config
-import tinder_api as api
+import tinder_api as tinder
 
 
 '''
@@ -16,7 +16,7 @@ gender, message count, and their average successRate.
 
 
 def get_match_info():
-    matches = api.get_updates()['matches']
+    matches = tinder.get_updates()['matches']
     now = datetime.utcnow()
     match_info = {}
     for match in matches[:len(matches)]:
@@ -24,24 +24,24 @@ def get_match_info():
             person = match['person']
             person_id = person['_id']  # This ID for looking up person
             match_info[person_id] = {
-                "name": person['name'],
-                "match_id": match['id'],  # This ID for messaging
-                "message_count": match['message_count'],
-                "photos": get_photos(person),
-                "bio": person['bio'],
-                "gender": person['gender'],
-                "avg_successRate": get_avg_successRate(person),
-                "messages": match['messages'],
-                "age": calculate_age(match['person']['birth_date']),
-                "distance": api.get_person(person_id)['results']['distance_mi'],
-                "last_activity_date": match['last_activity_date'],
+                'name': person['name'],
+                'match_id': match['id'],  # This ID for messaging
+                'message_count': match['message_count'],
+                'photos': get_photos(person),
+                'bio': person['bio'],
+                'gender': person['gender'],
+                'avg_successRate': get_avg_successRate(person),
+                'messages': match['messages'],
+                'age': calculate_age(match['person']['birth_date']),
+                'distance': tinder.get_person(person_id)['results']['distance_mi'],
+                'last_activity_date': match['last_activity_date'],
             }
         except Exception as ex:
-            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            template = 'An exception of type {0} occurred. Arguments:\n{1!r}'
             message = template.format(type(ex).__name__, ex.args)
             print(message)
             # continue
-    print("All data stored in variable: match_info")
+    print('All data stored in variable: match_info')
     return match_info
 
 
@@ -56,7 +56,7 @@ def get_match_id_by_name(name):
             list_of_ids.append(match_info[match]['match_id'])
     if len(list_of_ids) > 0:
         return list_of_ids
-    return {"error": "No matches by name of %s" % name}
+    return {'error': 'No matches by name of %s' % name}
 
 
 def get_photos(person):
@@ -106,17 +106,17 @@ def sort_by_value(sortType):
 
 
 def see_friends_profiles(name=None):
-    friends = api.see_friends()
+    friends = tinder.see_friends()
     if name == None:
         return friends
     else:
         result_dict = {}
         name = name.title()  # upcases first character of each word
         for friend in friends:
-            if name in friend["name"]:
-                result_dict[friend["name"]] = friend
+            if name in friend['name']:
+                result_dict[friend['name']] = friend
         if result_dict == {}:
-            return "No friends by that name"
+            return 'No friends by that name'
         return result_dict
 
 
@@ -125,7 +125,7 @@ def convert_from_datetime(difference):
     days = difference.days
     m, s = divmod(secs, 60)
     h, m = divmod(m, 60)
-    return ("%d days, %d hrs %02d min %02d sec" % (days, h, m, s))
+    return ('%d days, %d hrs %02d min %02d sec' % (days, h, m, s))
 
 
 def get_last_activity_date(now, ping_time):
@@ -145,7 +145,7 @@ def how_long_has_it_been():
         ping_time = match_info[person]['last_activity_date']
         since = get_last_activity_date(now, ping_time)
         times[name] = since
-        print(name, "----->", since)
+        print(name, '----->', since)
     return times
 
 
@@ -161,8 +161,8 @@ def pause():
     sleep(nap_length)
 
 if __name__ == '__main__':
-    if api.authverif() == True:
-        print("Gathering Data on your matches...")
+    if tinder.authverif() == True:
+        print('Gathering Data on your matches...')
         match_info = get_match_info()
     else:
-        print("Something went wrong. You were not authorized.")
+        print('Something went wrong. You were not authorized.')

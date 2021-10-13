@@ -64,7 +64,7 @@ class GetEmailState(betterproto.Message):
     refresh_token: Optional[str] = betterproto.message_field(
         1, wraps=betterproto.TYPE_STRING
     )
-    email_marketing: "EmailMarketing" = betterproto.message_field(2)
+    email_marketing: 'EmailMarketing' = betterproto.message_field(2)
 
 
 @dataclass
@@ -78,9 +78,9 @@ class ValidateEmailOtpState(betterproto.Message):
     email_sent: Optional[bool] = betterproto.message_field(
         5, wraps=betterproto.TYPE_BOOL
     )
-    email_marketing: "EmailMarketing" = betterproto.message_field(6)
-    unmasked_email: str = betterproto.string_field(2, group="email")
-    masked_email: str = betterproto.string_field(3, group="email")
+    email_marketing: 'EmailMarketing' = betterproto.message_field(6)
+    unmasked_email: str = betterproto.string_field(2, group='email')
+    masked_email: str = betterproto.string_field(3, group='email')
 
 
 @dataclass
@@ -94,7 +94,7 @@ class OnboardingState(betterproto.Message):
 class LoginResult(betterproto.Message):
     refresh_token: str = betterproto.string_field(1)
     auth_token: str = betterproto.string_field(2)
-    captcha: "LoginResultCaptcha" = betterproto.enum_field(3)
+    captcha: 'LoginResultCaptcha' = betterproto.enum_field(3)
     user_id: str = betterproto.string_field(4)
     auth_token_ttl: Optional[int] = betterproto.message_field(
         5, wraps=betterproto.TYPE_INT64
@@ -111,7 +111,7 @@ class AppleAccountNotFound(betterproto.Message):
 
 @dataclass
 class SocialConnection(betterproto.Message):
-    service: "SocialConnectionService" = betterproto.enum_field(1)
+    service: 'SocialConnectionService' = betterproto.enum_field(1)
 
 
 @dataclass
@@ -119,7 +119,7 @@ class SocialConnectionList(betterproto.Message):
     refresh_token: Optional[str] = betterproto.message_field(
         1, wraps=betterproto.TYPE_STRING
     )
-    connections: List["SocialConnection"] = betterproto.message_field(2)
+    connections: List['SocialConnection'] = betterproto.message_field(2)
 
 
 @dataclass
@@ -129,26 +129,26 @@ class ValidateEmailMagicLinkOtpState(betterproto.Message):
 
 @dataclass
 class AuthGatewayResponse(betterproto.Message):
-    meta: "MetaProto" = betterproto.message_field(1)
-    error: "ErrorProto" = betterproto.message_field(2)
-    get_phone_state: "GetPhoneState" = betterproto.message_field(3, group="data")
-    validate_phone_otp_state: "ValidatePhoneOtpState" = betterproto.message_field(
-        4, group="data"
+    meta: 'MetaProto' = betterproto.message_field(1)
+    error: 'ErrorProto' = betterproto.message_field(2)
+    get_phone_state: 'GetPhoneState' = betterproto.message_field(3, group='data')
+    validate_phone_otp_state: 'ValidatePhoneOtpState' = betterproto.message_field(
+        4, group='data'
     )
-    get_email_state: "GetEmailState" = betterproto.message_field(5, group="data")
-    validate_email_otp_state: "ValidateEmailOtpState" = betterproto.message_field(
-        6, group="data"
+    get_email_state: 'GetEmailState' = betterproto.message_field(5, group='data')
+    validate_email_otp_state: 'ValidateEmailOtpState' = betterproto.message_field(
+        6, group='data'
     )
-    onboarding_state: "OnboardingState" = betterproto.message_field(7, group="data")
-    login_result: "LoginResult" = betterproto.message_field(8, group="data")
-    social_connection_list: "SocialConnectionList" = betterproto.message_field(
-        9, group="data"
+    onboarding_state: 'OnboardingState' = betterproto.message_field(7, group='data')
+    login_result: 'LoginResult' = betterproto.message_field(8, group='data')
+    social_connection_list: 'SocialConnectionList' = betterproto.message_field(
+        9, group='data'
     )
-    apple_account_not_found: "AppleAccountNotFound" = betterproto.message_field(
-        10, group="data"
+    apple_account_not_found: 'AppleAccountNotFound' = betterproto.message_field(
+        10, group='data'
     )
-    validate_email_magic_link_otp_state: "ValidateEmailMagicLinkOtpState" = betterproto.message_field(
-        11, group="data"
+    validate_email_magic_link_otp_state: 'ValidateEmailMagicLinkOtpState' = betterproto.message_field(
+        11, group='data'
     )
 
 
@@ -167,13 +167,13 @@ class Phone(betterproto.Message):
         2, wraps=betterproto.TYPE_STRING
     )
     captcha_token: Optional[str] = betterproto.message_field(
-        3, group="check", wraps=betterproto.TYPE_STRING
+        3, group='check', wraps=betterproto.TYPE_STRING
     )
     ios_device_token: Optional[str] = betterproto.message_field(
-        4, group="check", wraps=betterproto.TYPE_STRING
+        4, group='check', wraps=betterproto.TYPE_STRING
     )
     android_jws: Optional[str] = betterproto.message_field(
-        5, group="check", wraps=betterproto.TYPE_STRING
+        5, group='check', wraps=betterproto.TYPE_STRING
     )
 
 
@@ -184,10 +184,10 @@ class PhoneOtpResend(betterproto.Message):
         2, wraps=betterproto.TYPE_STRING
     )
     ios_device_token: Optional[str] = betterproto.message_field(
-        3, group="check", wraps=betterproto.TYPE_STRING
+        3, group='check', wraps=betterproto.TYPE_STRING
     )
     android_jws: Optional[str] = betterproto.message_field(
-        4, group="check", wraps=betterproto.TYPE_STRING
+        4, group='check', wraps=betterproto.TYPE_STRING
     )
 
 
@@ -282,23 +282,23 @@ class EmailMagicLinkOtp(betterproto.Message):
 
 @dataclass
 class AuthGatewayRequest(betterproto.Message):
-    phone: "Phone" = betterproto.message_field(1, group="factor")
-    phone_otp: "PhoneOtp" = betterproto.message_field(2, group="factor")
-    email: "Email" = betterproto.message_field(3, group="factor")
-    google_token: "GoogleToken" = betterproto.message_field(4, group="factor")
-    email_otp: "EmailOtp" = betterproto.message_field(5, group="factor")
-    facebook_token: "FacebookToken" = betterproto.message_field(6, group="factor")
-    phone_otp_resend: "PhoneOtpResend" = betterproto.message_field(7, group="factor")
-    email_otp_resend: "EmailOtpResend" = betterproto.message_field(8, group="factor")
-    get_initial_state: "GetInitialState" = betterproto.message_field(9, group="factor")
-    refresh_auth: "RefreshAuth" = betterproto.message_field(10, group="factor")
-    apple_token: "AppleToken" = betterproto.message_field(11, group="factor")
-    dismiss_social_connection_list: "DismissSocialConnectionList" = betterproto.message_field(
-        12, group="factor"
+    phone: 'Phone' = betterproto.message_field(1, group='factor')
+    phone_otp: 'PhoneOtp' = betterproto.message_field(2, group='factor')
+    email: 'Email' = betterproto.message_field(3, group='factor')
+    google_token: 'GoogleToken' = betterproto.message_field(4, group='factor')
+    email_otp: 'EmailOtp' = betterproto.message_field(5, group='factor')
+    facebook_token: 'FacebookToken' = betterproto.message_field(6, group='factor')
+    phone_otp_resend: 'PhoneOtpResend' = betterproto.message_field(7, group='factor')
+    email_otp_resend: 'EmailOtpResend' = betterproto.message_field(8, group='factor')
+    get_initial_state: 'GetInitialState' = betterproto.message_field(9, group='factor')
+    refresh_auth: 'RefreshAuth' = betterproto.message_field(10, group='factor')
+    apple_token: 'AppleToken' = betterproto.message_field(11, group='factor')
+    dismiss_social_connection_list: 'DismissSocialConnectionList' = betterproto.message_field(
+        12, group='factor'
     )
-    email_magic_link: "EmailMagicLink" = betterproto.message_field(13, group="factor")
-    email_magic_link_otp: "EmailMagicLinkOtp" = betterproto.message_field(
-        14, group="factor"
+    email_magic_link: 'EmailMagicLink' = betterproto.message_field(13, group='factor')
+    email_magic_link_otp: 'EmailMagicLinkOtp' = betterproto.message_field(
+        14, group='factor'
     )
 
 
@@ -316,7 +316,7 @@ class UnderageBan(betterproto.Message):
     underage_token: Optional[str] = betterproto.message_field(
         2, wraps=betterproto.TYPE_STRING
     )
-    verification: "Verification" = betterproto.message_field(3)
+    verification: 'Verification' = betterproto.message_field(3)
 
 
 @dataclass
@@ -328,12 +328,12 @@ class BanAppeal(betterproto.Message):
 
 @dataclass
 class BanReason(betterproto.Message):
-    underage_ban: "UnderageBan" = betterproto.message_field(1, group="reason")
-    ban_appeal: "BanAppeal" = betterproto.message_field(2, group="reason")
+    underage_ban: 'UnderageBan' = betterproto.message_field(1, group='reason')
+    ban_appeal: 'BanAppeal' = betterproto.message_field(2, group='reason')
 
 
 @dataclass
 class ErrorProto(betterproto.Message):
     code: int = betterproto.int32_field(1)
     message: str = betterproto.string_field(2)
-    ban_reason: "BanReason" = betterproto.message_field(3)
+    ban_reason: 'BanReason' = betterproto.message_field(3)
