@@ -9,6 +9,9 @@ from tinder.recs import Rec
 class UserNotLoggedException(tinder.APIException):
     pass
 
+class NoMoreRecs(tinder.APIException):
+    pass
+
 class User:
 
     def __init__(self) -> None:
@@ -42,6 +45,9 @@ class User:
     @need_logged
     @make_request(tinder.RECS_EP)
     def recs(self, response: dict[str, Any]) -> list[Rec]:
+        if 'message' in response and response['message'] == 'recs timeout':
+            raise NoMoreRecs
+        
         result = response['results']
         recs = [
             Rec.create(infos)
