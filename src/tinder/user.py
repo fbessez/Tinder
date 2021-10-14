@@ -12,6 +12,13 @@ class UserNotLoggedException(tinder.APIException):
 class NoMoreRecs(tinder.APIException):
     pass
 
+class UnknownError(tinder.APIException):
+    
+    def __init__(self, message: str = ''):
+        self.message = f'An unknow error as occured.\n{str(message)}'
+        super().__init__(self.message)
+
+
 class User:
 
     def __init__(self) -> None:
@@ -47,6 +54,9 @@ class User:
     def recs(self, response: dict[str, Any]) -> list[Rec]:
         if 'message' in response and response['message'] == 'recs timeout':
             raise NoMoreRecs
+
+        if 'results' not in response:
+            raise UnknownError(response)
         
         result = response['results']
         recs = [
