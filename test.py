@@ -6,6 +6,6 @@ if __name__ == '__main__':
     user = SMSUser('phone', email='email')
     user.login()
 
-    # v2 FB authentication
+    # v2 FB authentication, not tested
     user = FBUSer('fb email', 'fb password')
     user.login()

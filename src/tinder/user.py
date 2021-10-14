@@ -1,3 +1,6 @@
+from functools import reduce, wraps
+from typing import Any
+
 import requests
 
 import tinder
@@ -13,11 +16,23 @@ class User:
         self._session = requests.Session()
 
     def need_logged(func):
+        @wraps(func)
         def wrapper(self, *args, **kwargs):
             if not self._logged:
                 raise UserNotLoggedException(f'The user need to be logged to call the function {func}')
             return func(self, *args, **kwargs)
         return wrapper
+
+    def make_request(url):
+        def inner_deco(func):
+            @wraps(func)
+            def wrapper(self, *params, **kwargs):
+                complete_url = reduce(lambda a, b: a / b, [url, *params])
+                r = self._session.get(complete_url)
+                response = r.json()
+                return func(self, response, **kwargs)
+            return wrapper
+        return inner_deco
 
     @property
     def logged(self) -> bool:
@@ -25,9 +40,9 @@ class User:
 
     @property
     @need_logged
-    def recs(self) -> dict:
-        r = self._session.get(tinder.RECS_EP)
-        result = r.json()['results']
+    @make_request(tinder.RECS_EP)
+    def recs(self, response: dict[str, Any]) -> list[Rec]:
+        result = response['results']
         recs = [
             Rec.create(infos)
             for infos in result
@@ -35,9 +50,8 @@ class User:
         return recs
 
     @need_logged
-    def like(self, user_rec) -> tuple[bool, int]:
-        r = self._session.get(tinder.LIKE_EP / user_rec.id)
-        response = r.json()
+    @make_request(tinder.LIKE_EP)
+    def like(self, response: dict[str, Any]) -> tuple[bool, int]:
         match = response['match']
         like_remaining = response['likes_remaining']
         return match, like_remaining

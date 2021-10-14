@@ -30,7 +30,7 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 	<tbody>
 		<tr>
 			<td>X-Auth-Token</td>
-			<td>See 'How to get facebook_token' below</td>
+			<td></td>
 			<td></td>
 		</tr>
 		<tr>
@@ -508,3 +508,6 @@ The following is a sample result for friends_pingtimes(): </h4>
 	  }
 }
 ```
+### TODO
+ - Write a better updated README.md
+ - Continue adding features to User class

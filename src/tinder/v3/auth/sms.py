@@ -19,9 +19,12 @@ class SMSAuthException(auth.AuthException):
 class SMSNotSent(SMSAuthException):
     pass
 
+class MissingToken(SMSAuthException):
+    pass
+
 class SMSUser(User):
 
-    def __init__(self, phone_number: str, email: str = None, token_fn: str = None) -> None:
+    def __init__(self, phone_number: str, email: str = None, token_fn: str = None, need_refresh: bool = False) -> None:
         super().__init__()
 
         self._install_id = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=11))
@@ -31,6 +34,7 @@ class SMSUser(User):
         self._device_id = secrets.token_hex(8)
         self._phone_number = phone_number
         self._email = email
+        self._need_refresh = need_refresh
 
         self._auth_token: str = None
         self._refresh_token: str = None
@@ -45,17 +49,19 @@ class SMSUser(User):
         
         token_file = Path(token_fn)
         if token_file.exists():
-            print(f'[+] `{token_fn}` found.\n[+] If you wish to auth again from scratch, delete it.')
+            print(f'[+] `{token_fn}` found.')
+            print('[+] If you wish to auth again from scratch, delete it.')
             with token_file.open() as fh:
                 tokens = fh.read()
                 auth_token, refresh_token = tokens.split(',')
                 self._auth_token = auth_token
                 self._refresh_token = refresh_token
+        else:
+            self._need_refresh = False
 
     def save_token(self, token_fn: str = None) -> None:
         if self._auth_token is None or self._refresh_token is None:
-            print('[!] Missing tokens to save.')
-            return
+            raise MissingToken
         
         token_fn = token_fn or self._phone_number + '_token.txt'
         token_file = Path(token_fn)
@@ -137,14 +143,6 @@ class SMSUser(User):
                                 'user_interests_available']
         }
         self._session.post(v2.BUCKET_EP, json=payload)
-
-        if self._refresh_token is not None:
-            print('[+] Attempting to refresh auth token with saved refresh token.')
-            initial_state = agw.GetInitialState(refresh_token=self._refresh_token)
-            message_out = agw.AuthGatewayRequest(get_initial_state=initial_state)
-        else:
-            phone = agw.Phone(phone=self._phone_number)
-            message_out = agw.AuthGatewayRequest(phone=phone)
         
         seconds = random.uniform(100, 250)
         headers = {
@@ -166,6 +164,24 @@ class SMSUser(User):
                 'accept-language': 'en-US',
                 'content-type': 'application/x-protobuf'
         }
+
+        if self._need_refresh:
+            print('[+] Attempting to refresh auth token with saved refresh token.')
+            initial_state = agw.GetInitialState(refresh_token=self._refresh_token)
+            message_out = agw.AuthGatewayRequest(get_initial_state=initial_state)
+        
+        elif self._auth_token is not None:
+            print('[+] Attempting to use saved auth token, might failed if expired.')
+            self._session.headers.update(headers)
+            self._session.headers.update({'X-Auth-Token': self._auth_token})
+            self._logged = True
+            return
+        
+        else:
+            print('[+] Attempting SMS auth.')
+            phone = agw.Phone(phone=self._phone_number)
+            message_out = agw.AuthGatewayRequest(phone=phone)
+        
         response = self._login_wrapper(message_out, seconds, headers)
 
         self._refresh_token = response['loginResult']['refreshToken']
