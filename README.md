@@ -4,6 +4,18 @@ First off, I want to give a shoutout to <a href='https://gist.github.com/rtt/104
 
 **Note: This was updated in June 2018 so it might be outdated.**
 
+### Installation
+
+The new project's structure allow its installation via pip, as it follows:
+
+```
+$ git clone ...
+$ python3 -m pip install -r requirements.txt
+$ python3 -m pip install -e .
+```
+
+Because it is not authorized by Tinder to analyse their API, the package is not uploaded on PyPI.
+
 ### API Details
 <table>
 	<tbody>
