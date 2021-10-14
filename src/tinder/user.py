@@ -35,17 +35,12 @@ class User:
         return recs
 
     @need_logged
-    def like(self, user_rec) -> dict:
-        r = self._session.get(tinder.LIKE_EP / self.id)
-        return r.json()
-
-    @need_logged
-    def like_all(self) -> None:
-        for rec in self.recs:
-            if rec.rec_type == 'user':
-                print(rec.name)
-                print(self.like(rec))
-                print()
+    def like(self, user_rec) -> tuple[bool, int]:
+        r = self._session.get(tinder.LIKE_EP / user_rec.id)
+        response = r.json()
+        match = response['match']
+        like_remaining = response['likes_remaining']
+        return match, like_remaining
 
     def login(self) -> None:
         raise NotImplementedError
