@@ -4,12 +4,9 @@ from typing import Any
 import requests
 
 import tinder
-from tinder.recs import Rec
+from tinder.recs import Rec, TimeOutException, RetryException
 
 class UserNotLoggedException(tinder.APIException):
-    pass
-
-class NoMoreRecs(tinder.APIException):
     pass
 
 class UnknownError(tinder.APIException):
@@ -52,8 +49,12 @@ class User:
     @need_logged
     @make_request(tinder.RECS_EP)
     def recs(self, response: dict[str, Any]) -> list[Rec]:
-        if 'message' in response and response['message'] == 'recs timeout':
-            raise NoMoreRecs
+        if 'message' in response:
+            message = response['message']
+            if message == 'recs timeout':
+                raise TimeOutException
+            elif message == 'retry required':
+                raise RetryException
 
         if 'results' not in response:
             raise UnknownError(response)

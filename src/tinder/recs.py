@@ -2,6 +2,17 @@ from typing import Any
 
 import tinder
 
+class TimeOutException(tinder.APIException):
+    
+    def __init__(self):
+        super().__init__('Time out while trying to get recs. Could be because there is no more.')
+
+
+class RetryException(tinder.APIException):
+    
+    def __init__(self):
+        super().__init__('Failed to retrieve recs. Retry needed.')
+
 class Rec:
 
     _subclasses = {}
