@@ -6,3 +6,4 @@ class V2Exception(tinder.APIException):
 URL = tinder.URL / 'v2'
 BUCKET_EP = URL / 'buckets'
 RECS_EP = URL / 'user' / 'recs'
+MATCHES = URL / 'matches'

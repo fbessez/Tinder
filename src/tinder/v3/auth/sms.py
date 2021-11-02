@@ -11,7 +11,7 @@ import requests
 import tinder.v2 as v2
 import tinder.v3.auth as auth
 import tinder.v3.auth.authgateway as agw
-from tinder.user import User
+from tinder.v3.user import V3User
 
 class SMSAuthException(auth.AuthException):
     pass
@@ -22,7 +22,7 @@ class SMSNotSent(SMSAuthException):
 class MissingToken(SMSAuthException):
     pass
 
-class SMSUser(User):
+class SMSUser(V3User):
 
     def __init__(self, phone_number: str, email: str = None, token_fn: str = None, need_refresh: bool = False) -> None:
         super().__init__()

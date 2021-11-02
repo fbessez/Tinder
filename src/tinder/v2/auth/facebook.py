@@ -12,7 +12,7 @@ import requests
 import robobrowser
 
 import tinder.v2.auth as auth
-from tinder.user import User
+from tinder.v2.user import V2User
 
 
 class FBAuthException(auth.AuthException):
@@ -25,7 +25,7 @@ class FBIdException(auth.AuthException):
     pass
 
 
-class FBUSer(User):
+class FBUSer(V2User):
 
     def __init__(self, email: str, password: str) -> None:
         super().__init__()

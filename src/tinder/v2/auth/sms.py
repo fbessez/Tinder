@@ -9,7 +9,7 @@ from pathlib import Path
 import requests
 
 import tinder.v2.auth as auth
-from tinder.user import User
+from tinder.v2.user import V2User
 from tinder import Url
 
 class SMSAuthException(auth.AuthException):
@@ -21,7 +21,7 @@ class SMSNotSent(SMSAuthException):
 class ValidationFailed(SMSAuthException):
     pass
 
-class SMSUser(User):
+class SMSUser(V2User):
 
     def __init__(self, phone_number: str, email: str = None, token_fn: str = None) -> None:
         super().__init__()
