@@ -6,10 +6,10 @@ if __name__ == '__main__':
     user = SMSUser('phone', email='email')
     user.login()
 
-    matches = user.all_matches
+    matches = user.all_matches()
 
     # v2 FB authentication, not tested
     user = FBUSer('fb email', 'fb password')
     user.login()
 
-    matches = user.all_matches
+    matches = user.all_matches()
