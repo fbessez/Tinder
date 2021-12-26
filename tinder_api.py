@@ -18,14 +18,14 @@ def get_auth_token(fb_auth_token, fb_user_id):
         return {"error": "could not retrieve fb_auth_token"}
     if "error" in fb_user_id:
         return {"error": "could not retrieve fb_user_id"}
-    url = config.host + '/v2/auth/login/facebook'
+    url = config.host + '/auth'
     req = requests.post(url,
                         headers=headers,
                         data=json.dumps(
-                            {'token': fb_auth_token, 'facebook_id': fb_user_id})
+                            {'facebook_token': fb_auth_token, 'facebook_id': fb_user_id})
                         )
     try:
-        tinder_auth_token = req.json()["data"]["api_token"]
+        tinder_auth_token = req.json()["token"]
         headers.update({"X-Auth-Token": tinder_auth_token})
         get_headers.update({"X-Auth-Token": tinder_auth_token})
         print("You have been successfully authorized!")
