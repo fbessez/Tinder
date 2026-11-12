@@ -1,5 +1,4 @@
 import requests
-import json
 
 CODE_REQUEST_URL = "https://api.gotinder.com/v2/auth/sms/send?auth_type=sms"
 CODE_VALIDATE_URL = "https://api.gotinder.com/v2/auth/sms/validate?auth_type=sms"
@@ -9,7 +8,7 @@ HEADERS = {'user-agent': 'Tinder/11.4.0 (iPhone; iOS 12.4.1; Scale/2.00)', 'cont
 
 def send_otp_code(phone_number):
     data = {'phone_number': phone_number}
-    r = requests.post(CODE_REQUEST_URL, headers=HEADERS, data=json.dumps(data), verify=False)
+    r = requests.post(CODE_REQUEST_URL, headers=HEADERS, json=data, timeout=15)
     print(r.url)
     response = r.json()
     if(response.get("data")['sms_sent'] == False):
@@ -19,7 +18,7 @@ def send_otp_code(phone_number):
 
 def get_refresh_token(otp_code, phone_number):
     data = {'otp_code': otp_code, 'phone_number': phone_number}
-    r = requests.post(CODE_VALIDATE_URL, headers=HEADERS, data=json.dumps(data), verify=False)
+    r = requests.post(CODE_VALIDATE_URL, headers=HEADERS, json=data, timeout=15)
     print(r.url)
     response = r.json()
     if(response.get("data")["validated"] == False):
@@ -29,7 +28,7 @@ def get_refresh_token(otp_code, phone_number):
     
 def get_api_token(refresh_token):
     data = {'refresh_token': refresh_token }
-    r = requests.post(TOKEN_URL, headers=HEADERS, data=json.dumps(data), verify=False)
+    r = requests.post(TOKEN_URL, headers=HEADERS, json=data, timeout=15)
     print(r.url)
     response = r.json()
     return response.get("data")["api_token"]
